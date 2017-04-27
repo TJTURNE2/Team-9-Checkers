@@ -5,6 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import checkers.GameEngine;
 
+/**
+ * Unit Test #18 in Software Test Plan
+ * Checks to make sure boards are copied correctly.
+ * @author Cristi DeLeo
+ * @version 1.0
+ * @since 27 April 2017
+ */
 public class GameEngineTest 
 {
 	@Test
