@@ -7,7 +7,7 @@ import checkers.Checkers;
 
 /**
  * Unit Tests #6, 10, and 14 in Software Test Plan
- * Checks to make sure "Help" menu is constructed.
+ * Checks getIndex, testColour, and ApplyMove methods behave correctly.
  * @author Cristi DeLeo
  * @version 3.0
  * @since 25 April 2017
