@@ -102,7 +102,7 @@ public class CheckerMoveTest {
 	
 	@Test
 	public void isMoveLegalTest8() {
-		assert(JunitTester.isMoveLegalTest(capBoardRedFlip, 1, 4, 2, 1, 2) == 2);
+		assert(JunitTester.isMoveLegalTest(noCapBoardFlip, 1, 0, 2, 2, 2) == 2);
 	}
 	
 	@Test
@@ -122,12 +122,12 @@ public class CheckerMoveTest {
 	
 	@Test
 	public void isMoveLegalTest12() {
-		assert(JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 5, 2, 2, 2) == 2);
+		assert(JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 5, 2, 4, 2) == 2);
 	}
 	
 	@Test
 	public void isMoveLegalTest13() {
-		assert(JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 0, 2, 1) == 2);
+		assert(JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 0, 4, 1) == 2);
 	}
 	
 	@Test
