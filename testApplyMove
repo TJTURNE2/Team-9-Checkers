@@ -1,0 +1,119 @@
+public void testApplyMove()
+	{
+		// Board containing values 
+		int[][] capBoardRed1 = {
+				{0,	1,	0,	3,	0,	1,	0,	0},
+				{2,	0,	0,	0,	2,	0,	2,	0},
+				{0,	0,	0,	0,	0,	0,	0,	2},
+				{0,	0,	0,	0,	0,	0,	0,	0},
+				{0,	2,	0,	1,	0,	0,	0,	2},
+				{0,	0,	3,	0,	2,	0,	3,	0},
+				{0,	4,	0,	2,	0,	0,	0,	2},
+				{1,	0,	3,	0,	2,	0,	0,	0}};
+		
+		/*
+		 *E	{0,	1,	0,	3,	0,	1,	0,	0},
+			{S,	0,	0,	0,	2,	0,	2,	0},
+			{0,	0,	0,	0,	0,	0,	0,	2},
+			{0,	0,	0,	0,	0,	0,	0,	0},
+			{0,	2,	0,	1,	0,	0,	0,	2},
+			{0,	0,	3,	0,	2,	0,	3,	0},
+			{0,	4,	0,	2,	0,	0,	0,	2},
+			{1,	0,	3,	0,	2,	0,	0,	0}
+		 */
+		int startX1 = 1; 	// Start row
+		int startY1 = 0; 	// Start column
+		int endX1 = 0;  	// End row
+		int endY1 = -1;   	// End column
+		int expected1 = 2; 	// Illegal move
+		int actual1 = CheckerMove.ApplyMove(capBoardRed1, startX1, startY1, endX1, endY1);
+		
+		// Board containing values 
+				int[][] capBoardRed2 = {
+						{0,	1,	0,	3,	0,	1,	0,	0},
+						{2,	0,	0,	0,	2,	0,	2,	0},
+						{0,	0,	0,	0,	0,	0,	0,	2},
+						{0,	0,	0,	0,	0,	0,	0,	0},
+						{0,	2,	0,	1,	0,	0,	0,	2},
+						{0,	0,	3,	0,	2,	0,	3,	0},
+						{0,	4,	0,	2,	0,	0,	0,	2},
+						{1,	0,	3,	0,	2,	0,	0,	0}};
+		
+		/*
+		 * 	{0,	1,	0,	S,	0,	1,	0,	0},
+			{2,	0,	0,	0,	2,	0,	2,	0},
+			{0,	0,	0,	0,	0,	E,	0,	2},
+			{0,	0,	0,	0,	0,	0,	0,	0},
+			{0,	2,	0,	1,	0,	0,	0,	2},
+			{0,	0,	3,	0,	2,	0,	3,	0},
+			{0,	4,	0,	2,	0,	0,	0,	2},
+			{1,	0,	3,	0,	2,	0,	0,	0}
+		 */
+		int startX2 = 0; 	// Start row
+		int startY2 = 3; 	// Start column
+		int endX2 = 2;  	// End row
+		int endY2 = 5;   	// End column
+		int expected2 = 3; 	// Incomplete move (player can jump one more piece located at 1, 6)
+		int actual2 = CheckerMove.ApplyMove(capBoardRed2, startX2, startY2, endX2, endY2);
+		
+		// Board containing values 
+				int[][] capBoardRed3 = {
+						{0,	1,	0,	3,	0,	1,	0,	0},
+						{2,	0,	0,	0,	2,	0,	2,	0},
+						{0,	0,	0,	0,	0,	0,	0,	2},
+						{0,	0,	0,	0,	0,	0,	0,	0},
+						{0,	2,	0,	1,	0,	0,	0,	2},
+						{0,	0,	3,	0,	2,	0,	3,	0},
+						{0,	4,	0,	2,	0,	0,	0,	2},
+						{1,	0,	3,	0,	2,	0,	0,	0}};
+		
+		/*
+		 * 	{0,	1,	0,	3,	0,	S,	0,	0},
+			{2,	0,	0,	0,	2,	0,	2,	0},
+			{0,	0,	0,	E,	0,	0,	0,	2},
+			{0,	0,	0,	0,	0,	0,	0,	0},
+			{0,	2,	0,	1,	0,	0,	0,	2},
+			{0,	0,	3,	0,	2,	0,	3,	0},
+			{0,	4,	0,	2,	0,	0,	0,	2},
+			{1,	0,	3,	0,	2,	0,	0,	0}
+		 */
+		int startX3 = 0; 	// Start row
+		int startY3 = 5; 	// Start column
+		int endX3 = 2;  	// End row
+		int endY3 = 3;   	// End column
+		int expected3 = 1; 	// Legal move
+		int actual3 = CheckerMove.ApplyMove(capBoardRed3, startX3, startY3, endX3, endY3);
+		System.out.println(actual3);
+		// Board containing values 
+				int[][] capBoardRed4 = {
+						{0,	1,	0,	3,	0,	1,	0,	0},
+						{2,	0,	0,	0,	2,	0,	2,	0},
+						{0,	0,	0,	0,	0,	0,	0,	2},
+						{0,	0,	0,	0,	0,	0,	0,	0},
+						{0,	2,	0,	1,	0,	0,	0,	2},
+						{0,	0,	3,	0,	2,	0,	3,	0},
+						{0,	4,	0,	2,	0,	0,	0,	2},
+						{1,	0,	3,	0,	2,	0,	0,	0}};
+		
+		/*
+		 * 	{0,	S,	0,	3,	0,	1,	0,	0},
+			{2,	0,	E,	0,	2,	0,	2,	0},
+			{0,	0,	0,	0,	0,	0,	0,	2},
+			{0,	0,	0,	0,	0,	0,	0,	0},
+			{0,	2,	0,	1,	0,	0,	0,	2},
+			{0,	0,	3,	0,	2,	0,	3,	0},
+			{0,	4,	0,	2,	0,	0,	0,	2},
+			{1,	0,	3,	0,	2,	0,	0,	0}
+		 */
+		int startX4 = 0; 	// Start row
+		int startY4 = 1; 	// Start column
+		int endX4 = 1;  	// End row
+		int endY4 = 2;   	// End column
+		int expected4 = 2; 	// Illegal move
+		int actual4 = CheckerMove.ApplyMove(capBoardRed4, startX4, startY4, endX4, endY4);
+
+		assertEquals(expected1, actual1);
+		assertEquals(expected2, actual2);
+		assertEquals(expected3, actual3);
+		assertEquals(expected4, actual4);
+	}
