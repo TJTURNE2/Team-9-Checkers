@@ -19,10 +19,13 @@ public class EvalTest {
 	@Test
 	public void evalTest() {
 		boolean eval = false;
-		if (JUnitTester.evalTest(capBoardRed) >= 112 && JUnitTester.evalTest(capBoardRed) <= 122) {
-			eval = true;
-		}
-		assertTrue(eval);
+		//for(int i = 0; i < 200; i++) {
+			if (JUnitTester.evalTest(capBoardRed) >= 112 && JUnitTester.evalTest(capBoardRed) <= 122) {
+				eval = true;
+			}
+			assertTrue(eval);
+			eval = false;
+		//}
 	}
 
 }
