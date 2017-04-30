@@ -479,11 +479,16 @@ public class CheckerMove {
 				}
 	}
 
-    ////////////////////////TEST CODE/////////////////////////////////////
-    
-    public static boolean getIsEmpty(int[][] board, int i, int j)
-    {
-            return CheckerMove.isEmpty(board, i, j);
-    }
-    
+	//////////////////////// TEST CODE/////////////////////////////////////
+
+	public static boolean getIsEmpty(int[][] board, int i, int j) {
+		return CheckerMove.isEmpty(board, i, j);
+	}
+	/////////////////////////////////////// TEST
+	/////////////////////////////////////// CODE////////////////////////////
+
+	public static boolean getInRange(int i, int j) {
+		return inRange(i, j);
+	}
+
 }

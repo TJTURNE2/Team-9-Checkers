@@ -5,6 +5,9 @@ import org.junit.Test;
 import checkers.JunitTester;
 
 public class CheckerMoveTest {
+	
+	JunitTester JunitTester = new JunitTester();
+	
 	int[][] capBoardRed = {{0, 1, 0, 3, 0, 1, 0, 0}, 
 						   {2, 0, 0, 0, 2, 0, 2, 0}, 
 						   {0, 0, 0, 0, 0, 0, 0, 2}, 
@@ -52,7 +55,7 @@ public class CheckerMoveTest {
 
 	@Test
 	public void isEmptyTest1() {
-		assert(JunitTester.isEmptyTest(capBoardRedFlip, 1, 2) == true);
+		assertTrue(JunitTester.isEmptyTest(capBoardRedFlip, 1, 2) == true);
 	}
 	
 	@Test

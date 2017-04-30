@@ -1,6 +1,8 @@
 package checkers;
 
 import java.awt.Point;
+import java.util.concurrent.TimeUnit;
+
 import checkers.GameWin;
 
 //class that Exposes Variables and methods for testing
@@ -9,12 +11,15 @@ public class JunitTester {
 	Point p1;
 	public StartPanel startTest;
 	public IntelliChecker iCheckers;
+	public CheckerFrame cFrame;
 	public Checkers checkers;
 	public GameWin gameWin;
 	public boolean canWalk;
 	public boolean noMoves;
 	public int getTurn;
-
+	CheckerFrame testCFrame = new CheckerFrame();
+	
+	
 	public JunitTester() {
 		p1 = new Point(25, 25);
 		gameWin = new GameWin("Test GameWin", p1);
@@ -31,6 +36,10 @@ public class JunitTester {
 		return gameWin;
 	}
 
+	public CheckerFrame getCheckerFrame(){
+		return cFrame = new CheckerFrame();
+	}
+	
 	public int isMoveLegal(int[][] board,int srtI,int srtJ,int endI,int endJ,int turn) {
 		return CheckerMove.isMoveLegal(board, srtI, srtJ, endI, endJ, turn);
 	}
@@ -71,49 +80,48 @@ public class JunitTester {
 	}
 
 	public static void CFrameTest() {
-		// TODO Auto-generated method stub
-		
+		CheckerFrame testCFrame = new CheckerFrame();
+    	while(testCFrame.isVisible()) {
+    		try {
+    			TimeUnit.SECONDS.sleep(60);
+    		} catch (InterruptedException e) {
+    		}
+    	}
+    	testCFrame = null;
 	}
 
-	public static int isMoveLegalTest(int[][] capBoardRedFlip, int i, int j, int k, int l, int m) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int isMoveLegalTest(int[][] board, int i, int j, int k, int l, int turn) {
+		return CheckerMove.isMoveLegal(board, i, j, k, l, turn);
 	}
 
 	public static boolean isPossibleSquareTest(int i, int j) {
-		// TODO Auto-generated method stub
-		return false;
+		Checkers testCheckers = new Checkers();
+		boolean value = testCheckers.getIsPossibleSquare(i, j);
+		testCheckers = null;
+		return value;
 	}
 
-	public static int getOpponentTest(int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	public static int getOpponentTest(int turn) {
+		return GameEngine.getOpponent(turn);
 	}
 
-	public static boolean isEmptyTest(int[][] capBoardRedFlip, int i, int j) {
-		// TODO Auto-generated method stub
-		return false;
+	public  boolean isEmptyTest(int[][] capBoardRedFlip, int i, int j) {
+		return CheckerMove.getIsEmpty(capBoardRedFlip, i, j);
 	}
 
 	public boolean canCaptureTest(int[][] capBoardRed, int i, int j) {
-		// TODO Auto-generated method stub
-		return false;
+		return CheckerMove.canCapture(capBoardRed, i, j);
 	}
-
 	public int evalTest(int[][] capBoardRed) {
-		// TODO Auto-generated method stub
-		return 0;
+		return GameEngine.eval(capBoardRed);
 	}
 
-	public Object isWalkLegalTest(int[][] capBoardRed, int i, int j, int k, int l) {
-		// TODO Auto-generated method stub
-		return null;
+	public int isWalkLegalTest(int[][] capBoardRed, int i, int j, int k, int l) {
+		return CheckerMove.isWalkLegal(capBoardRed, i, j, k, l);
 	}
 
 	public boolean inRangeTest(int i, int j) {
-		// TODO Auto-generated method stub
-		return false;
+		return CheckerMove.getInRange(i, j);
 	}
-
 
 }

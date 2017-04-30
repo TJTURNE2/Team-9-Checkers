@@ -8,10 +8,14 @@ import checkers.CheckerFrame;
 import checkers.JunitTester;
 
 public class CheckerFrameTest {
-
+	
+	JunitTester JunitTester = new JunitTester();
+	
 	@Test
 	public void CFrameTest() {
-		JunitTester.CFrameTest();
+		assertNotNull(JunitTester.getCheckerFrame());
+		
+		//JunitTester.CFrameTest(); // old test
 	}
 
 }
