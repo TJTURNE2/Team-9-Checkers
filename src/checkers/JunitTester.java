@@ -70,4 +70,50 @@ public class JunitTester {
 		checkers.play();
 	}
 
+	public static void CFrameTest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static int isMoveLegalTest(int[][] capBoardRedFlip, int i, int j, int k, int l, int m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public static boolean isPossibleSquareTest(int i, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static int getOpponentTest(int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public static boolean isEmptyTest(int[][] capBoardRedFlip, int i, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean canCaptureTest(int[][] capBoardRed, int i, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int evalTest(int[][] capBoardRed) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Object isWalkLegalTest(int[][] capBoardRed, int i, int j, int k, int l) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean inRangeTest(int i, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }
