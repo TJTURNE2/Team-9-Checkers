@@ -606,9 +606,4 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
     public void update(Graphics g){                                                                                                     
         paint(g);
     }
-    
-    ////////////TEST CODE////////////////////
-    public boolean getIsPossibleSquare(int i, int j) {
-    	return isPossibleSquare(i, j);
-    }
 }

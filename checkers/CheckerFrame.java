@@ -2,14 +2,13 @@ package checkers;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 
 public class CheckerFrame extends JFrame implements ActionListener{
     JButton stB=new JButton("Start Game");
     JPanel gmP=new StartPanel();
-
+  
     CheckerFrame(){
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -20,7 +19,7 @@ public class CheckerFrame extends JFrame implements ActionListener{
         }
         setupGUI();
 //        new PlaySound("src//sounds//Start.wav").start();								//OLD
-        new PlaySound("sounds//Start.wav").start();																		//NEW-Steven
+        new PlaySound("sounds//Start.wav").start();										//FIXED
     }
 
     private void setupGUI() {
@@ -33,10 +32,8 @@ public class CheckerFrame extends JFrame implements ActionListener{
         stB.setIcon(new ImageIcon("images/checkers.png"));								//Fixed
         stB.setBackground(Color.LIGHT_GRAY);
         stB.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//        stB.setBounds(154,420,200,60);												//OLD-Steven
-        stB.setBounds(104,420,292,60);													//FIXED-Steven
-//        stB.setFont(new Font("Times new roman",Font.BOLD,20));						//OLD-Steven
-        stB.setFont(new Font("Times new roman",Font.BOLD,255));							//FIXED-Steven
+        stB.setBounds(154,420,200,60);
+        stB.setFont(new Font("Times new roman",Font.BOLD,20));
         stB.addActionListener(this);
         stB.setFocusPainted(false);
         add(stB);
