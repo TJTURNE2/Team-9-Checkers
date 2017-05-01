@@ -1,18 +1,62 @@
 package junit;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
-import checkers.JunitTester;
+import checkers.GameEngine;
 
-public class GameEngineTest {
+/**
+ * Unit Test #18 in Software Test Plan
+ * Checks to make sure boards are copied correctly.
+ * @author Cristi DeLeo
+ * @version 1.0
+ * @since 27 April 2017
+ */
+public class GameEngineTest 
+{
+  checkers.JunitTester JunitTester = new checkers.JunitTester();
+  
+	@Test
+	public void testCopyBoard()
+	{
+		// Generic in-game board to be copied
+		int[][] testBoard1 = {
+				{0,	0, 2, 0, 2, 0, 2, 0},
+				{0, 2, 0, 0, 0, 3, 0, 0},
+				{1, 0, 0, 0, 0, 0, 0, 0},
+				{0, 2, 0, 0, 0, 2, 0, 2},
+				{3, 0, 0, 0, 1, 0, 2, 0},
+				{0, 0, 0, 0, 0, 3, 0, 3},
+				{1, 0, 0, 0, 2, 0, 4, 0},
+				{0, 2, 0, 0, 0, 0, 0, 1}};
+		
+		// Expected result
+		int[][] expectedBoard1 = {
+				{0,	0, 2, 0, 2, 0, 2, 0},
+				{0, 2, 0, 0, 0, 3, 0, 0},
+				{1, 0, 0, 0, 0, 0, 0, 0},
+				{0, 2, 0, 0, 0, 2, 0, 2},
+				{3, 0, 0, 0, 1, 0, 2, 0},
+				{0, 0, 0, 0, 0, 3, 0, 3},
+				{1, 0, 0, 0, 2, 0, 4, 0},
+				{0, 2, 0, 0, 0, 0, 0, 1}};
+		
+		// Actual result
+		int[][] actualBoard1 = JunitTester.copyBoard(testBoard1);
+		
+		assertArrayEquals(expectedBoard1, actualBoard1);
+	}
 
-	@Test
-	public void getOpponentTest1() {
-		assert(JunitTester.getOpponentTest(1) == 2);
-	}
-	
-	@Test
-	public void getOpponentTest2() {
-		assert(JunitTester.getOpponentTest(2) == 1);
-	}
+  //Merge Conflict 
+  //Steven Bennett-Test Cases
+  @Test
+  public void getOpponentTest1() {
+    assertTrue(JunitTester.getOpponentTest(1) == 2);
+  }
+  
+  @Test
+  public void getOpponentTest2() {
+    assertTrue(JunitTester.getOpponentTest(2) == 1);
+}
+
 }

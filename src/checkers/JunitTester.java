@@ -8,8 +8,8 @@ import checkers.GameWin;
 //class that Exposes Variables and methods for testing
 public class JunitTester {
 
-  Point p1;
-  public StartPanel startTest;
+  Point p1 = new Point(25, 25);
+  public static StartPanel startTest;
   public IntelliChecker iCheckers;
   public CheckerFrame cFrame;
   public Checkers checkers;
@@ -17,30 +17,34 @@ public class JunitTester {
   public boolean canWalk;
   public boolean noMoves;
   public int getTurn;
-  CheckerFrame testCFrame = new CheckerFrame();
+  public Help help;
+  CheckerFrame testCFrame;
 
   public JunitTester() {
-    p1 = new Point(25, 25);
-    gameWin = new GameWin("Test GameWin", p1);
-    iCheckers = new IntelliChecker();
-    checkers = new Checkers();
+    //p1 = new Point(25, 25);
+    //gameWin = new GameWin("Test GameWin", p1);
+    //iCheckers = new IntelliChecker();
+    //checkers = new Checkers();
   }
 
   public GameWin newGameWin(String str) {
-    return new GameWin(str, p1);
+    return gameWin = new GameWin(str, p1);
   }
 
   public GameWin getGamewin() {
+    gameWin = new GameWin("Test GameWin", p1);
     return gameWin;
   }
 
   public CheckerFrame getCheckerFrame() {
     return cFrame = new CheckerFrame();
   }
-public void playCheckerFrame(){
-  checkers.play();
-  
-}
+
+  public void playCheckerFrame() {
+    checkers =  new Checkers();
+    checkers.play();
+  }
+
   public int isMoveLegal(int[][] board, int srtI, int srtJ, int endI, int endJ, int turn) {
     return CheckerMove.isMoveLegal(board, srtI, srtJ, endI, endJ, turn);
   }
@@ -62,11 +66,30 @@ public void playCheckerFrame(){
   }
 
   public IntelliChecker getiCheckers() {
-    return iCheckers;
+    return iCheckers  = new IntelliChecker();
   }
 
   public Checkers getCheckers() {
-    return checkers;
+    return checkers = new Checkers();
+  }
+
+  public int getRedking() {
+    return Checkers.redKing;
+  }
+
+  public int getYellowking() {
+    return Checkers.yellowKing;
+  }
+
+  public int getRedNormal() {
+    return Checkers.redNormal;
+  }
+
+  public int getYellowNormal() {
+    return Checkers.yellowNormal;
+  }
+  public int getEmpty() {
+    return Checkers.empty;
   }
 
   public StartPanel getStartTest() {
@@ -88,6 +111,10 @@ public void playCheckerFrame(){
     testCFrame = null;
   }
 
+  public int ApplyMove(int[][] capBoardRed1, int startX1, int startY1, int endX1, int endY1) {
+    return CheckerMove.ApplyMove(capBoardRed1, startX1, startY1, endX1, endY1);
+  }
+
   public int isMoveLegalTest(int[][] board, int i, int j, int k, int l, int turn) {
     return CheckerMove.isMoveLegal(board, i, j, k, l, turn);
   }
@@ -99,7 +126,7 @@ public void playCheckerFrame(){
     return value;
   }
 
-  public static int getOpponentTest(int turn) {
+  public int getOpponentTest(int turn) {
     return GameEngine.getOpponent(turn);
   }
 
@@ -123,4 +150,19 @@ public void playCheckerFrame(){
     return CheckerMove.getInRange(i, j);
   }
 
+  public int colour(int piece) {
+    return CheckerMove.colour(piece);
+  }
+
+  public int[] getIndex(int actualX1, int actualY1) {
+    return CheckerMove.getIndex(actualX1, actualY1);
+  }
+
+  public int[][] copyBoard(int[][] testBoard1) {
+    return GameEngine.copyBoard(testBoard1);
+  }
+
+  public Help newHelp(){
+    return help = new Help();
+  }
 }
