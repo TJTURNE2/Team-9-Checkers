@@ -60,12 +60,12 @@ public class Checkers extends JPanel
   JLabel col = new JLabel("Colour");
   JLabel diff = new JLabel("Difficulty Level");
   JLabel rp = new JLabel();
-  JLabel rpt = new JLabel("Your Piece");
-  JLabel bpt = new JLabel("Opponent's Piece");
+  JLabel rpt = new JLabel("Red Piece");
+  JLabel bpt = new JLabel("Yellow Piece");
   JLabel bp = new JLabel();
   JLabel rk = new JLabel();
-  JLabel rkt = new JLabel("Your King");
-  JLabel bkt = new JLabel("Opponent's King");
+  JLabel rkt = new JLabel("Red King");
+  JLabel bkt = new JLabel("Yellow King");
   JLabel bk = new JLabel();
 
   JComboBox level = new JComboBox();
