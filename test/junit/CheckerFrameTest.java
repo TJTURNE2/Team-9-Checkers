@@ -14,8 +14,7 @@ public class CheckerFrameTest {
 	@Test
 	public void CFrameTest() {
 		assertNotNull(JunitTester.getCheckerFrame());
-		
-		//JunitTester.CFrameTest(); // old test
+		//JunitTester.CFrameTest();
 	}
 
 }
