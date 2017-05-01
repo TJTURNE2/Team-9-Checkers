@@ -16,26 +16,26 @@ public class StartPanel extends JPanel {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    g.drawLine(0, 400, 508, 400);
-    ///////////////////////////////////////////////////////////////////////
-    g.setColor(Color.RED);
-    g.setFont(new Font("Times new roman", Font.BOLD, 30));
-    g.drawString("CHECKERS", 180, 100);
-    /////////////////////////////////////////////////////////////////////////
-    g.setColor(Color.BLUE);
-    g.setFont(new Font("Times new roman", Font.BOLD, 14));
-    g.drawString("CS 3230 INTELLIGENT SYSTEMS", 160, 130);
-    //////////////////////////////////////////////////////////////////////
-    g.setFont(new Font("Times new roman", Font.BOLD, 12));
-    g.setColor(Color.BLACK);
-    g.drawString("A.M.H.H. ABEYKOON", 180, 180);
-    g.drawString("070002V", 320, 180);
-    g.drawString("B.P.P. FERNANDO", 180, 200);
-    g.drawString("070123R", 320, 200);
-    g.drawString("C.S.N.J. FERNANDO", 180, 220);
-    g.drawString("070125B", 320, 220);
-    g.drawString("K.C.B. GAJASINGHE", 180, 240);
-    g.drawString("070137M", 320, 240);
+            g.drawLine(0,400,508,400);
+        ///////////////////////////////////////////////////////////////////////
+        g.setColor(Color.RED);
+        g.setFont(new Font("Times new roman",Font.BOLD,30));
+        g.drawString("CHECKERS",180,100);
+        /////////////////////////////////////////////////////////////////////////
+        g.setColor(Color.BLUE);
+        g.setFont(new Font("Times new roman",Font.BOLD,14));
+        g.drawString("SER 216: Testing and Quality",160,130); //fixed ben
+        //////////////////////////////////////////////////////////////////////
+        g.setFont(new Font("Times new roman",Font.BOLD,12));
+        g.setColor(Color.BLACK);
+        g.drawString("S. Bennett",180,180);  //fixed - ben
+       // g.drawString("070002V",320,180);
+        g.drawString("C. Deleo",180,200);   //fixed - ben
+        //g.drawString("070123R",320,200);
+        g.drawString("B. Jansen",180,220);   //fixed - ben
+        //g.drawString("070125B",320,220);
+        g.drawString("T. Turner",180,240);   //fixed - ben
+        //g.drawString("070137M",320,240);
     ////////////////////////////////////////////////////////////////////////
     // g.drawImage(new
     // ImageIcon(getClass().getResource("/images/checkersIcon.jpg")).getImage(),350,280,this);//checkersIcon.jpg

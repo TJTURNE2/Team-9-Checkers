@@ -9,7 +9,7 @@ public class Checkers extends JPanel
 
   Graphics g;
 
-  JTextArea msg = new JTextArea("Start a new game... Blue is to move first...");
+  JTextArea msg = new JTextArea("Start a new game... Yellow is to move first...");
   // ImageIcon redN=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/red.png")).getImage());//red_normal.jpg //OLD
   ImageIcon redN = new ImageIcon(new ImageIcon("images/red_normal.jpg").getImage());// red_normal.jpg
@@ -146,8 +146,8 @@ public class Checkers extends JPanel
     snB.addActionListener(this);
     nwB.setBounds(405, 70, 95, 25);// 297
     this.add(nwB);
-    unB.setBounds(405, 100, 95, 25);
-    // this.add(unB);
+    unB.setBounds(405, 40, 95, 25); // FIXED - Steven
+    this.add(unB); // FIXED - Steven
     hlpB.setBounds(415, 10, 25, 25);
     this.add(hlpB);
     snB.setBounds(460, 10, 25, 25);
@@ -166,18 +166,18 @@ public class Checkers extends JPanel
     this.add(p1);
     this.add(p2);
 
-    col.setBounds(110, 400, 80, 25);
-    // this.add(col);
+    col.setBounds(420, 100, 80, 25); // FIXED - Steven
+    this.add(col); // FIXED - Steven
     c1.addActionListener(this);
     c2.addActionListener(this);
     c1.setCursor(new Cursor(Cursor.HAND_CURSOR));
     c2.setCursor(new Cursor(Cursor.HAND_CURSOR));
     colors.add(c1);
     colors.add(c2);
-    c1.setBounds(90, 440, 80, 25);
-    c2.setBounds(90, 420, 80, 25);
-    // this.add(c1);
-    // this.add(c2);
+    c1.setBounds(415, 140, 80, 25); // FIXED - Steven
+    c2.setBounds(415, 120, 80, 25); // FIXED - Steven
+    this.add(c1); // FIXED - Steven
+    this.add(c2); // FIXED - Steven
 
     level.setCursor(new Cursor(Cursor.HAND_CURSOR));
     level.addItemListener(this);
@@ -329,7 +329,8 @@ public class Checkers extends JPanel
 
     won = 0;
 
-    undoCount = 0;
+    // undoCount = 0; // OLD - Steven
+    undoCount = 2; // FIXED - Steven
 
     highlight = false;
     incomplete = false;
@@ -360,9 +361,11 @@ public class Checkers extends JPanel
     }
 
     if (selectedMode == 1 && selectedColor.equalsIgnoreCase("yellow")) {
+      undoCount = 1; // FIXED - Steven
       this.toMove = redNormal;
       play();
     } else if (selectedMode == 1 && selectedColor.equalsIgnoreCase("red")) {
+      undoCount = 1; // FIXED - Steven
       this.toMove = redNormal;
       play();
     }
@@ -395,12 +398,15 @@ public class Checkers extends JPanel
     for (int i = 0; i < 8; i++) {
       System.arraycopy(preBoard3[i], 0, board[i], 0, 8); // copies previous board
     }
-    toMove = preToMove3;
+    // toMove = preToMove3; // OLD - Steven
     drawCheckers();
     update(g);
 
     if (selectedMode == 1) {
+      toMove = preToMove3; // FIXED - Steven
       play();
+    } else {
+    	toMove = preToMove2; // FIXED - Steven
     }
   }
 
@@ -570,17 +576,17 @@ public class Checkers extends JPanel
     if (this.toMove == redNormal) {
       msg.setText("Red to move");
     } else {
-      msg.setText("Blue to move");
+      msg.setText("Yellow to move");
     }
 
     if (loser == redNormal && won == 0) {
-      msg.setText("Blue Wins!");
+      msg.setText("Yellow Wins!");
       try {
         Thread.sleep(150);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      new GameWin("Blue", this.getLocationOnScreen());
+      new GameWin("Yellow", this.getLocationOnScreen());
       won = 1;
       undoCount = 0;
       newGame();
