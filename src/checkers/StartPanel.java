@@ -24,17 +24,17 @@ public class StartPanel extends JPanel {
         /////////////////////////////////////////////////////////////////////////
         g.setColor(Color.BLUE);
         g.setFont(new Font("Times new roman",Font.BOLD,14));
-        g.drawString("SER 216: Testing and Quality",160,130);
+        g.drawString("SER 216: Testing and Quality",160,130); //fixed ben
         //////////////////////////////////////////////////////////////////////
         g.setFont(new Font("Times new roman",Font.BOLD,12));
         g.setColor(Color.BLACK);
-        g.drawString("S. Bennett",180,180);
+        g.drawString("S. Bennett",180,180);  //fixed - ben
        // g.drawString("070002V",320,180);
-        g.drawString("C. Deleo",180,200);
+        g.drawString("C. Deleo",180,200);   //fixed - ben
         //g.drawString("070123R",320,200);
-        g.drawString("B. Jansen",180,220);
+        g.drawString("B. Jansen",180,220);   //fixed - ben
         //g.drawString("070125B",320,220);
-        g.drawString("T. Turner",180,240);
+        g.drawString("T. Turner",180,240);   //fixed - ben
         //g.drawString("070137M",320,240);
     ////////////////////////////////////////////////////////////////////////
     // g.drawImage(new
