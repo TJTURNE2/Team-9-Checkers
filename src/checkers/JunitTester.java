@@ -23,7 +23,7 @@ public class JunitTester {
     p1 = new Point(25, 25);
     gameWin = new GameWin("Test GameWin", p1);
     iCheckers = new IntelliChecker();
-    
+    checkers = new Checkers();
   }
 
   public GameWin newGameWin(String str) {
@@ -37,7 +37,10 @@ public class JunitTester {
   public CheckerFrame getCheckerFrame() {
     return cFrame = new CheckerFrame();
   }
-
+public void playCheckerFrame(){
+  checkers.play();
+  
+}
   public int isMoveLegal(int[][] board, int srtI, int srtJ, int endI, int endJ, int turn) {
     return CheckerMove.isMoveLegal(board, srtI, srtJ, endI, endJ, turn);
   }
@@ -70,14 +73,8 @@ public class JunitTester {
     return startTest = new StartPanel();
   }
 
-  public Checkers runCheckers() {
-    checkers = new Checkers();
-    checkers.newGame();
-    checkers.drawCheckers();
-    checkers.undo();
-    checkers.play();
-    
-    return checkers;
+  public void runCheckers() {
+    CFrameTest();
   }
 
   public static void CFrameTest() {
