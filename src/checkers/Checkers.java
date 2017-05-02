@@ -230,24 +230,58 @@ public class Checkers extends JPanel
 
   }
 
-  public void paintComponent(Graphics g) {
+  /**
+   * Graphically creates the Checkers board with the checkers
+   * placed on the black squares.
+   * Bug presented: the checkers were previously placed in the
+   * white squares, and, in the game of Checkers, it is
+   * customary for the pieces to be placed on the darker colored
+   * squares.
+   * Bug fixed by: Cristi DeLeo
+   * Enhancement presented: there were two for-loops to create 
+   * the squares for a single color, and only one for-loop was
+   * needed (combine both fillRect statements, per color, under
+   * one for-loop).
+   * Bug fixed by: Cristi DeLeo
+   */
+  public void paintComponent(Graphics g) 
+  {
     super.paintComponent(g);
-    g.setColor(new Color(0, 0, 0));
-
-    for (int i = 0; i < 4; i++) {
-      for (int j = 0; j < 4; j++) {
+    
+    // Sets color in-use to white
+    g.setColor(Color.white);
+    
+    // Creates white squares with dimensions of 50 pixels x 50 pixels 
+    for (int i = 0; i < 4; i++)
+    {
+      for (int j = 0; j < 4; j++) 
+      {
         g.fillRect(100 * j, 100 * i, 50, 50);
-      }
-    }
-    for (int i = 0; i < 4; i++) {
-      for (int j = 0; j < 4; j++) {
         g.fillRect(50 + 100 * j, 50 + 100 * i, 50, 50);
       }
     }
+
+    // Sets color in-use to black
+    g.setColor(Color.black);
+    
+    // Creates black squares with dimensions of 50 pixels x 50 pixels
+    // that alternate in between the white squares, completing the
+    // black & white checkered board display
+    for (int i = 0; i < 4; i++) 
+    {
+      for (int j = 0; j < 4; j++) 
+      {
+        g.fillRect(100 * j, 50 + 100 * i, 50, 50);
+        g.fillRect(50 + 100 * j, 100 * i, 50, 50);
+      }
+    }
+    
     g.drawLine(0, 400, 400, 400);
     g.drawLine(400, 0, 400, 400);
+    
+    // Displays the checkers on the board
     drawCheckers();
-  }
+  } // End of paintComponent(Graphics g)
 
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand().equalsIgnoreCase("1-Player")) {
@@ -378,8 +412,8 @@ public class Checkers extends JPanel
 
   /**
    * Paints the checker pieces on the board.
-   * Bug presented: Pieces were not centered horizontally or vertically.
-   * Bug fixed by: Cristi DeLeo
+   * Enhancement presented: Pieces were not centered horizontally or vertically.
+   * Enhanced by: Cristi DeLeo
    */
   public void drawCheckers() 
   {
@@ -514,7 +548,8 @@ public class Checkers extends JPanel
     showStatus();
   }
 
-  private boolean isPossibleSquare(int i, int j) {
+  private boolean isPossibleSquare(int i, int j) 
+  {
     return (i + j) % 2 == 1;
   }
 
