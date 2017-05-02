@@ -86,12 +86,13 @@ public class Checkers extends JPanel
 
   int[][] board = new int[8][8];
 
-  int[][] preBoard1 = new int[8][8]; // for undo
-  int preToMove1;
+  int[][] preBoard1 = new int[8][8]; // for undo 
   int[][] preBoard2 = new int[8][8];
-  int preToMove2;
   int[][] preBoard3 = new int[8][8];
-  int preToMove3;
+  
+  int preToMove1 = yellowNormal;
+  int preToMove2 = yellowNormal;
+  int preToMove3 = yellowNormal;
 
   int startX, startY, endX, endY;
   boolean incomplete = false;
@@ -112,7 +113,8 @@ public class Checkers extends JPanel
     setupGUI();
   }
 
-  private void setupGUI() {
+  private void setupGUI() 
+  {
     setLayout(null);
 
     nwB.setFocusPainted(false);
@@ -246,11 +248,12 @@ public class Checkers extends JPanel
    * customary for the pieces to be placed on the darker colored
    * squares.
    * Bug fixed by: Cristi DeLeo
+   * 
    * Enhancement presented: there were two for-loops to create 
    * the squares for a single color, and only one for-loop was
    * needed (combine both fillRect statements, per color, under
    * one for-loop).
-   * Bug fixed by: Cristi DeLeo
+   * Enhanced by: Cristi DeLeo
    */
   public void paintComponent(Graphics g) 
   {
@@ -291,8 +294,21 @@ public class Checkers extends JPanel
     drawCheckers();
   } // End of paintComponent(Graphics g)
 
-  public void actionPerformed(ActionEvent e) {
-    if (e.getActionCommand().equalsIgnoreCase("1-Player")) {
+  /**
+   * Performs the corresponding actions for each click of a 
+   * button (or radio button) by the user's mouse.
+   * 
+   * Enhancement presented: there was not an option for the user
+   * to forfeit a game.
+   * Enhanced by: Steven Bennett
+   * 
+   * @param e the ActionEvent that accounts for mouse-clicks
+   */
+  public void actionPerformed(ActionEvent e) 
+  {
+    // Executes if the user selects the "1-Player" radio button
+    if (e.getActionCommand().equalsIgnoreCase("1-Player")) 
+    {
       // new PlaySound("src//sounds//option.wav").start(); //OLD
       new PlaySound("sounds//option.wav").start(); // FIXED - Terry
       col.setEnabled(true);
@@ -306,7 +322,10 @@ public class Checkers extends JPanel
       level.setEnabled(true);
       level.setVisible(true);
     }
-    if (e.getActionCommand().equalsIgnoreCase("2-Player")) {
+    
+    // Executes if the user selects the "2-Player" radio button
+    if (e.getActionCommand().equalsIgnoreCase("2-Player")) 
+    {
       // new PlaySound("src//sounds//option.wav").start(); //OLD
       new PlaySound("sounds//option.wav").start(); // FIXED -Terry
       col.setEnabled(false);
@@ -321,15 +340,24 @@ public class Checkers extends JPanel
       level.setVisible(false);
       c2.setSelected(true);
     }
-    if (e.getActionCommand().equalsIgnoreCase("red")) {
+    
+    // Executes if the user selects the "red" radio button
+    if (e.getActionCommand().equalsIgnoreCase("red")) 
+    {
       // new PlaySound("src//sounds//option.wav").start(); //OLD
       new PlaySound("sounds//option.wav").start();// FIXED -Terry
     }
-    if (e.getActionCommand().equalsIgnoreCase("yellow")) {
+    
+    // Executes if the user selects the "yellow" radio button
+    if (e.getActionCommand().equalsIgnoreCase("yellow")) 
+    {
       // new PlaySound("src//sounds//option.wav").start(); //OLD
       new PlaySound("sounds//option.wav").start();// FIXED -Terry
     }
-    if (e.getActionCommand().equalsIgnoreCase("New Game")) {
+    
+    // Executes if the user clicks the "New Game" button
+    if (e.getActionCommand().equalsIgnoreCase("New Game")) 
+    {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
       new PlaySound("sounds//button.wav").start();// FIXED -Terry
       nwB.setEnabled(false);
@@ -344,57 +372,92 @@ public class Checkers extends JPanel
       ffB.setEnabled(true);
       newGame();
     }
-    if(e.getActionCommand().equalsIgnoreCase("Forfeit")) {
+    
+    // Executes if the user clicks the "Forfeit" button during game play
+    if(e.getActionCommand().equalsIgnoreCase("Forfeit")) 
+    {
         new PlaySound("sounds//button.wav").start();
         loser = toMove;
         showStatus();
     }
-    if (e.getActionCommand().equalsIgnoreCase("Undo") && undoCount > 3) {
+    
+    // Executes if the user clicks the "Undo" button game play and the
+    // the number of "undos" is greater than 3.
+    if (e.getActionCommand().equalsIgnoreCase("Undo") && undoCount > 3) 
+    {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
       new PlaySound("sounds//button.wav").start();// FIXED -Terry
       undo();
     }
-    if (e.getSource() == hlpB) {
+    
+    // Executes if the user clicks the "Help" icon
+    if (e.getSource() == hlpB) 
+    {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
       new PlaySound("sounds//button.wav").start();// FIXED -Terry
       hp.setVisible(true);
     }
-    if (e.getSource() == snB) {
-      if (silent) {
+    
+    // Executes if the user clicks the "Sound" icon
+    if (e.getSource() == snB) 
+    {
+      if (silent) 
+      {
         snB.setIcon(snp);
         silent = false;
         // new PlaySound("src//sounds//button.wav").start(); //OLD
         new PlaySound("sounds//button.wav").start();// FIXED -Terry
-      } else {
+      } 
+      else 
+      {
         snB.setIcon(mup);
         silent = true;
       }
     }
-  }
+  } // End of ActionPerformed(ActionEvent e)
 
-  public void newGame() { // creates a new game
-
+  /**
+   * Creates a new game with the selected game play settings.
+   */
+  public void newGame() 
+  {
     // Yellow takes the first move in both modes
     // If someone wants to move secondly, red has to be selected
     // Yellow is always at the bottom of the board
 
+    // Assigns the selected color to the user (in 1-Player mode),
+    // otherwise the selected color is set to default to "yellow"
+    // in 2-Player mode
     selectedColor = c1.isSelected() ? "red" : "yellow";
+    
+    // Instantiates the selectedMode dependent upon the user's selection
     selectedMode = p1.isSelected() ? 1 : 2;
+    
+    // Instantiates the difficulty dependent upon the user's selection
     difficulty = level.getSelectedIndex();
 
+    // The undo button is disabled prior to the movement of any pieces
     unB.setEnabled(false);
 
+    // Resets the winner variable
     won = 0;
 
     // undoCount = 0; // OLD - Steven
+    // Sets/resets the number of undos to 2
     undoCount = 2; // FIXED - Steven
 
+    // Sets/resets the highlight variable to false, representing that no squares
+    // are currently selected
     highlight = false;
+    
+    // Sets/resets the incomplete variable to false, indicating that the current
+    // status of the first move in a new game is not an incomplete move
     incomplete = false;
 
+    // Resets the loser variable
     loser = empty;
 
-    // Initiates an new board
+    // Initiates an new, blank board
     for (int i = 0; i < 8; i++)
     {
       for (int j = 0; j < 8; j++)
@@ -409,38 +472,61 @@ public class Checkers extends JPanel
           board[i][j] = yellowNormal;
     }
 
-    toMove = yellowNormal;
+    // toMove = yellowNormal; // OLD - toMove only needs to be set to yellow when 2-Player mode is selected
 
-    for (int i = 0; i < 8; i++) {
+    // For-loop copies the current state of the board to the pre-board
+    // to store past data in the event of the user clicking "undo"
+    for (int i = 0; i < 8; i++) 
+    {
       System.arraycopy(board[i], 0, preBoard1[i], 0, 8); // for undo
       System.arraycopy(preBoard1[i], 0, preBoard2[i], 0, 8);
       System.arraycopy(preBoard2[i], 0, preBoard3[i], 0, 8);
-      preToMove3 = preToMove2 = preToMove1 = toMove;
+      //preToMove3 = preToMove2 = preToMove1 = toMove; // OLD - Cristi - Variables are initialized at the beginning of the class to yellowNormal.
     }
 
-    if (selectedMode == 1 && selectedColor.equalsIgnoreCase("yellow")) {
+    // Executes if the user has 1-Player mode selected and chooses Yellow
+    if (selectedMode == 1 && selectedColor.equalsIgnoreCase("yellow")) 
+    {
       undoCount = 1; // FIXED - Steven
       this.toMove = redNormal;
       play();
-    } else if (selectedMode == 1 && selectedColor.equalsIgnoreCase("red")) {
+    } 
+    
+    // Executes if the user has 1-Player mode selected and chooses Red
+    else if (selectedMode == 1 && selectedColor.equalsIgnoreCase("red")) 
+    {
       undoCount = 1; // FIXED - Steven
       this.toMove = redNormal;
       play();
     }
+    
+    // Executes if the user has 2-Player mode selected
+    else if (selectedMode == 2)
+    {
+      // The first player to make a move is yellow
+      toMove = yellowNormal;
+    }
 
+    // Updates the GUI to display a new game
     update(getGraphics());
+    
+    // Draws the black & white checkered board
     drawCheckers();
+    
+    // Displays the current status of the new game "Yellow to move"
     showStatus();
-  }
+  } // End of newGame()
 
   /**
    * Paints the checker pieces on the board.
+   * 
    * Enhancement presented: Pieces were not centered horizontally or vertically.
    * Enhanced by: Cristi DeLeo
    */
   public void drawCheckers() 
   {
     g = getGraphics();
+    //paintComponent(g);
 
     for (int i = 0; i < 8; i++) 
     {
@@ -474,103 +560,203 @@ public class Checkers extends JPanel
     }
   } // End of drawCheckers()
 
-  public void undo() { // undo function
+  /**
+   * Performs the undo request by the user.
+   * 
+   * Bug presented: toMove was set to the preToMove3, despite the selected mode
+   * (1-Player should result in toMove being set to preToMove3, while 2-Player
+   * should result in toMove being set to preToMove2).
+   * Bug fixed by: Steven Bennett
+   * 
+   * Bug presented: drawCheckers() was unnecessarily called (to re-draw the 
+   * black & white checker squares).
+   * Bug fixed by: Cristi DeLeo
+   */
+  public void undo() 
+  {
     undoCount = 1;
-    for (int i = 0; i < 8; i++) {
+    
+    for (int i = 0; i < 8; i++) 
+    {
       System.arraycopy(preBoard3[i], 0, board[i], 0, 8); // copies previous board
     }
+    
     // toMove = preToMove3; // OLD - Steven
-    drawCheckers();
+    
+    // drawCheckers(); // OLD - Cristi - It is not necessary to draw the checker board here (black & white squares, not pieces)
+    
+    // Updates the display to represent the undo 
     update(g);
 
-    if (selectedMode == 1) {
+    // Executes if the 1-Player mode is selected
+    if (selectedMode == 1) 
+    {
       toMove = preToMove3; // FIXED - Steven
       play();
-    } else {
+    } 
+    
+    // Executes if the 2-Player mode is selected
+    else 
+    {
       toMove = preToMove2; // FIXED - Steven
     }
-  }
+  } // End of undo()
 
-  public void play() {
-
+  /**
+   * Performs the necessary steps to successfully play Checkers.
+   * 
+   * Bug presented: incorrect source for .wav file.
+   * Bug fixed by: Terry Turner
+   */
+  public void play() 
+  {
+    // Increases the undoCount by 1
     undoCount++;
 
-    if (undoCount > 3) {
+    // Executes if the undoCount is greater than 3
+    if (undoCount > 3) 
+    {
+      // Executes if 1-Player mode is selected and the difficulty is not
+      // set to "tough"
       if (selectedMode == 1 && difficulty != 4)
+      {
+        // Enables the "undo" button
         unB.setEnabled(true);
+      }
+      
+      // Executes if 2-Player mode is selected
       else if (selectedMode == 2)
+      {
+        // Enables the "undo" button
         unB.setEnabled(true);
+      }
     }
 
-    for (int i = 0; i < 8; i++) {
+    // For-loop copies the current board to preBoard1, and preBoard1-3 are
+    // copied to the next sequential preBoard
+    for (int i = 0; i < 8; i++) 
+    {
       System.arraycopy(preBoard2[i], 0, preBoard3[i], 0, 8);
       System.arraycopy(preBoard1[i], 0, preBoard2[i], 0, 8);
       System.arraycopy(board[i], 0, preBoard1[i], 0, 8);
     }
+    
     preToMove3 = preToMove2;
     preToMove2 = preToMove1;
     preToMove1 = toMove;
+    
     int tempScore;
     int[] result = new int[4];
     int[] counter = new int[1];
 
+    // Sets the counter to 0
     counter[0] = 0;
 
+    // Executes if it is the user's turn and the following options have
+    // been selected: 1-Player mode and the user's selected color is yellow
     if (this.toMove == yellowNormal && selectedMode == 1
-        && selectedColor.equalsIgnoreCase("yellow")) {
+        && selectedColor.equalsIgnoreCase("yellow")) 
+    {
+      // Assigns the current move to the red opponent (in this case it is the computer)
       this.toMove = redNormal;
+      
+      // Displays who's turn it is
       showStatus();
+      
       tempScore = GameEngine.MinMax(board, 0, difficulty + 2, result, this.toMove, counter);
 
       if (result[0] == 0 && result[1] == 0)
+      {
         loser = redNormal;
-      else {
+      }
+      
+      else 
+      {
         CheckerMove.moveComputer(board, result);
 
-        if (loser == empty) {
+        if (loser == empty) 
+        {
           // new PlaySound("src//sounds//comPlay.wav").start(); //OLD
           new PlaySound("sounds//comPlay.wav").start(); // FIXED -Terry
           play();
         }
+        
+        // Assigns the current move to the yellow opponent (in this case it is the user)
         this.toMove = yellowNormal;
       }
     }
 
+    // Executes if it is the user's turn and the following options have
+    // been selected: 1-Player mode and the user's selected color is red
     else if (this.toMove == redNormal && selectedMode == 1
-        && selectedColor.equalsIgnoreCase("red")) {
+        && selectedColor.equalsIgnoreCase("red")) 
+    {
+      // Assigns the current move to the yellow opponent (in this case it is the computer)
       this.toMove = yellowNormal;
+      
+      // Displays who's turn it is
       showStatus();
+      
       tempScore = GameEngine.MinMax(board, 0, difficulty + 2, result, this.toMove, counter);
 
       if (result[0] == 0 && result[1] == 0)
+      {
         loser = yellowNormal;
-      else {
+      }
+      
+      else 
+      {
         CheckerMove.moveComputer(board, result);
-        if (loser == empty) {
+        if (loser == empty) 
+        {
           // new PlaySound("src//sounds//comPlay.wav").start(); //OLD
           new PlaySound("sounds//comPlay.wav").start(); // FIXED -Terry
           play();
         }
-
+        
+        // Assigns the current move to the red opponent (in this case it is the user)
         this.toMove = redNormal;
       }
-    } else {
-      if (this.toMove == redNormal)
-        this.toMove = yellowNormal;
-      else
-        this.toMove = redNormal;
-    }
-    if (CheckerMove.noMovesLeft(board, this.toMove)) //
+    } 
+    
+    // Executes if neither of the two previously accounted for conditions were met
+    else 
     {
       if (this.toMove == redNormal)
-        loser = redNormal;
+      {
+        this.toMove = yellowNormal;
+      }
+      
       else
-        loser = yellowNormal;
+      {
+        this.toMove = redNormal;
+      }
     }
-
+    
+    // Executes if there are no more moves left for the opponent whose turn it is
+    // and pronounces them as the loser
+    if (CheckerMove.noMovesLeft(board, this.toMove))
+    {
+      if (this.toMove == redNormal)
+      {
+        loser = redNormal;
+      }
+      
+      else
+      {
+        loser = yellowNormal;
+      }
+    }
     showStatus();
-  }
+  } // End of play()
 
+  /**
+   * Determines whether the specified coordinate is a valid square (pieces
+   * may only move to/from black squares.
+   * @param i
+   * @param j
+   * @return true if the coordinate is a valid location, otherwise false
+   */
   private boolean isPossibleSquare(int i, int j) 
   {
     return (i + j) % 2 == 1;
@@ -579,26 +765,32 @@ public class Checkers extends JPanel
   public void itemStateChanged(ItemEvent e) {
   }
 
-  public void mousePressed(MouseEvent e) {
-	if (won == 1)
-		return;
+  public void mousePressed(MouseEvent e) 
+  {
+    if (won == 1)
+    {
+      return;
+    }
 
     int x = e.getX();
     int y = e.getY();
     int[] square = new int[2];
 
     if (x >= 0 && x <= 500 && y <= 500 && y >= 0)
+    {
       square = CheckerMove.getIndex(x, y);
+    }
 
     if (toMove == Checkers.redNormal
         && (board[square[0]][square[1]] == Checkers.redNormal
             || board[square[0]][square[1]] == Checkers.redKing)
         || toMove == Checkers.yellowNormal && (board[square[0]][square[1]] == Checkers.yellowNormal
-            || board[square[0]][square[1]] == Checkers.yellowKing)) {
-
+            || board[square[0]][square[1]] == Checkers.yellowKing)) 
+    {
       // we don't want to lose the incomplete move info:
       // only set new start variables if !incomplete
-      if (!incomplete) {
+      if (!incomplete) 
+      {
         highlight = true;
         startX = square[0];
         startY = square[1];
@@ -610,32 +802,35 @@ public class Checkers extends JPanel
         // new PlaySound("src//sounds//clickChecker.wav").start(); //OLD
         new PlaySound("sounds//clickChecker.wav").start(); // FIXED -Terry
       }
-    } else if (highlight && (float) (square[0] + square[1]) / 2 != (square[0] + square[1]) / 2) {
+    } 
+    else if (highlight && (float) (square[0] + square[1]) / 2 != (square[0] + square[1]) / 2) 
+    {
       endX = square[0];
       endY = square[1];
       int status = CheckerMove.ApplyMove(board, startX, startY, endX, endY);
-      switch (status) {
-      case CheckerMove.legalMove:
-        incomplete = false;
-        highlight = false;
-        play();
-        update(g);
-        drawCheckers();
-        break;
-      case CheckerMove.incompleteMove:
-        incomplete = true;
-        highlight = true;
-        // the ending square is now starting square for the next capture
-        startX = square[0];
-        startY = square[1];
-        update(g);
-        g = getGraphics();
-        g.setColor(new Color(255, 100, 30));
-        g.fillRect(50 * square[0], 50 * square[1], 50, 50);
-        drawCheckers();
-        break;
+      switch (status) 
+      {
+        case CheckerMove.legalMove:
+          incomplete = false;
+          highlight = false;
+          play();
+          update(g);
+          drawCheckers();
+          break;
+        case CheckerMove.incompleteMove:
+          incomplete = true;
+          highlight = true;
+          // the ending square is now starting square for the next capture
+          startX = square[0];
+          startY = square[1];
+          update(g);
+          g = getGraphics();
+          g.setColor(new Color(255, 100, 30));
+          g.fillRect(50 * square[0], 50 * square[1], 50, 50);
+          drawCheckers();
+          break;
+        }
       }
-    }
   }
 
   public void mouseReleased(MouseEvent e) {
@@ -733,7 +928,7 @@ public class Checkers extends JPanel
   public void update(Graphics g) {
     paint(g);
   }
-
+  
   //////////// TEST CODE////////////////////
   public boolean getIsPossibleSquare(int i, int j) {
     return isPossibleSquare(i, j);
