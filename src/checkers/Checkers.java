@@ -12,20 +12,20 @@ public class Checkers extends JPanel
   JTextArea msg = new JTextArea("Start a new game... Yellow is to move first...");
   // ImageIcon redN=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/red.png")).getImage());//red_normal.jpg //OLD
-  ImageIcon redN = new ImageIcon(new ImageIcon("images/red_normal.jpg").getImage());// red_normal.jpg
+  ImageIcon redN = new ImageIcon(new ImageIcon("images/red_normal.png").getImage());// red_normal.jpg
                                                                                     // //FIXED -
                                                                                     // Terry
   // ImageIcon yellowN=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/blue.png")).getImage());//yellow_normal.jpg //OLD
-  ImageIcon yellowN = new ImageIcon(new ImageIcon("images/yellow_normal.jpg").getImage());// yellow_normal.jpg//FIXED
+  ImageIcon yellowN = new ImageIcon(new ImageIcon("images/yellow_normal.png").getImage());// yellow_normal.jpg//FIXED
                                                                                           // - Terry
   // ImageIcon redK=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/rs.jpg")).getImage());//red_king.jpg //OLD
-  ImageIcon redK = new ImageIcon(new ImageIcon("images/red_king.jpg").getImage());// red_king.jpg
+  ImageIcon redK = new ImageIcon(new ImageIcon("images/red_king.png").getImage());// red_king.jpg
                                                                                   // //FIXED - Terry
   // ImageIcon yellowK=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/bs.jpg")).getImage());//yellow_king.jpg //OLD
-  ImageIcon yellowK = new ImageIcon(new ImageIcon("images/yellow_king.jpg").getImage());// yellow_king.jpg
+  ImageIcon yellowK = new ImageIcon(new ImageIcon("images/yellow_king.png").getImage());// yellow_king.jpg
                                                                                         // //FIXED -
                                                                                         // Terry
   // ImageIcon hlp=new ImageIcon(new
@@ -42,6 +42,7 @@ public class Checkers extends JPanel
                                                                              // Terry
 
   JButton nwB = new JButton("New Game");
+  JButton ffB = new JButton("Forfeit");
   JButton unB = new JButton("Undo");
   JButton hlpB = new JButton(hlp);
   JButton snB = new JButton(snp);
@@ -115,6 +116,7 @@ public class Checkers extends JPanel
     setLayout(null);
 
     nwB.setFocusPainted(false);
+    ffB.setFocusPainted(false);
     unB.setFocusPainted(false);
     c1.setFocusPainted(false);
     c2.setFocusPainted(false);
@@ -131,21 +133,27 @@ public class Checkers extends JPanel
     p1.setFont(new Font("SansSerif", Font.PLAIN, 11));
     p2.setFont(new Font("SansSerif", Font.PLAIN, 11));
     nwB.setFont(new Font("SansSerif", Font.BOLD, 11));
+    ffB.setFont(new Font("SansSerif", Font.BOLD, 11));
     unB.setFont(new Font("SansSerif", Font.BOLD, 11));
     hlpB.setFont(new Font("SansSerif", Font.PLAIN, 11));
     snB.setFont(new Font("SansSerif", Font.PLAIN, 11));
     msg.setFont(new Font("SansSerif", Font.PLAIN, 11));
 
     nwB.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    ffB.setCursor(new Cursor(Cursor.HAND_CURSOR));
     unB.setCursor(new Cursor(Cursor.HAND_CURSOR));
     hlpB.setCursor(new Cursor(Cursor.HAND_CURSOR));
     snB.setCursor(new Cursor(Cursor.HAND_CURSOR));
     nwB.addActionListener(this);
+    ffB.addActionListener(this);
     unB.addActionListener(this);
     hlpB.addActionListener(this);
     snB.addActionListener(this);
     nwB.setBounds(405, 70, 95, 25);// 297
     this.add(nwB);
+    ffB.setBounds(405, 350, 95, 25);
+    ffB.setEnabled(false);
+    this.add(ffB);
     unB.setBounds(405, 40, 95, 25); // FIXED - Steven
     this.add(unB); // FIXED - Steven
     hlpB.setBounds(415, 10, 25, 25);
@@ -324,7 +332,22 @@ public class Checkers extends JPanel
     if (e.getActionCommand().equalsIgnoreCase("New Game")) {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
       new PlaySound("sounds//button.wav").start();// FIXED -Terry
+      nwB.setEnabled(false);
+      col.setEnabled(false);
+      diff.setEnabled(false);
+      c1.setEnabled(false);
+      c2.setEnabled(false);
+      level.setEnabled(false);
+      mode.setEnabled(false);
+      p1.setEnabled(false);
+      p2.setEnabled(false);
+      ffB.setEnabled(true);
       newGame();
+    }
+    if(e.getActionCommand().equalsIgnoreCase("Forfeit")) {
+        new PlaySound("sounds//button.wav").start();
+        loser = toMove;
+        showStatus();
     }
     if (e.getActionCommand().equalsIgnoreCase("Undo") && undoCount > 3) {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
@@ -557,6 +580,8 @@ public class Checkers extends JPanel
   }
 
   public void mousePressed(MouseEvent e) {
+	if (won == 1)
+		return;
 
     int x = e.getX();
     int y = e.getY();
@@ -663,7 +688,7 @@ public class Checkers extends JPanel
       }
       new GameWin("Yellow", this.getLocationOnScreen());
       won = 1;
-      undoCount = 0;
+      //undoCount = 0;
       //newGame(); // OLD - Removed to display board after game ends, user should have to click New Game for new game to start - Cristi
     } 
     else if (loser == yellowNormal && won == 0) 
@@ -679,8 +704,21 @@ public class Checkers extends JPanel
       }
       new GameWin("Red", this.getLocationOnScreen());
       won = 1;
-      undoCount = 0;
+      //undoCount = 0;
       //newGame(); // OLD - Removed to display board after game ends, user should have to click New Game for new game to start - Cristi
+    }
+    if(won == 1) {
+        nwB.setEnabled(true);
+        col.setEnabled(true);
+        diff.setEnabled(true);
+        c1.setEnabled(true);
+        c2.setEnabled(true);
+        level.setEnabled(true);
+        mode.setEnabled(true);
+        p1.setEnabled(true);
+        p2.setEnabled(true);
+        ffB.setEnabled(false);
+        undoCount = 0;
     }
   } // End of showStatus()
 
