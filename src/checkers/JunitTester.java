@@ -17,7 +17,7 @@ public class JunitTester {
   Point p1 = new Point(25, 25);
 
   /** The start test. */
-  public static StartPanel startTest;
+  public StartPanel startTest;
 
   /** The i checkers. */
   public IntelliChecker iCheckers;
@@ -26,7 +26,7 @@ public class JunitTester {
   public CheckerFrame cFrame;
 
   /** The checkers. */
-  public static Checkers checkers;
+  public Checkers checkers;
 
   /** The game win. */
   public GameWin gameWin;

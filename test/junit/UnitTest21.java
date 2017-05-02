@@ -15,7 +15,7 @@ import org.junit.Test;
 import checkers.CheckerFrame;
 import checkers.Checkers;
 import checkers.IntelliChecker;
-import checkers.JunitTester;
+import checkers.junitTester;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -24,7 +24,7 @@ import checkers.JunitTester;
 public class UnitTest21 {
 
   /** The Junit tester. */
-  JunitTester JunitTester;
+  junitTester junitTester;
   
   /** The cframe. */
   CheckerFrame cframe;
@@ -41,7 +41,7 @@ public class UnitTest21 {
   @Test
   public void test() {
     IntelliChecker Checker = new IntelliChecker();
-    JunitTester = new JunitTester();
+    junitTester = new junitTester();
     try {
       String[] stuff = { "null", "null" };
       Checker.main(stuff);
@@ -49,12 +49,12 @@ public class UnitTest21 {
       // TODO Auto-generated catch block
       // e.printStackTrace();
     }
-    checkers = JunitTester.getCheckers();
+    checkers = junitTester.getCheckers();
     checkers.drawCheckers();
     // checkers.();
-    cframe = new JunitTester().getCheckerFrame();
-    JunitTester.getCheckerFrame().setVisible(true);
-    // JunitTester.CFrameTest(); //assertNotNull(this.JunitTester.runCheckers());
+    cframe = new junitTester().getCheckerFrame();
+    junitTester.getCheckerFrame().setVisible(true);
+    // junitTester.CFrameTest(); //assertNotNull(this.junitTester.runCheckers());
   }
 
   
@@ -63,8 +63,8 @@ public class UnitTest21 {
    */
   @Test
   public void mouseTest() {
-    JunitTester = new JunitTester();
-    checkers = JunitTester.getCheckers();
+    junitTester = new junitTester();
+    checkers = junitTester.getCheckers();
     me = new MouseEvent(checkers, 0, 0, 0, 100, 100, 1, false);
     checkers.mouseDragged(me);
     checkers.mouseClicked(me);
@@ -79,8 +79,8 @@ public class UnitTest21 {
    */
   @Test
   public void actionPerformedTest() {
-    JunitTester = new JunitTester();
-    checkers = JunitTester.getCheckers();
+    junitTester = new junitTester();
+    checkers = junitTester.getCheckers();
     me = new MouseEvent(checkers, 0, 0, 0, 100, 100, 1, false);
     checkers.mousePressed(me);
     ActionEvent evt = new ActionEvent(checkers, 1, "1-Player");
@@ -105,7 +105,7 @@ public class UnitTest21 {
    */
   @Test
   public void moveComputerTest() {
-    JunitTester = new JunitTester();
+    junitTester = new junitTester();
     int[] com = { 0, 0, 2, 2 };
     int[][] capBoardRed = {
         {1, 0, 0, 0, 0, 0, 0, 0}, 
@@ -116,7 +116,7 @@ public class UnitTest21 {
         {0, 0, 0, 0, 0, 0, 0, 0}, 
         {0, 0, 0, 0, 0, 0, 0, 0}, 
         {0, 0, 0, 0, 0, 0, 0, 0}};
-    JunitTester.moveComputer(capBoardRed, com);
+    junitTester.moveComputer(capBoardRed, com);
   }
   
   /**
@@ -124,7 +124,7 @@ public class UnitTest21 {
    */
   @Test
   public void generateMovesTest() {
-    JunitTester = new JunitTester();
+    junitTester = new junitTester();
     int com = 1;
     int[][] board1 = {
         {1, 0, 0, 0, 0, 0, 0, 0}, 
@@ -153,15 +153,15 @@ public class UnitTest21 {
         {0, 0, 0, 0, 0, 0, 0, 0}, 
         {0, 0, 0, 0, 0, 0, 0, 0}, 
         {0, 0, 0, 0, 0, 0, 0, 0}};
-    assertNotNull(JunitTester.generateMoves(board1, com));
-    assertNotNull(JunitTester.generateMoves(board2, com));
-    assertNotNull(JunitTester.generateMoves(board3, com));
+    assertNotNull(junitTester.generateMoves(board1, com));
+    assertNotNull(junitTester.generateMoves(board2, com));
+    assertNotNull(junitTester.generateMoves(board3, com));
   }
  
 //  @Test
 //  public void forceCaptureTest() {
-//    JunitTester = new JunitTester();
-//    ActionEvent evt = new ActionEvent(JunitTester, 1, "Start Game");
+//    junitTester = new junitTester();
+//    ActionEvent evt = new ActionEvent(junitTester, 1, "Start Game");
 //    //cframe.actionPerformed(evt);
 //    
 //  }
