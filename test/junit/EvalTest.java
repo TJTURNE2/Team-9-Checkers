@@ -18,6 +18,7 @@ public class EvalTest {
 			   {2, 4, 0, 0, 0, 0, 3, 1}, 
 			   {4, 0, 0, 0, 0, 0, 0, 3}};
 
+	//running eval test 1k times to ensure the random value (1-10) never brings the expected value outside the range
 	@Test
 	public void evalTest() {
 		boolean eval = false;
