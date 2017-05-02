@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CheckerMoveTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">junit</a> &gt; <span class="el_source">CheckerMoveTest.java</span></div><h1>CheckerMoveTest.java</h1><pre class="source lang-java linenums">/*
+ * 
+ */
+package junit;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+import checkers.CheckerMove;
+import checkers.Checkers;
+
+// TODO: Auto-generated Javadoc
+/**
+ * Unit Tests #6, 10, and 14 in Software Test Plan Checks getIndex, testColour, and ApplyMove
+ * methods behave correctly.
+ * 
+ * @author Cristi DeLeo  
+ * @author Steven Bennette
+ * @version 3.0
+ * @since 25 April 2017
+ */
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">public class CheckerMoveTest {</span>
+  
+  /** The Junit tester. */
+<span class="fc" id="L24">  checkers.JunitTester JunitTester = new checkers.JunitTester();</span>
+
+  /**
+   * Test get index.
+   */
+  @Test
+  public void testGetIndex() {
+    // Test 1: x = -1, y = 50, result = {0, 0}
+<span class="fc" id="L32">    int actualX1 = -1;</span>
+<span class="fc" id="L33">    int actualY1 = 50;</span>
+<span class="fc" id="L34">    int[] expectedIndex1 = { 0, 0 };</span>
+
+    // Test 2: x = 349, y = 225, result = {6, 4}
+<span class="fc" id="L37">    int actualX2 = 349;</span>
+<span class="fc" id="L38">    int actualY2 = 225;</span>
+<span class="fc" id="L39">    int[] expectedIndex2 = { 6, 4 };</span>
+
+    // Test 3: x = 350, y = 401, result = {0, 0}
+<span class="fc" id="L42">    int actualX3 = 350;</span>
+<span class="fc" id="L43">    int actualY3 = 401;</span>
+<span class="fc" id="L44">    int[] expectedIndex3 = { 0, 0 };</span>
+
+<span class="fc" id="L46">    assertArrayEquals(&quot;Index value: -1, 50&quot;, expectedIndex1,</span>
+<span class="fc" id="L47">        JunitTester.getIndex(actualX1, actualY1));</span>
+<span class="fc" id="L48">    assertArrayEquals(&quot;Index value: 349, 225&quot;, expectedIndex2,</span>
+<span class="fc" id="L49">        JunitTester.getIndex(actualX2, actualY2));</span>
+<span class="fc" id="L50">    assertArrayEquals(&quot;Index value: 350, 401&quot;, expectedIndex3,</span>
+<span class="fc" id="L51">        JunitTester.getIndex(actualX3, actualY3));</span>
+<span class="fc" id="L52">  }</span>
+
+  /**
+   * Test colour.
+   */
+  @Test
+  public void testColour() {
+    // Test 1 Parameters: Empty square returns 0
+<span class="fc" id="L60">    int expected0 = 0;</span>
+<span class="fc" id="L61">    int actual0 = JunitTester.colour(JunitTester.getEmpty());</span>
+
+    // Tests 2 &amp; 4 Parameters: Square occupied by a red normal or red king piece
+<span class="fc" id="L64">    int expected1 = 1;</span>
+<span class="fc" id="L65">    int actual1 = JunitTester.colour(JunitTester.getRedNormal());</span>
+<span class="fc" id="L66">    int actual3 = JunitTester.colour(JunitTester.getRedking());</span>
+
+    // Tests 3 &amp; 5 Parameters: Square occupied by a yellow normal or yellow king piece
+<span class="fc" id="L69">    int expected2 = 2;</span>
+<span class="fc" id="L70">    int actual2 = JunitTester.colour(JunitTester.getYellowNormal());</span>
+<span class="fc" id="L71">    int actual4 = JunitTester.colour(JunitTester.getYellowking());</span>
+
+<span class="fc" id="L73">    assertEquals(&quot;Case: empty (0), Result: 0&quot;, expected0, actual0);</span>
+<span class="fc" id="L74">    assertEquals(&quot;Case: redNormal (1), Result: 1&quot;, expected1, actual1);</span>
+<span class="fc" id="L75">    assertEquals(&quot;Case: yellowNormal (2), Result: 2&quot;, expected2, actual2);</span>
+<span class="fc" id="L76">    assertEquals(&quot;Case: redKing (3), Result: 1&quot;, expected1, actual3);</span>
+<span class="fc" id="L77">    assertEquals(&quot;Case: yellowKing (4), Result: 2&quot;, expected2, actual4);</span>
+<span class="fc" id="L78">  }</span>
+
+  /**
+   * Test apply move.
+   */
+  @Test
+  public void testApplyMove() {
+<span class="fc" id="L85">    int[][] capBoardRed1 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 },</span>
+<span class="fc" id="L86">        { 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 }, { 3, 0, 0, 0, 1, 0, 2, 0 },</span>
+<span class="fc" id="L87">        { 0, 0, 0, 0, 0, 3, 0, 3 }, { 1, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 1 } };</span>
+
+    // Move to an out-of-bounds i value
+<span class="fc" id="L90">    int startX1 = 6; // Start row</span>
+<span class="fc" id="L91">    int startY1 = 0; // Start column</span>
+<span class="fc" id="L92">    int endX1 = 8; // End row</span>
+<span class="fc" id="L93">    int endY1 = 2; // End column</span>
+<span class="fc" id="L94">    int expected1 = 2; // Illegal move</span>
+<span class="fc" id="L95">    int actual1 = JunitTester.ApplyMove(capBoardRed1, startX1, startY1, endX1, endY1);</span>
+
+<span class="fc" id="L97">    int[][] capBoardRed2 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 },</span>
+<span class="fc" id="L98">        { 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 }, { 3, 0, 0, 0, 1, 0, 2, 0 },</span>
+<span class="fc" id="L99">        { 0, 0, 0, 0, 0, 3, 0, 3 }, { 1, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 1 } };</span>
+
+    // Red King captures a normal yellow piece, with one more capture available after
+<span class="fc" id="L102">    int startX2 = 4; // Start row</span>
+<span class="fc" id="L103">    int startY2 = 0; // Start column</span>
+<span class="fc" id="L104">    int endX2 = 2; // End row</span>
+<span class="fc" id="L105">    int endY2 = 2; // End column</span>
+<span class="fc" id="L106">    int expected2 = 3; // Incomplete move (player can jump one more piece located at 1, 6)</span>
+<span class="fc" id="L107">    int actual2 = JunitTester.ApplyMove(capBoardRed2, startX2, startY2, endX2, endY2);</span>
+
+<span class="fc" id="L109">    int[][] capBoardRed3 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 },</span>
+<span class="fc" id="L110">        { 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 }, { 3, 0, 0, 0, 1, 0, 2, 0 },</span>
+<span class="fc" id="L111">        { 0, 0, 0, 0, 0, 3, 0, 3 }, { 1, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 1 } };</span>
+
+    // Normal red piece captures a normal yellow piece without any further captures available
+<span class="fc" id="L114">    int startX3 = 4; // Start row</span>
+<span class="fc" id="L115">    int startY3 = 4; // Start column</span>
+<span class="fc" id="L116">    int endX3 = 2; // End row</span>
+<span class="fc" id="L117">    int endY3 = 6; // End column</span>
+<span class="fc" id="L118">    int expected3 = 1; // Legal move</span>
+<span class="fc" id="L119">    int actual3 = JunitTester.ApplyMove(capBoardRed3, startX3, startY3, endX3, endY3);</span>
+
+<span class="fc" id="L121">    int[][] capBoardRed4 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 },</span>
+<span class="fc" id="L122">        { 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 }, { 3, 0, 0, 0, 1, 0, 2, 0 },</span>
+<span class="fc" id="L123">        { 0, 0, 0, 0, 0, 3, 0, 3 }, { 1, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 1 } };</span>
+
+    // Normal red piece attempts to move to a legal square, however there are other possible
+    // moves that result in a capture, thus the move is deemed illegal
+<span class="fc" id="L127">    int startX4 = 6; // Start row</span>
+<span class="fc" id="L128">    int startY4 = 0; // Start column</span>
+<span class="fc" id="L129">    int endX4 = 5; // End row</span>
+<span class="fc" id="L130">    int endY4 = 1; // End column</span>
+<span class="fc" id="L131">    int expected4 = 2; // Illegal move</span>
+<span class="fc" id="L132">    int actual4 = JunitTester.ApplyMove(capBoardRed4, startX4, startY4, endX4, endY4);</span>
+
+<span class="fc" id="L134">    int[][] capBoardRed5 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L135">        { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 }, { 0, 0, 0, 0, 0, 0, 2, 0 },</span>
+<span class="fc" id="L136">        { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 0 } };</span>
+
+    // Normal red piece moves one space to a legal square (no available captures for any red piece)
+<span class="fc" id="L139">    int startX5 = 6; // Start row</span>
+<span class="fc" id="L140">    int startY5 = 0; // Start column</span>
+<span class="fc" id="L141">    int endX5 = 5; // End row</span>
+<span class="fc" id="L142">    int endY5 = 1; // End column</span>
+<span class="fc" id="L143">    int expected5 = 1; // Legal move</span>
+<span class="fc" id="L144">    int actual5 = JunitTester.ApplyMove(capBoardRed5, startX5, startY5, endX5, endY5);</span>
+
+<span class="fc" id="L146">    int[][] boardKingRed6 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L147">        { 0, 0, 0, 0, 0, 0, 1, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 }, { 0, 0, 0, 0, 0, 0, 2, 0 },</span>
+<span class="fc" id="L148">        { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 0 } };</span>
+
+    // &quot;King&quot; a normal red piece
+<span class="fc" id="L151">    int startX6 = 2; // Start row</span>
+<span class="fc" id="L152">    int startY6 = 6; // Start column</span>
+<span class="fc" id="L153">    int endX6 = 1; // End row</span>
+<span class="fc" id="L154">    int endY6 = 7; // End column</span>
+<span class="fc" id="L155">    int expected6 = 1; // Legal move</span>
+<span class="fc" id="L156">    int actual6 = JunitTester.ApplyMove(boardKingRed6, startX6, startY6, endX6, endY6);</span>
+
+<span class="fc" id="L158">    int[][] boardKingYellow7 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L159">        { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 1, 0, 2, 0, 2 }, { 0, 0, 0, 0, 0, 0, 2, 0 },</span>
+<span class="fc" id="L160">        { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 2, 0, 4, 0 }, { 0, 2, 0, 0, 0, 0, 0, 0 } };</span>
+
+    // &quot;King&quot; a normal yellow piece
+<span class="fc" id="L163">    int startX7 = 3; // Start row</span>
+<span class="fc" id="L164">    int startY7 = 1; // Start column</span>
+<span class="fc" id="L165">    int endX7 = 2; // End row</span>
+<span class="fc" id="L166">    int endY7 = 0; // End column</span>
+<span class="fc" id="L167">    int expected7 = 1; // Legal move</span>
+<span class="fc" id="L168">    int actual7 = JunitTester.ApplyMove(boardKingYellow7, startX7, startY7, endX7, endY7);</span>
+
+<span class="fc" id="L170">    assertEquals(expected1, actual1);</span>
+<span class="fc" id="L171">    assertEquals(expected2, actual2);</span>
+<span class="fc" id="L172">    assertEquals(expected3, actual3);</span>
+<span class="fc" id="L173">    assertEquals(expected4, actual4);</span>
+<span class="fc" id="L174">    assertEquals(expected5, actual5);</span>
+<span class="fc" id="L175">    assertEquals(expected6, actual6);</span>
+<span class="fc" id="L176">    assertEquals(expected7, actual7);</span>
+<span class="fc" id="L177">  }</span>
+
+  
+  // Merge Conflict Steven Bennette
+  // checker Move Test Cases
+  //
+  //
+  //
+  //
+  //
+
+  /** The cap board red. */
+<span class="fc" id="L189">  int[][] capBoardRed = { { 0, 1, 0, 3, 0, 1, 0, 0 }, { 2, 0, 0, 0, 2, 0, 2, 0 },</span>
+<span class="fc" id="L190">      { 0, 0, 0, 0, 0, 0, 0, 2 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 1, 0, 0, 0, 2 },</span>
+<span class="fc" id="L191">      { 0, 0, 3, 0, 2, 0, 3, 0 }, { 0, 4, 0, 2, 0, 0, 0, 2 }, { 1, 0, 3, 0, 2, 0, 0, 0 } };</span>
+
+  /** The cap board yellow. */
+<span class="fc" id="L194">  int[][] capBoardYellow = { { 0, 0, 0, 0, 0, 0, 0, 2 }, { 1, 0, 0, 0, 0, 0, 3, 0 },</span>
+<span class="fc" id="L195">      { 0, 4, 0, 0, 0, 4, 0, 0 }, { 1, 0, 0, 0, 1, 0, 2, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L196">      { 0, 0, 1, 0, 2, 0, 0, 0 }, { 0, 0, 0, 2, 0, 1, 0, 1 }, { 0, 0, 0, 0, 4, 0, 2, 0 } };</span>
+
+  /** The cap board red flip. */
+<span class="fc" id="L199">  int[][] capBoardRedFlip = { { 0, 2, 0, 0, 0, 0, 0, 1 }, { 1, 0, 0, 0, 2, 0, 4, 0 },</span>
+<span class="fc" id="L200">      { 0, 0, 0, 0, 0, 3, 0, 3 }, { 3, 0, 0, 0, 1, 0, 2, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 },</span>
+<span class="fc" id="L201">      { 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 }, { 0, 0, 2, 0, 2, 0, 2, 0 } };</span>
+
+  /** The no cap board flip. */
+<span class="fc" id="L204">  int[][] noCapBoardFlip = { { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L205">      { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 4, 0 }, { 0, 3, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L206">      { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 2 }, { 0, 0, 0, 0, 0, 0, 0, 0 } };</span>
+
+  /** The empty board. */
+<span class="fc" id="L209">  int[][] emptyBoard = { { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L210">      { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 },</span>
+<span class="fc" id="L211">      { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 } };</span>
+
+  /**
+   * Checks if is empty test 1.
+   */
+  @Test
+  public void isEmptyTest1() {
+<span class="fc" id="L218">    assertTrue(JunitTester.isEmptyTest(capBoardRedFlip, 1, 2) == true);</span>
+<span class="fc" id="L219">  }</span>
+
+  /**
+   * Checks if is empty test 2.
+   */
+  @Test
+  public void isEmptyTest2() {
+<span class="pc bpc" id="L226" title="2 of 4 branches missed.">    assert (JunitTester.isEmptyTest(capBoardRedFlip, 1, 0) == false);</span>
+<span class="fc" id="L227">  }</span>
+
+  /**
+   * Checks if is empty test 3.
+   */
+  @Test
+  public void isEmptyTest3() {
+<span class="pc bpc" id="L234" title="2 of 4 branches missed.">    assert (JunitTester.isEmptyTest(capBoardRedFlip, -1, 0) == false);</span>
+<span class="fc" id="L235">  }</span>
+
+  /**
+   * Checks if is move legal test 1.
+   */
+  @Test
+  public void isMoveLegalTest1() {
+<span class="pc bpc" id="L242" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 0, 1, -1, 0, 2) == 2);</span>
+<span class="fc" id="L243">  }</span>
+
+  /**
+   * Checks if is move legal test 2.
+   */
+  @Test
+  public void isMoveLegalTest2() {
+<span class="pc bpc" id="L250" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 7, 3, 6, 2) == 2);</span>
+<span class="fc" id="L251">  }</span>
+
+  /**
+   * Checks if is move legal test 3.
+   */
+  @Test
+  public void isMoveLegalTest3() {
+<span class="pc bpc" id="L258" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 3, 0, 2, 1, 1) == 2);</span>
+<span class="fc" id="L259">  }</span>
+
+  /**
+   * Checks if is move legal test 4.
+   */
+  @Test
+  public void isMoveLegalTest4() {
+<span class="pc bpc" id="L266" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 5, 5, 4, 2) == 2);</span>
+<span class="fc" id="L267">  }</span>
+
+  /**
+   * Checks if is move legal test 5.
+   */
+  @Test
+  public void isMoveLegalTest5() {
+<span class="pc bpc" id="L274" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 1, 0, 2, 1, 1) == 1);</span>
+<span class="fc" id="L275">  }</span>
+
+  /**
+   * Checks if is move legal test 6.
+   */
+  @Test
+  public void isMoveLegalTest6() {
+<span class="pc bpc" id="L282" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 6, 7, 5, 6, 2) == 1);</span>
+<span class="fc" id="L283">  }</span>
+
+  /**
+   * Checks if is move legal test 7.
+   */
+  @Test
+  public void isMoveLegalTest7() {
+<span class="pc bpc" id="L290" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 4, 1, 3, 0, 1) == 1);</span>
+<span class="fc" id="L291">  }</span>
+
+  /**
+   * Checks if is move legal test 8.
+   */
+  @Test
+  public void isMoveLegalTest8() {
+<span class="pc bpc" id="L298" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 1, 0, 2, 2, 2) == 2);</span>
+<span class="fc" id="L299">  }</span>
+
+  /**
+   * Checks if is move legal test 9.
+   */
+  @Test
+  public void isMoveLegalTest9() {
+<span class="pc bpc" id="L306" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 4, 3, 1) == 2);</span>
+<span class="fc" id="L307">  }</span>
+
+  /**
+   * Checks if is move legal test 10.
+   */
+  @Test
+  public void isMoveLegalTest10() {
+<span class="pc bpc" id="L314" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 3, 6, 5, 4, 2) == 2);</span>
+<span class="fc" id="L315">  }</span>
+
+  /**
+   * Checks if is move legal test 11.
+   */
+  @Test
+  public void isMoveLegalTest11() {
+<span class="pc bpc" id="L322" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 5, 0, 3, 3, 1) == 2);</span>
+<span class="fc" id="L323">  }</span>
+
+  /**
+   * Checks if is move legal test 12.
+   */
+  @Test
+  public void isMoveLegalTest12() {
+<span class="pc bpc" id="L330" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 5, 2, 4, 2) == 2);</span>
+<span class="fc" id="L331">  }</span>
+
+  /**
+   * Checks if is move legal test 13.
+   */
+  @Test
+  public void isMoveLegalTest13() {
+<span class="pc bpc" id="L338" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 0, 4, 1) == 2);</span>
+<span class="fc" id="L339">  }</span>
+
+  /**
+   * Checks if is move legal test 14.
+   */
+  @Test
+  public void isMoveLegalTest14() {
+<span class="pc bpc" id="L346" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 0, 3, 1) == 3);</span>
+<span class="fc" id="L347">  }</span>
+
+  /**
+   * Checks if is move legal test 15.
+   */
+  @Test
+  public void isMoveLegalTest15() {
+<span class="pc bpc" id="L354" title="2 of 4 branches missed.">    assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 1, 0, 1, 1, 1) == 2);</span>
+<span class="fc" id="L355">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

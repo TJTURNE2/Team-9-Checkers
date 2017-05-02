@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>StartPanel.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">checkers</a> &gt; <span class="el_source">StartPanel.java</span></div><h1>StartPanel.java</h1><pre class="source lang-java linenums">package checkers;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class StartPanel extends JPanel {
+
+<span class="fc" id="L8">  StartPanel() {</span>
+<span class="fc" id="L9">    setupGUI();</span>
+<span class="fc" id="L10">  }</span>
+
+  private void setupGUI() {
+<span class="fc" id="L13">    this.setLayout(null);</span>
+<span class="fc" id="L14">  }</span>
+
+  @Override
+  public void paintComponent(Graphics g) {
+<span class="fc" id="L18">    super.paintComponent(g);</span>
+<span class="fc" id="L19">            g.drawLine(0,400,508,400);</span>
+        ///////////////////////////////////////////////////////////////////////
+<span class="fc" id="L21">        g.setColor(Color.RED);</span>
+<span class="fc" id="L22">        g.setFont(new Font(&quot;Times new roman&quot;,Font.BOLD,30));</span>
+<span class="fc" id="L23">        g.drawString(&quot;CHECKERS&quot;,180,100);</span>
+        /////////////////////////////////////////////////////////////////////////
+<span class="fc" id="L25">        g.setColor(Color.BLUE);</span>
+<span class="fc" id="L26">        g.setFont(new Font(&quot;Times new roman&quot;,Font.BOLD,14));</span>
+<span class="fc" id="L27">        g.drawString(&quot;SER 216: Testing and Quality&quot;,160,130); //fixed ben</span>
+        //////////////////////////////////////////////////////////////////////
+<span class="fc" id="L29">        g.setFont(new Font(&quot;Times new roman&quot;,Font.BOLD,12));</span>
+<span class="fc" id="L30">        g.setColor(Color.BLACK);</span>
+<span class="fc" id="L31">        g.drawString(&quot;S. Bennett&quot;,180,180);  //fixed - ben</span>
+       // g.drawString(&quot;070002V&quot;,320,180);
+<span class="fc" id="L33">        g.drawString(&quot;C. Deleo&quot;,180,200);   //fixed - ben</span>
+        //g.drawString(&quot;070123R&quot;,320,200);
+<span class="fc" id="L35">        g.drawString(&quot;B. Jansen&quot;,180,220);   //fixed - ben</span>
+        //g.drawString(&quot;070125B&quot;,320,220);
+<span class="fc" id="L37">        g.drawString(&quot;T. Turner&quot;,180,240);   //fixed - ben</span>
+        //g.drawString(&quot;070137M&quot;,320,240);
+    ////////////////////////////////////////////////////////////////////////
+    // g.drawImage(new
+    // ImageIcon(getClass().getResource(&quot;/images/checkersIcon.jpg&quot;)).getImage(),350,280,this);//checkersIcon.jpg
+    // //OLD
+<span class="fc" id="L43">    g.drawImage(new ImageIcon(&quot;/images/checkersIcon.jpg&quot;).getImage(), 350, 280, this);// checkersIcon.jpg</span>
+    // //FIXED - Terry
+
+<span class="fc" id="L46">    g.setColor(new Color(0, 0, 0));</span>
+    // g.drawLine(0,200,200,400);
+    // g.draw3DRect(0, 0, 50, 400, true);
+
+<span class="fc bfc" id="L50" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">      if (i % 2 == 0) {</span>
+<span class="fc" id="L52">        g.fill3DRect(0, i * 50, 50, 50, true);</span>
+<span class="fc" id="L53">        g.fill3DRect(100, i * 50, 50, 50, true);</span>
+<span class="fc" id="L54">      } else {</span>
+<span class="fc" id="L55">        g.fill3DRect(50, i * 50, 50, 50, true);</span>
+      }
+      // g.fillPolygon(new int[]{80 * i, 40+80*i, 80 * i, -40+80*i},new
+      // int[]{200+80*i, 240+80*i,280+80*i, 240+80*i},4);
+      // g.fillPolygon(new int[]{80 * i, 40+80*i, 80 * i, -40+80*i},new
+      // int[]{280+80*i, 320+80*i,360+80*i, 320+80*i},4);
+      // g.fillPolygon(new int[]{80 * i, 40+80*i, 80 * i, -40+80*i},new
+      // int[]{360+80*i, 400+80*i,420+80*i, 400+80*i},4);
+    }
+<span class="fc" id="L64">    g.drawLine(150, 0, 150, 400);</span>
+<span class="fc" id="L65">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

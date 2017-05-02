@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CheckerFrame.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">checkers</a> &gt; <span class="el_source">CheckerFrame.java</span></div><h1>CheckerFrame.java</h1><pre class="source lang-java linenums">package checkers;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.*;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CheckerFrame.
+ */
+public class CheckerFrame extends JFrame implements ActionListener {
+
+  /** The st B. */
+<span class="fc" id="L15">  JButton stB = new JButton(&quot;Start Game&quot;);</span>
+
+  /** The gm P. */
+<span class="fc" id="L18">  JPanel gmP = new StartPanel();</span>
+
+  /**
+   * Instantiates a new checker frame.
+   */
+<span class="fc" id="L23">  CheckerFrame() {</span>
+    try {
+<span class="fc" id="L25">      UIManager.setLookAndFeel(&quot;com.sun.java.swing.plaf.windows.WindowsLookAndFeel&quot;);</span>
+<span class="fc" id="L26">      SwingUtilities.updateComponentTreeUI(this); // changing the</span>
+      // appearence of the
+      // frame
+<span class="pc" id="L29">    } catch (Exception e) {</span>
+      // no need to handle exception as it only affect the appearence
+    }
+<span class="fc" id="L32">    setupGUI();</span>
+    // new PlaySound(&quot;src//sounds//Start.wav&quot;).start(); //OLD
+<span class="fc" id="L34">    new PlaySound(&quot;sounds//Start.wav&quot;).start(); // NEW-Steven</span>
+<span class="fc" id="L35">  }</span>
+
+  /**
+   * Setup GUI.
+   */
+  private void setupGUI() {
+<span class="fc" id="L41">    setLayout(null);</span>
+<span class="fc" id="L42">    gmP.setBounds(0, 0, 508, 401);// 400,401</span>
+    // gmP.imageUpdate(ne, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH)
+<span class="fc" id="L44">    add(gmP);</span>
+<span class="fc" id="L45">    stB.setHorizontalAlignment(SwingConstants.LEADING);</span>
+    // stB.setIcon(new
+    // ImageIcon(getClass().getResource(&quot;/images/checkers.png&quot;))); //OLD
+<span class="fc" id="L48">    stB.setIcon(new ImageIcon(&quot;images/checkers.png&quot;)); // Fixed - Terry</span>
+<span class="fc" id="L49">    stB.setBackground(Color.LIGHT_GRAY);</span>
+<span class="fc" id="L50">    stB.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+    // stB.setBounds(154,420,200,60); //OLD-Steven
+<span class="fc" id="L52">    stB.setBounds(104, 420, 292, 60); // FIXED-Steven</span>
+    // stB.setFont(new Font(&quot;Times new roman&quot;,Font.BOLD,20)); //OLD-Steven
+<span class="fc" id="L54">    stB.setFont(new Font(&quot;Times new roman&quot;, Font.BOLD, 255)); // FIXED-Steven</span>
+<span class="fc" id="L55">    stB.addActionListener(this);</span>
+<span class="fc" id="L56">    stB.setFocusPainted(false);</span>
+<span class="fc" id="L57">    add(stB);</span>
+
+    // this.setIconImage(new
+    // ImageIcon(getClass().getResource(&quot;/images/icon.jpg&quot;)).getImage());
+    // /OLD - Terry
+<span class="fc" id="L62">    this.setIconImage(new ImageIcon(&quot;images/icon.jpg&quot;).getImage()); // Fixed - Terry</span>
+
+<span class="fc" id="L64">    setSize(508, 520);</span>
+<span class="fc" id="L65">    setLocation((int) getToolkit().getScreenSize().getWidth() / 2 - 254,</span>
+<span class="fc" id="L66">        (int) getToolkit().getScreenSize().getHeight() / 2 - 310);</span>
+<span class="fc" id="L67">    setResizable(false);</span>
+<span class="fc" id="L68">    setVisible(true);</span>
+<span class="fc" id="L69">    setTitle(&quot;Play Checkers&quot;);</span>
+<span class="fc" id="L70">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L71">  }</span>
+
+  /*
+   * Action for starting the new game
+   * 
+   * @
+   */
+  public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">    if (e.getActionCommand().equalsIgnoreCase(&quot;Start Game&quot;)) {</span>
+<span class="nc" id="L80">      ((JButton) e.getSource()).setText(&quot;New Game&quot;);</span>
+      // new PlaySound(&quot;src//sounds//button.wav&quot;).start(); //OLD
+<span class="nc" id="L82">      new PlaySound(&quot;sounds//button.wav&quot;).start(); // Fixed - Terry</span>
+<span class="nc" id="L83">      gmP = new Checkers();</span>
+<span class="nc" id="L84">      gmP.setBounds(0, 0, 508, 401);</span>
+<span class="nc" id="L85">      this.setContentPane(gmP);</span>
+    }
+<span class="nc" id="L87">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

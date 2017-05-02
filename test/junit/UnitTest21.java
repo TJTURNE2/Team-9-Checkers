@@ -8,6 +8,8 @@ import static org.junit.Assert.assertNotNull;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+
 import org.junit.Test;
 
 import checkers.CheckerFrame;
@@ -159,17 +161,9 @@ public class UnitTest21 {
 //  @Test
 //  public void forceCaptureTest() {
 //    JunitTester = new JunitTester();
-//    int[] com = { 0, 0, 2, 2 };
-//    int[][] capBoardRed = {
-//        {1, 0, 0, 0, 0, 0, 0, 0}, 
-//        {0, 2, 0, 0, 0, 0, 0, 0}, 
-//        {0, 0, 0, 0, 0, 0, 0, 0}, 
-//        {0, 0, 0, 0, 0, 0, 0, 0}, 
-//        {0, 0, 0, 0, 0, 0, 0, 0}, 
-//        {0, 0, 0, 0, 0, 0, 0, 0}, 
-//        {0, 0, 0, 0, 0, 0, 0, 0}, 
-//        {0, 0, 0, 0, 0, 0, 0, 0}};
-//    JunitTester.forceCaptures(capBoardRed, com);
+//    ActionEvent evt = new ActionEvent(JunitTester, 1, "Start Game");
+//    //cframe.actionPerformed(evt);
+//    
 //  }
 
 }

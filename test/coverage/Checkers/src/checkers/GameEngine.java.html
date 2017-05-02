@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>GameEngine.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">checkers</a> &gt; <span class="el_source">GameEngine.java</span></div><h1>GameEngine.java</h1><pre class="source lang-java linenums">package checkers;
+
+import java.util.Vector;
+
+//game tree implementation
+<span class="nc" id="L6">public class GameEngine {</span>
+
+  final static int inf = Integer.MAX_VALUE;
+  final static int normal = 100; // one checker worth 100
+  final static int king = 200; // a King's worth
+  final static int pos = 1; // one position along the -j worth 1
+  final static int edge = 10; // effect of king being on the edge
+
+  /*********************
+   * Evaluation Function **********************************
+   * 
+   * For normal checkers; Eval=(weightOfChecker + PositionWeight*(position)^2)*numberOfCheckers +
+   * randomWeight;
+   * 
+   * For kings; Eval=(weightOfKing - EdgeWeight*numberOfEdges)*numberOfKings + randomWeight;
+   * 
+   * Weight of checkers Own normal checker = 100 Opposite normal checker = -100 Own king = 200
+   * Opposite king = -200
+   * 
+   * For normal checkers there is a weight for position. The evaluted are less in edges for kings,
+   * so that they tend to be in the middle Small random weight between 0-10 was added to reduce the
+   * monotony of the game.
+   **********************************************************************************/
+
+  public static int eval(int[][] board) {
+<span class="fc" id="L31">    int score = 0;</span>
+
+<span class="fc bfc" id="L33" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">      for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (board[i][j] == Checkers.redNormal) {</span>
+<span class="fc" id="L36">          score -= normal;</span>
+<span class="fc" id="L37">          score -= pos * j * j;</span>
+<span class="fc" id="L38">        }</span>
+
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        else if (board[i][j] == Checkers.redKing) {</span>
+<span class="fc" id="L41">          score -= king;</span>
+<span class="fc bfc" id="L42" title="All 4 branches covered.">          if (i == 0 || i == 7)</span>
+<span class="fc" id="L43">            score += edge;</span>
+<span class="fc bfc" id="L44" title="All 4 branches covered.">          if (j == 0 || j == 7)</span>
+<span class="fc" id="L45">            score += edge;</span>
+<span class="fc" id="L46">        }</span>
+
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        else if (board[i][j] == Checkers.yellowNormal) {</span>
+<span class="fc" id="L49">          score += normal;</span>
+<span class="fc" id="L50">          score += pos * (7 - j) * (7 - j);</span>
+<span class="fc" id="L51">        }</span>
+
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        else if (board[i][j] == Checkers.yellowKing) {</span>
+<span class="fc" id="L54">          score += king;</span>
+<span class="fc bfc" id="L55" title="All 4 branches covered.">          if (i == 0 || i == 7)</span>
+<span class="fc" id="L56">            score -= edge;</span>
+<span class="fc bfc" id="L57" title="All 4 branches covered.">          if (j == 0 || j == 7)</span>
+<span class="fc" id="L58">            score -= edge;</span>
+        }
+      }
+    }
+<span class="fc" id="L62">    score += (int) (Math.random() * 10); // Adds a random weight</span>
+
+<span class="fc" id="L64">    return score;</span>
+  }
+
+  /********************
+   * MinMax with Alpha-Beta Pruning ************************ returns the best score evaluated MinMax
+   * algorithm with alpha beta pruning cut off the tree according to the difficulty level With
+   * maximum difficulty it searches upto 6 levels for the best possible solution With minimum
+   * difficulty it searches only upto two levels.
+   ****************************************************************************/
+
+  public static int MinMax(int[][] board, int depth, int maxDepth, int[] move, int toMove,
+      int[] counter) {
+<span class="nc" id="L76">    return MinMax(board, depth, maxDepth, move, toMove, counter, inf, -inf);</span>
+  }
+
+  static int MinMax(int[][] board, int depth, int maxDepth, int[] move, int turn, int[] counter,
+      int redBest, int yellowBest) {
+    int score, bestScore;
+    int[][] newBoard;
+<span class="nc" id="L83">    int[] bestMove = new int[4];</span>
+
+    Vector movesList; // vector of 4x1 arrays
+
+    // assumes that depth is never equal to maxDepth to begin with since
+    // chosenMove is not set here
+
+<span class="nc bnc" id="L90" title="All 2 branches missed.">    if (depth == maxDepth) {</span>
+<span class="nc" id="L91">      bestScore = eval(board);</span>
+<span class="nc" id="L92">      counter[0]++;</span>
+<span class="nc" id="L93">    }</span>
+
+    else {
+<span class="nc" id="L96">      movesList = CheckerMove.generateMoves(board, turn);</span>
+<span class="nc" id="L97">      bestScore = getTurn(turn);</span>
+<span class="nc bnc" id="L98" title="All 3 branches missed.">      switch (movesList.size()) {</span>
+      case 0:
+<span class="nc" id="L100">        counter[0]++;</span>
+<span class="nc" id="L101">        return bestScore;</span>
+      case 1:
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (depth == 0) {</span>
+          // forced move: immediately return control
+<span class="nc" id="L105">          bestMove = (int[]) movesList.elementAt(0);</span>
+<span class="nc" id="L106">          System.arraycopy(bestMove, 0, move, 0, 4);</span>
+<span class="nc" id="L107">          return 0;</span>
+        } else {
+          // extend search since there is a forcing move
+<span class="nc" id="L110">          maxDepth += 1;</span>
+        }
+      }
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">      for (int i = 0; i &lt; movesList.size(); i++) {</span>
+<span class="nc" id="L115">        newBoard = copyBoard(board); // board need not be touched</span>
+<span class="nc" id="L116">        CheckerMove.moveComputer(newBoard, (int[]) movesList.elementAt(</span>
+<span class="nc" id="L117">            i)); /*</span>
+                  * returns new_board (changing start and end coodinates and applying the move)
+                  */
+<span class="nc" id="L120">        int temp[] = new int[4];</span>
+<span class="nc" id="L121">        score = MinMax(newBoard, depth + 1, maxDepth, temp, getOpponent(turn), counter, yellowBest,</span>
+<span class="nc" id="L122">            redBest);</span>
+
+<span class="nc bnc" id="L124" title="All 4 branches missed.">        if (turn == Checkers.yellowNormal &amp;&amp; score &gt; bestScore) {</span>
+<span class="nc" id="L125">          bestMove = (int[]) movesList.elementAt(i);</span>
+<span class="nc" id="L126">          bestScore = score;</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">          if (bestScore &gt; yellowBest) {</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (bestScore &gt;= redBest)</span>
+<span class="nc" id="L129">              break; /* alpha_beta cutoff */</span>
+            else
+<span class="nc" id="L131">              yellowBest = bestScore; // the_score</span>
+          }
+<span class="nc" id="L133">        }</span>
+
+<span class="nc bnc" id="L135" title="All 4 branches missed.">        else if (turn == Checkers.redNormal &amp;&amp; score &lt; bestScore) {</span>
+<span class="nc" id="L136">          bestMove = (int[]) movesList.elementAt(i);</span>
+<span class="nc" id="L137">          bestScore = score;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">          if (bestScore &lt; redBest) {</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            if (bestScore &lt;= yellowBest)</span>
+<span class="nc" id="L140">              break; /* alpha_beta cutoff */</span>
+            else
+<span class="nc" id="L142">              redBest = bestScore; // the_score</span>
+          }
+        }
+      }
+    }
+
+<span class="nc" id="L148">    System.arraycopy(bestMove, 0, move, 0, 4);</span>
+<span class="nc" id="L149">    return bestScore;</span>
+  }
+
+  static int[][] copyBoard(int[][] board) { // uses to copy a double array
+<span class="fc" id="L153">    int[][] copy = new int[8][8];</span>
+
+<span class="fc bfc" id="L155" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++)</span>
+<span class="fc" id="L156">      System.arraycopy(board[i], 0, copy[i], 0, 8);</span>
+<span class="fc" id="L157">    return copy;</span>
+  }
+
+  static int getOpponent(int turn) { // returns the opponent
+<span class="fc bfc" id="L161" title="All 2 branches covered.">    return turn == Checkers.yellowNormal ? Checkers.redNormal : Checkers.yellowNormal;</span>
+  }
+
+  static int getTurn(int turn) { // returns the turn
+<span class="fc bfc" id="L165" title="All 2 branches covered.">    return CheckerMove.colour(turn) == Checkers.yellowNormal ? -inf : inf;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

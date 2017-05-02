@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CheckerMove.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">checkers</a> &gt; <span class="el_source">CheckerMove.java</span></div><h1>CheckerMove.java</h1><pre class="source lang-java linenums">package checkers;
+
+import java.util.Vector;
+
+//class for movements
+<span class="nc" id="L6">public class CheckerMove {</span>
+  final static int legalMove = 1;
+  final static int illegalMove = 2;
+  final static int incompleteMove = 3;
+
+  /**
+   * returns the index according to the given x and y values
+   */
+
+  static int[] getIndex(int x, int y) {
+<span class="fc" id="L16">    int[] index = new int[2];</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">      for (int j = 0; j &lt; 8; j++) {</span>
+<span class="pc bpc" id="L19" title="1 of 8 branches missed.">        if (i * 50 &lt; x &amp;&amp; i * 50 + 50 &gt; x &amp;&amp; j * 50 &lt; y &amp;&amp; j * 50 + 50 &gt; y) {</span>
+<span class="fc" id="L20">          index[0] = i;</span>
+<span class="fc" id="L21">          index[1] = j;</span>
+<span class="fc" id="L22">          return index;</span>
+        }
+      }
+    }
+<span class="fc" id="L26">    return index;</span>
+  }
+
+  /*
+   * noMovesLeft return true if no more movents are left for the next player else it returns false
+   */
+  static boolean noMovesLeft(int[][] board, int toMove) {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">      for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if ((float) (i + j) / 2 != (i + j) / 2) {</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">          if (toMove == Checkers.redNormal</span>
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">              &amp;&amp; (board[i][j] == Checkers.redNormal || board[i][j] == Checkers.redKing)) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            if (canWalk(board, i, j))</span>
+<span class="fc" id="L39">              return false;</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">            else if (canCapture(board, i, j))</span>
+<span class="fc" id="L41">              return false;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">          } else if (toMove == Checkers.yellowNormal</span>
+<span class="pc bpc" id="L43" title="1 of 4 branches missed.">              &amp;&amp; (board[i][j] == Checkers.yellowNormal || board[i][j] == Checkers.yellowKing)) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            if (canWalk(board, i, j))</span>
+<span class="fc" id="L45">              return false;</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            else if (canCapture(board, i, j))</span>
+<span class="fc" id="L47">              return false;</span>
+          }
+        }
+      }
+    }
+<span class="fc" id="L52">    return true;</span>
+  }
+
+  /*
+   * ApplyMove checks if the move entered is legal, illegal or incomplete. If IsMoveLegal returns
+   * incompleteMove, this means a capture has just been made. Call canCapture() to see if a further
+   * capture is possible. clears old position and Move checker to a new position
+   */
+
+  static int ApplyMove(int[][] board, int srtI, int srtJ, int endI, int endJ) {
+<span class="fc" id="L62">    int result = isMoveLegal(board, srtI, srtJ, endI, endJ, colour(board[srtI][srtJ]));</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">    if (result != illegalMove) {</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">      if (Math.abs(endI - srtI) == 1) {</span>
+<span class="fc" id="L65">        board[endI][endJ] = board[srtI][srtJ]; // declare a checker</span>
+        // there
+<span class="fc" id="L67">        board[srtI][srtJ] = Checkers.empty; // clear the previous cell.</span>
+<span class="fc" id="L68">      } else // capture</span>
+      {
+<span class="fc" id="L70">        board[(srtI + endI) / 2][(srtJ + endJ) / 2] = Checkers.empty;</span>
+<span class="fc" id="L71">        board[endI][endJ] = board[srtI][srtJ];</span>
+<span class="fc" id="L72">        board[srtI][srtJ] = Checkers.empty;</span>
+      }
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">      if (result == incompleteMove) {</span>
+        // if there are no further captures
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (!(canCapture(board, endI, endJ)))</span>
+<span class="fc" id="L78">          result = legalMove;</span>
+      }
+
+      // check for new king
+<span class="fc bfc" id="L82" title="All 4 branches covered.">      if (board[endI][endJ] == Checkers.redNormal &amp;&amp; endJ == 7) {</span>
+<span class="fc" id="L83">        board[endI][endJ] = Checkers.redKing;</span>
+<span class="fc" id="L84">      }</span>
+
+<span class="pc bpc" id="L86" title="1 of 4 branches missed.">      else if (board[endI][endJ] == Checkers.yellowNormal &amp;&amp; endJ == 0) {</span>
+<span class="fc" id="L87">        board[endI][endJ] = Checkers.yellowKing;</span>
+      }
+
+    }
+<span class="fc" id="L91">    return result;</span>
+  }
+
+  /*
+   * IsMoveLegal checks if the move entered is legal. Returns illegalMove or legalMove; have to
+   * check with canCapture(int[][],int,int) to see if there is another capture possible after the
+   * first capture Returns incompleteMove if a capture has taken place. Note: it does not check if a
+   * 2nd capture is possible!
+   */
+  static int isMoveLegal(int[][] board, int srtI, int srtJ, int endI, int endJ, int turn) {
+<span class="pc bpc" id="L101" title="1 of 4 branches missed.">    if (!(inRange(srtI, srtJ) &amp;&amp; inRange(endI, endJ))) // if try to move out</span>
+      // of the board,
+<span class="fc" id="L103">      return illegalMove; // returns illegal move</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">    if (board[endI][endJ] != Checkers.empty) // if try to move to a occupied</span>
+      // square
+<span class="fc" id="L106">      return illegalMove; // returns illegal move</span>
+
+<span class="fc" id="L108">    int piece = board[srtI][srtJ];</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">    if (Math.abs(srtI - endI) == 1) {</span>
+      // first see if any captures are possible
+<span class="pc bpc" id="L111" title="1 of 3 branches missed.">      switch (piece) {</span>
+      case Checkers.redNormal:
+      case Checkers.redKing:
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">          for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc bfc" id="L116" title="All 4 branches covered.">            if ((board[i][j] == Checkers.redNormal || board[i][j] == Checkers.redKing)</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">                &amp;&amp; canCapture(board, i, j))</span>
+<span class="fc" id="L118">              return illegalMove;</span>
+          }
+        }
+<span class="fc" id="L121">        break;</span>
+      case Checkers.yellowNormal:
+      case Checkers.yellowKing:
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">          for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc bfc" id="L126" title="All 4 branches covered.">            if ((board[i][j] == Checkers.yellowNormal || board[i][j] == Checkers.yellowKing)</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">                &amp;&amp; canCapture(board, i, j))</span>
+<span class="fc" id="L128">              return illegalMove;</span>
+          }
+        }
+        break;
+      }
+
+<span class="pc bpc" id="L134" title="1 of 4 branches missed.">      switch (piece) {</span>
+      case Checkers.redNormal:
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (endJ - srtJ == 1)</span>
+<span class="fc" id="L137">          return legalMove; // Normal checkers only can go forward</span>
+        break;
+      case Checkers.yellowNormal:
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (endJ - srtJ == -1)</span>
+<span class="fc" id="L141">          return legalMove;</span>
+        break;
+      case Checkers.redKing:
+      case Checkers.yellowKing:
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">        if (Math.abs(endJ - srtJ) == 1)</span>
+<span class="fc" id="L146">          return legalMove; // Kings can go in any direction</span>
+        break;
+      }
+<span class="fc" id="L149">      return illegalMove;</span>
+
+    }
+
+<span class="fc bfc" id="L153" title="All 2 branches covered.">    else if (Math.abs(srtI - endI) == 2) {</span>
+<span class="fc" id="L154">      int cap_i = (srtI + endI) / 2;</span>
+<span class="fc" id="L155">      int cap_j = (srtJ + endJ) / 2;</span>
+<span class="fc" id="L156">      int cap_piece = board[cap_i][cap_j];</span>
+
+<span class="fc bfc" id="L158" title="All 2 branches covered.">      if (turn == Checkers.redNormal) // when you try to cut a piece it</span>
+      // should be a peice of opposite
+      // side.
+      // otherwise it is an illegal move.
+      {
+<span class="pc bpc" id="L163" title="1 of 4 branches missed.">        if (!(cap_piece == Checkers.yellowNormal || cap_piece == Checkers.yellowKing))</span>
+<span class="fc" id="L164">          return illegalMove;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">      } else if (!(cap_piece == Checkers.redNormal || // same for</span>
+      // yellowers
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">          cap_piece == Checkers.redKing))</span>
+<span class="fc" id="L168">        return illegalMove;</span>
+
+<span class="pc bpc" id="L170" title="1 of 4 branches missed.">      switch (piece) // if u are going to cut a piece the move must have</span>
+      // the length two
+      {
+      case Checkers.redNormal:
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        if (endJ - srtJ != 2)</span>
+<span class="fc" id="L175">          return illegalMove;</span>
+        break;
+      case Checkers.yellowNormal:
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">        if (endJ - srtJ != -2)</span>
+<span class="fc" id="L179">          return illegalMove;</span>
+        break;
+      case Checkers.redKing:
+      case Checkers.yellowKing:
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        if (Math.abs(endJ - srtJ) != 2)</span>
+<span class="fc" id="L184">          return illegalMove;</span>
+      }
+
+<span class="fc" id="L187">      return incompleteMove; // if the situation is something else it</span>
+      // should be an incomplete move
+    }
+<span class="fc" id="L190">    return illegalMove; // if the situation is not one of these it should be</span>
+    // illegal.
+  }
+
+  static int isWalkLegal(int[][] board, int srtI, int srtJ, int endI, int endJ) {
+<span class="pc bpc" id="L195" title="1 of 4 branches missed.">    if (!(inRange(srtI, srtJ) &amp;&amp; inRange(endI, endJ)))</span>
+<span class="fc" id="L196">      return illegalMove;</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (board[endI][endJ] != Checkers.empty)</span>
+<span class="fc" id="L198">      return illegalMove;</span>
+
+<span class="fc" id="L200">    int piece = board[srtI][srtJ];</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">    if (Math.abs(srtI - endI) == 1) {</span>
+<span class="fc bfc" id="L202" title="All 4 branches covered.">      switch (piece) {</span>
+      case Checkers.redNormal:
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        if (endJ - srtJ == 1)</span>
+<span class="fc" id="L205">          return legalMove;</span>
+        break;
+      case Checkers.yellowNormal:
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">        if (endJ - srtJ == -1)</span>
+<span class="fc" id="L209">          return legalMove;</span>
+        break;
+      case Checkers.redKing:
+      case Checkers.yellowKing:
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if (Math.abs(endJ - srtJ) == 1)</span>
+<span class="fc" id="L214">          return legalMove;</span>
+        break;
+      }
+<span class="fc" id="L217">      return illegalMove;</span>
+    }
+<span class="fc" id="L219">    return illegalMove;</span>
+  }
+
+  static boolean canCapture(int[][] board, int toMove) {
+<span class="fc bfc" id="L223" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++)</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">      for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc bfc" id="L225" title="All 4 branches covered.">        if (colour(board[i][j]) == toMove &amp;&amp; canCapture(board, i, j))</span>
+<span class="fc" id="L226">          return true;</span>
+      }
+<span class="fc" id="L228">    return false;</span>
+  }
+
+  // examines a board board to see if the piece indicated at (x,y)
+  // can make a(nother) capture
+  static boolean canCapture(int[][] board, int i, int j) {
+<span class="fc bfc" id="L234" title="All 5 branches covered.">    switch (board[i][j]) {</span>
+    case Checkers.redNormal:
+      // check if (red)checkers go out of the board
+<span class="fc bfc" id="L237" title="All 4 branches covered.">      if (i + 2 &lt; 8 &amp;&amp; j + 2 &lt; 8)</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if ((board[i + 1][j + 1] == Checkers.yellowNormal</span>
+<span class="fc bfc" id="L239" title="All 2 branches covered.">            || board[i + 1][j + 1] == Checkers.yellowKing)</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">            &amp;&amp; (board[i + 2][j + 2] == Checkers.empty))</span>
+<span class="fc" id="L241">          return true;</span>
+      // other posiible move direction
+<span class="fc bfc" id="L243" title="All 4 branches covered.">      if (i - 2 &gt; -1 &amp;&amp; j + 2 &lt; 8)</span>
+<span class="fc bfc" id="L244" title="All 2 branches covered.">        if ((board[i - 1][j + 1] == Checkers.yellowNormal</span>
+<span class="pc bpc" id="L245" title="1 of 4 branches missed.">            || board[i - 1][j + 1] == Checkers.yellowKing) &amp;&amp; board[i - 2][j + 2] == Checkers.empty)</span>
+<span class="fc" id="L246">          return true;</span>
+      break;
+    case Checkers.yellowNormal:
+<span class="fc bfc" id="L249" title="All 4 branches covered.">      if (i + 2 &lt; 8 &amp;&amp; j - 2 &gt; -1)</span>
+<span class="fc bfc" id="L250" title="All 4 branches covered.">        if ((board[i + 1][j - 1] == Checkers.redNormal || board[i + 1][j - 1] == Checkers.redKing)</span>
+<span class="fc bfc" id="L251" title="All 2 branches covered.">            &amp;&amp; board[i + 2][j - 2] == Checkers.empty)</span>
+<span class="fc" id="L252">          return true;</span>
+<span class="fc bfc" id="L253" title="All 4 branches covered.">      if (i - 2 &gt; -1 &amp;&amp; j - 2 &gt; -1)</span>
+<span class="fc bfc" id="L254" title="All 4 branches covered.">        if ((board[i - 1][j - 1] == Checkers.redNormal || board[i - 1][j - 1] == Checkers.redKing)</span>
+<span class="fc bfc" id="L255" title="All 2 branches covered.">            &amp;&amp; board[i - 2][j - 2] == Checkers.empty)</span>
+<span class="fc" id="L256">          return true;</span>
+      break;
+    case Checkers.redKing: // should check all four directions
+<span class="fc bfc" id="L259" title="All 2 branches covered.">      if (i + 2 &lt; 8) {</span>
+<span class="fc bfc" id="L260" title="All 2 branches covered.">        if (j + 2 &lt; 8)</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">          if ((board[i + 1][j + 1] == Checkers.yellowNormal</span>
+<span class="fc bfc" id="L262" title="All 2 branches covered.">              || board[i + 1][j + 1] == Checkers.yellowKing)</span>
+<span class="fc bfc" id="L263" title="All 2 branches covered.">              &amp;&amp; board[i + 2][j + 2] == Checkers.empty)</span>
+<span class="fc" id="L264">            return true;</span>
+<span class="fc bfc" id="L265" title="All 2 branches covered.">        if (j - 2 &gt; -1)</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">          if ((board[i + 1][j - 1] == Checkers.yellowNormal</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">              || board[i + 1][j - 1] == Checkers.yellowKing)</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">              &amp;&amp; board[i + 2][j - 2] == Checkers.empty)</span>
+<span class="fc" id="L269">            return true;</span>
+      }
+<span class="fc bfc" id="L271" title="All 2 branches covered.">      if (i - 2 &gt; -1) {</span>
+<span class="fc bfc" id="L272" title="All 2 branches covered.">        if (j + 2 &lt; 8)</span>
+<span class="fc bfc" id="L273" title="All 2 branches covered.">          if ((board[i - 1][j + 1] == Checkers.yellowNormal</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">              || board[i - 1][j + 1] == Checkers.yellowKing)</span>
+<span class="fc bfc" id="L275" title="All 2 branches covered.">              &amp;&amp; board[i - 2][j + 2] == Checkers.empty)</span>
+<span class="fc" id="L276">            return true;</span>
+<span class="fc bfc" id="L277" title="All 2 branches covered.">        if (j - 2 &gt; -1)</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">          if ((board[i - 1][j - 1] == Checkers.yellowNormal</span>
+<span class="pc bpc" id="L279" title="1 of 2 branches missed.">              || board[i - 1][j - 1] == Checkers.yellowKing)</span>
+<span class="pc bpc" id="L280" title="1 of 2 branches missed.">              &amp;&amp; board[i - 2][j - 2] == Checkers.empty)</span>
+<span class="fc" id="L281">            return true;</span>
+      }
+      break;
+    case Checkers.yellowKing:
+<span class="fc bfc" id="L285" title="All 2 branches covered.">      if (i + 2 &lt; 8) {</span>
+<span class="fc bfc" id="L286" title="All 2 branches covered.">        if (j + 2 &lt; 8)</span>
+<span class="pc bpc" id="L287" title="1 of 4 branches missed.">          if ((board[i + 1][j + 1] == Checkers.redNormal || board[i + 1][j + 1] == Checkers.redKing)</span>
+<span class="fc bfc" id="L288" title="All 2 branches covered.">              &amp;&amp; board[i + 2][j + 2] == Checkers.empty)</span>
+<span class="fc" id="L289">            return true;</span>
+<span class="fc bfc" id="L290" title="All 2 branches covered.">        if (j - 2 &gt; -1)</span>
+<span class="fc bfc" id="L291" title="All 4 branches covered.">          if ((board[i + 1][j - 1] == Checkers.redNormal || board[i + 1][j - 1] == Checkers.redKing)</span>
+<span class="fc bfc" id="L292" title="All 2 branches covered.">              &amp;&amp; board[i + 2][j - 2] == Checkers.empty)</span>
+<span class="fc" id="L293">            return true;</span>
+      }
+<span class="fc bfc" id="L295" title="All 2 branches covered.">      if (i - 2 &gt; -1) {</span>
+<span class="fc bfc" id="L296" title="All 2 branches covered.">        if (j + 2 &lt; 8)</span>
+<span class="fc bfc" id="L297" title="All 4 branches covered.">          if ((board[i - 1][j + 1] == Checkers.redNormal || board[i - 1][j + 1] == Checkers.redKing)</span>
+<span class="pc bpc" id="L298" title="1 of 2 branches missed.">              &amp;&amp; board[i - 2][j + 2] == Checkers.empty)</span>
+<span class="fc" id="L299">            return true;</span>
+<span class="fc bfc" id="L300" title="All 2 branches covered.">        if (j - 2 &gt; -1)</span>
+<span class="fc bfc" id="L301" title="All 4 branches covered.">          if ((board[i - 1][j - 1] == Checkers.redNormal || board[i - 1][j - 1] == Checkers.redKing)</span>
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">              &amp;&amp; board[i - 2][j - 2] == Checkers.empty)</span>
+<span class="fc" id="L303">            return true;</span>
+      }
+      break;
+    }
+<span class="fc" id="L307">    return false;</span>
+  }
+
+  // canWalk() returns true if the piece on (i,j) can make a
+  // legal non-capturing move
+  // Imporatant to see if the game is over
+  static boolean canWalk(int[][] board, int i, int j) {
+<span class="pc bpc" id="L314" title="1 of 5 branches missed.">    switch (board[i][j]) {</span>
+    case Checkers.redNormal:
+<span class="pc bpc" id="L316" title="1 of 4 branches missed.">      if (isEmpty(board, i + 1, j + 1) || isEmpty(board, i - 1, j + 1))</span>
+<span class="fc" id="L317">        return true;</span>
+      break;
+    case Checkers.yellowNormal:
+<span class="pc bpc" id="L320" title="1 of 4 branches missed.">      if (isEmpty(board, i + 1, j - 1) || isEmpty(board, i - 1, j - 1))</span>
+<span class="fc" id="L321">        return true;</span>
+      break;
+    case Checkers.redKing:
+    case Checkers.yellowKing:
+<span class="pc bpc" id="L325" title="1 of 4 branches missed.">      if (isEmpty(board, i + 1, j + 1) || isEmpty(board, i + 1, j - 1)</span>
+<span class="pc bpc" id="L326" title="2 of 4 branches missed.">          || isEmpty(board, i - 1, j + 1) || isEmpty(board, i - 1, j - 1))</span>
+<span class="fc" id="L327">        return true;</span>
+      break;
+    case Checkers.empty: /// Bug for empyt piece added fix T.T.
+<span class="pc bpc" id="L330" title="1 of 2 branches missed.">      if (isEmpty(board, i, j)) {</span>
+<span class="fc" id="L331">        return false;</span>
+      }
+    }
+    // board[i][j] cannot walk anywhere right now
+<span class="fc" id="L335">    return false;</span>
+  }
+
+  private static boolean isEmpty(int[][] board, int i, int j) {
+<span class="pc bpc" id="L339" title="1 of 8 branches missed.">    if (i &gt; -1 &amp;&amp; i &lt; 8 &amp;&amp; j &gt; -1 &amp;&amp; j &lt; 8)</span>
+<span class="fc bfc" id="L340" title="All 2 branches covered.">      if (board[i][j] == Checkers.empty)</span>
+<span class="fc" id="L341">        return true;</span>
+<span class="fc" id="L342">    return false;</span>
+  }
+
+  // returns the color of a piece
+  static int colour(int piece) {
+<span class="fc bfc" id="L347" title="All 3 branches covered.">    switch (piece) {</span>
+    case Checkers.redNormal:
+    case Checkers.redKing:
+<span class="fc" id="L350">      return Checkers.redNormal;</span>
+    case Checkers.yellowNormal:
+    case Checkers.yellowKing:
+<span class="fc" id="L353">      return Checkers.yellowNormal;</span>
+    }
+<span class="fc" id="L355">    return Checkers.empty;</span>
+  }
+
+  // checkers that i and j are between 0 and 7 inclusive
+  private static boolean inRange(int i, int j) {
+<span class="fc bfc" id="L360" title="All 8 branches covered.">    return (i &gt; -1 &amp;&amp; i &lt; 8 &amp;&amp; j &gt; -1 &amp;&amp; j &lt; 8);</span>
+  }
+
+  // given a board, generates all the possible moves depending on whose turn
+  static Vector generateMoves(int[][] board, int turn) {
+<span class="fc" id="L365">    Vector moves_list = new Vector();</span>
+    int move;
+
+<span class="fc bfc" id="L368" title="All 2 branches covered.">    for (int i = 7; i &gt;= 0; i--)</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">      for (int j = 0; j &lt; 8; j++)</span>
+<span class="fc bfc" id="L370" title="All 2 branches covered.">        if (turn == colour(board[i][j])) {</span>
+<span class="fc bfc" id="L371" title="All 2 branches covered.">          if (canCapture(board, turn)) {</span>
+<span class="fc bfc" id="L372" title="All 2 branches covered.">            for (int k = -2; k &lt;= 2; k += 4) // check all directions</span>
+<span class="fc bfc" id="L373" title="All 2 branches covered.">              for (int l = -2; l &lt;= 2; l += 4) {</span>
+<span class="fc" id="L374">                move = isMoveLegal(board, i, j, i + k, j + l, turn);</span>
+<span class="fc bfc" id="L375" title="All 2 branches covered.">                if (move == incompleteMove) {</span>
+<span class="fc" id="L376">                  int[] int_array = new int[4]; // stores old</span>
+                  // coorinates
+                  // and new
+                  // coordinates
+<span class="fc" id="L380">                  int_array[0] = i;</span>
+<span class="fc" id="L381">                  int_array[1] = j;</span>
+<span class="fc" id="L382">                  int_array[2] = i + k;</span>
+<span class="fc" id="L383">                  int_array[3] = j + l;</span>
+<span class="fc" id="L384">                  int[][] temp_board = GameEngine.copyBoard(board);</span>
+<span class="fc" id="L385">                  move = CheckerMove.ApplyMove(temp_board, i, j, i + k, j + l);</span>
+<span class="pc bpc" id="L386" title="1 of 2 branches missed.">                  if (move == incompleteMove)/*</span>
+                                              * (canCapture( temp_board,i+ k,j+l))
+                                              */
+                  {
+<span class="nc" id="L390">                    forceCaptures(temp_board, int_array, moves_list, 10);</span>
+<span class="nc" id="L391">                  } else {</span>
+<span class="fc" id="L392">                    moves_list.addElement(int_array);</span>
+                  }
+
+                }
+              }
+<span class="fc" id="L397">          } else {</span>
+<span class="fc bfc" id="L398" title="All 2 branches covered.">            for (int k = -1; k &lt;= 2; k += 2)</span>
+<span class="fc bfc" id="L399" title="All 2 branches covered.">              for (int l = -1; l &lt;= 2; l += 2) {</span>
+<span class="fc bfc" id="L400" title="All 2 branches covered.">                if (inRange(i + k, j + l)) {</span>
+<span class="fc" id="L401">                  move = isWalkLegal(board, i, j, i + k, j + l);</span>
+<span class="fc bfc" id="L402" title="All 2 branches covered.">                  if (move == legalMove) {</span>
+<span class="fc" id="L403">                    int[] int_array = new int[4];</span>
+<span class="fc" id="L404">                    int_array[0] = i;</span>
+<span class="fc" id="L405">                    int_array[1] = j;</span>
+<span class="fc" id="L406">                    int_array[2] = i + k;</span>
+<span class="fc" id="L407">                    int_array[3] = j + l;</span>
+                    // a walk has taken place
+                    // add the new array to the Vector
+                    // moves_list
+<span class="fc" id="L411">                    moves_list.addElement(int_array);</span>
+                  }
+                }
+              }
+          }
+        }
+<span class="fc" id="L417">    return moves_list;</span>
+
+  }
+
+  // &quot;apply move&quot; in the Minimax. simply moves the board give moves
+  static void moveComputer(int[][] board, int[] move) {
+<span class="fc" id="L423">    int startx = move[0];</span>
+<span class="fc" id="L424">    int starty = move[1];</span>
+<span class="fc" id="L425">    int endx = move[2];</span>
+<span class="fc" id="L426">    int endy = move[3];</span>
+<span class="pc bpc" id="L427" title="1 of 4 branches missed.">    while (endx &gt; 0 || endy &gt; 0) {</span>
+
+<span class="fc" id="L429">      ApplyMove(board, startx, starty, endx % 10, endy % 10);</span>
+<span class="fc" id="L430">      startx = endx % 10;</span>
+<span class="fc" id="L431">      starty = endy % 10;</span>
+<span class="fc" id="L432">      endx /= 10;</span>
+<span class="fc" id="L433">      endy /= 10;</span>
+    }
+<span class="fc" id="L435">  }</span>
+
+  // for an initial capture represented by move, sees if there are more
+  // captures
+  // until there is none. If there are multiple capture configurations,
+  // add all of them to moves_list
+  private static void forceCaptures(int[][] board, int[] move, Vector moves_list, int inc) {
+<span class="nc" id="L442">    int newx = move[2], newy = move[3];</span>
+
+<span class="nc bnc" id="L444" title="All 4 branches missed.">    while (newx &gt; 7 || newy &gt; 7) {</span>
+<span class="nc" id="L445">      newx /= 10;</span>
+<span class="nc" id="L446">      newy /= 10;</span>
+    } // end while
+<span class="nc bnc" id="L448" title="All 2 branches missed.">    for (int i = -2; i &lt;= 2; i += 4)</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">      for (int j = -2; j &lt;= 2; j += 4)</span>
+<span class="nc bnc" id="L450" title="All 2 branches missed.">        if (inRange(newx + i, newy + j)) {</span>
+<span class="nc" id="L451">          int[][] tempPosition = GameEngine.copyBoard(board);</span>
+<span class="nc" id="L452">          int moveResult = ApplyMove(tempPosition, newx, newy, newx + i, newy + j);</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">          if (moveResult == legalMove) { // an ordinary move without</span>
+            // additionals
+<span class="nc" id="L455">            int[] new_move = new int[4];</span>
+<span class="nc" id="L456">            new_move[0] = move[0];</span>
+<span class="nc" id="L457">            new_move[1] = move[1];</span>
+<span class="nc" id="L458">            new_move[2] = move[2] + (newx + i) * inc;</span>
+<span class="nc" id="L459">            new_move[3] = move[3] + (newy + j) * inc;</span>
+<span class="nc" id="L460">            moves_list.addElement(new_move);</span>
+<span class="nc bnc" id="L461" title="All 2 branches missed.">          } else if (moveResult == incompleteMove) // There are</span>
+          // multiple
+          // captures
+          {
+<span class="nc" id="L465">            int[] new_move = new int[4];</span>
+<span class="nc" id="L466">            new_move[0] = move[0];</span>
+<span class="nc" id="L467">            new_move[1] = move[1];</span>
+<span class="nc" id="L468">            new_move[2] = move[2] + (newx + i) * inc;</span>
+<span class="nc" id="L469">            new_move[3] = move[3] + (newy + j) * inc;</span>
+
+<span class="nc" id="L471">            forceCaptures(tempPosition, new_move, moves_list, inc * 10); // do</span>
+            // until
+            // there
+            // are
+            // no
+            // more
+            // captures
+          }
+        }
+<span class="nc" id="L480">  }</span>
+
+  //////////////////////// TEST CODE/////////////////////////////////////
+
+  public static boolean getIsEmpty(int[][] board, int i, int j) {
+<span class="fc" id="L485">    return CheckerMove.isEmpty(board, i, j);</span>
+  }
+  
+  /////////////////////////////////////// TEST CODE////////////////////////////
+  
+  public static boolean getInRange(int i, int j) {
+<span class="fc" id="L491">    return inRange(i, j);</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

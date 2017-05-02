@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>IsWalkLegalTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">junit</a> &gt; <span class="el_source">IsWalkLegalTest.java</span></div><h1>IsWalkLegalTest.java</h1><pre class="source lang-java linenums">/*
+ * 
+ */
+package junit;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import checkers.JunitTester;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IsWalkLegalTest.
+ */
+<span class="fc" id="L16">public class IsWalkLegalTest {</span>
+	
+	/** The Junit tester. */
+<span class="fc" id="L19">	JunitTester JunitTester =  new JunitTester();</span>
+		
+		/** The cap board red. */
+<span class="fc" id="L22">		int[][] capBoardRed = {</span>
+<span class="fc" id="L23">				   {0, 1, 0, 3, 0, 1, 0, 0}, </span>
+<span class="fc" id="L24">				   {2, 0, 0, 0, 0, 0, 2, 0}, </span>
+<span class="fc" id="L25">				   {0, 0, 0, 0, 0, 0, 0, 2}, </span>
+<span class="fc" id="L26">				   {0, 0, 0, 0, 4, 0, 2, 0}, </span>
+<span class="fc" id="L27">				   {0, 2, 0, 1, 0, 0, 0, 2}, </span>
+<span class="fc" id="L28">				   {0, 0, 3, 0, 2, 0, 3, 0}, </span>
+<span class="fc" id="L29">				   {0, 4, 0, 2, 0, 0, 0, 2}, </span>
+<span class="fc" id="L30">				   {1, 0, 3, 0, 2, 0, 0, 0}};</span>
+
+		
+	/**
+	 * Walk test 1.
+	 */
+	//OUt of bounds walk	
+	@Test
+	public void walkTest1() {
+<span class="fc" id="L39">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 0, -1, -1, 0), 2);</span>
+<span class="fc" id="L40">	}</span>
+
+	/**
+	 * Walk test 2.
+	 */
+	//occupied square
+	@Test
+	public void walkTest2() {
+<span class="fc" id="L48">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 4, 7, 3, 6), 2);</span>
+<span class="fc" id="L49">	}</span>
+	
+	/**
+	 * Walk test 3.
+	 */
+	//red normal walk
+	@Test
+	public void walkTest3() {
+<span class="fc" id="L57">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 0, 1, 1, 2), 1);</span>
+<span class="fc" id="L58">	}</span>
+	
+	/**
+	 * Walk test 4.
+	 */
+	//yellow normal walk
+	@Test
+	public void walkTest4() {
+<span class="fc" id="L66">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 3, 6, 2, 5), 1);</span>
+<span class="fc" id="L67">	}</span>
+	
+	/**
+	 * Walk test 5.
+	 */
+	//Red king forward walk test
+	@Test
+	public void walkTest5() {
+<span class="fc" id="L75">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 0, 3, 1, 4), 1);</span>
+<span class="fc" id="L76">	}</span>
+	
+	/**
+	 * Walk test 6.
+	 */
+	//Red king back walk test
+	@Test
+	public void walkTest6() {
+<span class="fc" id="L84">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 0, 3, 1, 2), 1);</span>
+<span class="fc" id="L85">	}</span>
+	
+	/**
+	 * Walk test 7.
+	 */
+	//Yellow king forward walk test
+	@Test
+	public void walkTest7() {
+<span class="fc" id="L93">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 3, 4, 2, 3), 1);</span>
+<span class="fc" id="L94">	}</span>
+	
+	/**
+	 * Walk test 8.
+	 */
+	//Yellow king backward walk test
+	@Test
+	public void walkTest8() {
+<span class="fc" id="L102">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 3, 4, 4, 5), 1);</span>
+<span class="fc" id="L103">	}</span>
+	
+	/**
+	 * Walk test 9.
+	 */
+	//invalid number of rows
+	@Test
+	public void walkTest9() {
+<span class="fc" id="L111">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 1, 4, 2, 1), 2);</span>
+<span class="fc" id="L112">	}</span>
+	
+	/**
+	 * Walk test 10.
+	 */
+	//invalid number of columns
+	@Test
+	public void walkTest10() {
+<span class="fc" id="L120">		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 1, 0, 1, 1), 2);</span>
+<span class="fc" id="L121">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>
