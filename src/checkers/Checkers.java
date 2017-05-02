@@ -411,23 +411,42 @@ public class Checkers extends JPanel
     showStatus();
   }
 
-  public void drawCheckers() { // paint checkers on the board
+  /**
+   * Paints the checker pieces on the board.
+   * Bug presented: Pieces were not centered horizontally or vertically.
+   * Bug fixed by: Cristi DeLeo
+   */
+  public void drawCheckers() 
+  {
     g = getGraphics();
 
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        if (board[i][j] == redNormal)
-          g.drawImage(redN.getImage(), i * 50, j * 50, this);
-        else if (board[i][j] == yellowNormal)
-          g.drawImage(yellowN.getImage(), i * 50, j * 50, this);
-        else if (board[i][j] == redKing)
-          g.drawImage(redK.getImage(), i * 50, j * 50, this);
-        else if (board[i][j] == yellowKing)
-          g.drawImage(yellowK.getImage(), i * 50, j * 50, this);
+    for (int i = 0; i < 8; i++) 
+    {
+      for (int j = 0; j < 8; j++) 
+      {
+        if (board[i][j] == redNormal) // Executes if current space contains a normal red piece
+        {
+          // Displays the normal red pieces centered horizontally and vertically in squares
+          g.drawImage(redN.getImage(), (i * 50) + 5, (j * 50) + 5, this);
+        }  
+        else if (board[i][j] == yellowNormal) // Executes if current space contains a normal yellow piece
+        {
+          // Displays the normal yellow pieces centered horizontally and vertically in squares
+          g.drawImage(yellowN.getImage(), (i * 50) + 5, (j * 50) + 5, this);
+        }
+        else if (board[i][j] == redKing) // Executes if current space contains a King red piece
+        {
+          // Displays the King red pieces centered horizontally and vertically in squares
+          g.drawImage(redK.getImage(), (i * 50) + 5, (j * 50) + 5, this);
+        }
+        else if (board[i][j] == yellowKing) // Executes if current space contains a King yellow piece
+        {
+          // Displays the King yellow pieces centered horizontally and vertically in squares
+          g.drawImage(yellowK.getImage(), (i * 50) + 5, (j * 50) + 5, this);
+        }
       }
     }
-
-  }
+  } // End of drawCheckers()
 
   public void undo() { // undo function
     undoCount = 1;
@@ -610,29 +629,50 @@ public class Checkers extends JPanel
   public void mouseExited(MouseEvent e) {
   }
 
-  private void showStatus() { // prints msgs to the statuss bar
-    if (this.toMove == redNormal) {
+  /**
+   * Displays messages in the status bar and generates the "Winner" window
+   * upon the winning/losing of a game.
+   * Bug presented:  New game automatically started with the settings of the
+   * previous game.  This did not allow the user to change settings for the
+   * next game, nor view the ending status of the board.
+   * Bug fixed on: 01 May 2017
+   */
+  private void showStatus() 
+  {
+    if (this.toMove == redNormal) 
+    {
       msg.setText("Red to move");
-    } else {
+    } 
+    else 
+    {
       msg.setText("Yellow to move");
     }
 
-    if (loser == redNormal && won == 0) {
+    if (loser == redNormal && won == 0) 
+    {
       msg.setText("Yellow Wins!");
-      try {
+      try 
+      {
         Thread.sleep(150);
-      } catch (InterruptedException e) {
+      } 
+      catch (InterruptedException e) 
+      {
         e.printStackTrace();
       }
       new GameWin("Yellow", this.getLocationOnScreen());
       won = 1;
 //      undoCount = 0;
 //      newGame();
-    } else if (loser == yellowNormal && won == 0) {
+    } 
+    else if (loser == yellowNormal && won == 0) 
+    {
       msg.setText("Red Wins!");
-      try {
+      try 
+      {
         Thread.sleep(150);
-      } catch (InterruptedException e) {
+      } 
+      catch (InterruptedException e) 
+      {
         e.printStackTrace();
       }
       new GameWin("Red", this.getLocationOnScreen());
@@ -640,11 +680,12 @@ public class Checkers extends JPanel
 //      undoCount = 0;
 //      newGame();
     }
-    if(won == 1) {
-        undoCount = 0;
-    	reset();
+    if(won == 1) 
+    {
+      undoCount = 0;
+      reset();
     }
-  }
+  } // End of showStatus()
   
   private void reset() {
 	  for(int i = 0; i < 8; i++) {
