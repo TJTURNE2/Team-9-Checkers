@@ -19,7 +19,7 @@ public class IsWalkLegalTest {
 				   {1, 0, 3, 0, 2, 0, 0, 0}};
 
 		
-	//OUt of bounds walk	
+	//Out of bounds walk	
 	@Test
 	public void walkTest1() {
 		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 0, -1, -1, 0), 2);
