@@ -1,1 +1,71 @@
-Start The Games
+Starting a New Game:
+	1) Select preferred mode (1- or 2-Player mode).
+	2) If the 1-Player mode is selected, select the preferred color
+	   (yellow or red).
+	   Note: Yellow Opponent always makes the first move.
+	3) If the 1-Player mode is selected, select the preferred 
+	   difficulty (easy, fairly easy, moderate, bit difficult, or
+	   tough).
+	4) Click the "New Game" button to begin a new game with
+	   the selected game play settings.
+
+General Game Play Rules:
+	- Yellow Opponent always makes the initial move to begin
+	  game play.
+	- The piece selected to move must be the same color as the 
+	  color chosen prior to the beginning of the new game.
+
+The Object of the Game:
+	- The object of Checkers is to capture all of your opponent's
+	  checkers, or to make it so your opponent no longer has
+	  any possible moves.
+	  
+Board Set-Up:
+	- The game of Checkers is played on a board of 64
+	  alternating black and white squares.
+	- Only the black colored squares are used.
+	- Each opponent begins with 12 checkers that are either red
+	  or yellow in color.
+	- A new game begins with each opponent's pieces set up in
+	  the first three rows of opposite sides with pieces placed
+	  only on the black squares.
+	
+Movement of the Checkers:
+	- Each regular checkers piece can move 1 unit diagonally in
+	  the forward direction.
+	- Each King checkers piece can move 1 unit diagonally in the
+	  forward OR backward direction.
+	- If a jump move is available, it must be taken.  In doing so,
+	  this places the active piece 2 units diagonally from its 
+	  initial position (forward if the active piece is a regular
+	  checkers, and forward OR backward if the active piece is a
+	  King checkers).
+	- If a jump move is available immediately after a piece makes
+	  a jump move, that respective piece must make the second
+	  jump. The active piece continues jumping the opponent's
+	  pieces until no more jumps are available.
+	- If an opponent's piece is jumped, that respective piece
+	  must be removed from the board.
+	- If, at the beginning of a turn, more than one piece has jump
+	  moves available, it is up to the player to determine which
+	  piece will be moved.
+	- If a regular piece is crowned as a King during a turn, that 
+	  player's turn ends upon the Crowning of the active piece.
+	  
+Common Terms Defined:
+	- Crowning: when a regular checkers piece reaches the
+	  opposite side of the board and the active piece is deemed
+	  a King.
+	- Jumping: if an opponent's piece is diagonally adjacent
+	  to the active piece, and the space that is 1 unit beyond
+	  the opponent's piece (in the same direction) is empty,
+	  then the active piece must "jump" the respective
+	  opponent's piece.
+	- King Checkers Piece: a checkers piece that has traveled
+	  the distance of the board (reached the side in which the
+	  opponent started game play), been Crowned, and may
+	  then move (diagonally) in the forward or backward
+	  direction when moving.
+	- Regular Checkers Piece: a checkers piece that has not
+	  yet been awarded the status of "King" and may only move
+	  (diagonally) in the forward direction.
