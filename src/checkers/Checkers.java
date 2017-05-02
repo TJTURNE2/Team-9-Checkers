@@ -12,20 +12,20 @@ public class Checkers extends JPanel
   JTextArea msg = new JTextArea("Start a new game... Yellow is to move first...");
   // ImageIcon redN=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/red.png")).getImage());//red_normal.jpg //OLD
-  ImageIcon redN = new ImageIcon(new ImageIcon("images/red_normal.jpg").getImage());// red_normal.jpg
+  ImageIcon redN = new ImageIcon(new ImageIcon("images/red_normal.png").getImage());// red_normal.jpg
                                                                                     // //FIXED -
                                                                                     // Terry
   // ImageIcon yellowN=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/blue.png")).getImage());//yellow_normal.jpg //OLD
-  ImageIcon yellowN = new ImageIcon(new ImageIcon("images/yellow_normal.jpg").getImage());// yellow_normal.jpg//FIXED
+  ImageIcon yellowN = new ImageIcon(new ImageIcon("images/yellow_normal.png").getImage());// yellow_normal.jpg//FIXED
                                                                                           // - Terry
   // ImageIcon redK=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/rs.jpg")).getImage());//red_king.jpg //OLD
-  ImageIcon redK = new ImageIcon(new ImageIcon("images/red_king.jpg").getImage());// red_king.jpg
+  ImageIcon redK = new ImageIcon(new ImageIcon("images/red_king.png").getImage());// red_king.jpg
                                                                                   // //FIXED - Terry
   // ImageIcon yellowK=new ImageIcon(new
   // ImageIcon(getClass().getResource("/images/bs.jpg")).getImage());//yellow_king.jpg //OLD
-  ImageIcon yellowK = new ImageIcon(new ImageIcon("images/yellow_king.jpg").getImage());// yellow_king.jpg
+  ImageIcon yellowK = new ImageIcon(new ImageIcon("images/yellow_king.png").getImage());// yellow_king.jpg
                                                                                         // //FIXED -
                                                                                         // Terry
   // ImageIcon hlp=new ImageIcon(new
@@ -232,30 +232,64 @@ public class Checkers extends JPanel
     this.add(bk);
     bkt.setBounds(420, 450, 100, 20);
     this.add(bkt);
-    
-    //g=getGraphics();
-    //g.drawImage(redN.getImage(),30,450,this);
+
+    // g=getGraphics();
+    // g.drawImage(redN.getImage(),30,450,this);
 
   }
 
-  public void paintComponent(Graphics g) {
+  /**
+   * Graphically creates the Checkers board with the checkers
+   * placed on the black squares.
+   * Bug presented: the checkers were previously placed in the
+   * white squares, and, in the game of Checkers, it is
+   * customary for the pieces to be placed on the darker colored
+   * squares.
+   * Bug fixed by: Cristi DeLeo
+   * Enhancement presented: there were two for-loops to create 
+   * the squares for a single color, and only one for-loop was
+   * needed (combine both fillRect statements, per color, under
+   * one for-loop).
+   * Bug fixed by: Cristi DeLeo
+   */
+  public void paintComponent(Graphics g) 
+  {
     super.paintComponent(g);
-    g.setColor(new Color(0, 0, 0));
-
-    for (int i = 0; i < 4; i++) {
-      for (int j = 0; j < 4; j++) {
+    
+    // Sets color in-use to white
+    g.setColor(Color.white);
+    
+    // Creates white squares with dimensions of 50 pixels x 50 pixels 
+    for (int i = 0; i < 4; i++)
+    {
+      for (int j = 0; j < 4; j++) 
+      {
         g.fillRect(100 * j, 100 * i, 50, 50);
-      }
-    }
-    for (int i = 0; i < 4; i++) {
-      for (int j = 0; j < 4; j++) {
         g.fillRect(50 + 100 * j, 50 + 100 * i, 50, 50);
       }
     }
+
+    // Sets color in-use to black
+    g.setColor(Color.black);
+    
+    // Creates black squares with dimensions of 50 pixels x 50 pixels
+    // that alternate in between the white squares, completing the
+    // black & white checkered board display
+    for (int i = 0; i < 4; i++) 
+    {
+      for (int j = 0; j < 4; j++) 
+      {
+        g.fillRect(100 * j, 50 + 100 * i, 50, 50);
+        g.fillRect(50 + 100 * j, 100 * i, 50, 50);
+      }
+    }
+    
     g.drawLine(0, 400, 400, 400);
     g.drawLine(400, 0, 400, 400);
+    
+    // Displays the checkers on the board
     drawCheckers();
-  }
+  } // End of paintComponent(Graphics g)
 
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand().equalsIgnoreCase("1-Player")) {
@@ -297,31 +331,23 @@ public class Checkers extends JPanel
     }
     if (e.getActionCommand().equalsIgnoreCase("New Game")) {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
-      nwB.setEnabled(false);
-      nwB.setVisible(false);
-      col.setEnabled(false);
-      col.setVisible(false);
-      diff.setEnabled(false);
-      diff.setVisible(false);
-      c1.setEnabled(false);
-      c1.setVisible(false);
-      c2.setEnabled(false);
-      c2.setVisible(false);
-      level.setEnabled(false);
-      level.setVisible(false);
-      mode.setEnabled(false);
-      mode.setVisible(false);
-      p1.setEnabled(false);
-      p1.setVisible(false);
-      p2.setEnabled(false);
-      p2.setVisible(false);
-      ffB.setEnabled(true);
       new PlaySound("sounds//button.wav").start();// FIXED -Terry
+      nwB.setEnabled(false);
+      col.setEnabled(false);
+      diff.setEnabled(false);
+      c1.setEnabled(false);
+      c2.setEnabled(false);
+      level.setEnabled(false);
+      mode.setEnabled(false);
+      p1.setEnabled(false);
+      p2.setEnabled(false);
+      ffB.setEnabled(true);
       newGame();
     }
     if(e.getActionCommand().equalsIgnoreCase("Forfeit")) {
-      new PlaySound("sounds//button.wav").start();
-      forfeit();
+        new PlaySound("sounds//button.wav").start();
+        loser = toMove;
+        showStatus();
     }
     if (e.getActionCommand().equalsIgnoreCase("Undo") && undoCount > 3) {
       // new PlaySound("src//sounds//button.wav").start(); //OLD
@@ -345,11 +371,6 @@ public class Checkers extends JPanel
       }
     }
   }
-  
-  public void forfeit() {
-	  loser = toMove;
-	  showStatus();
-  }
 
   public void newGame() { // creates a new game
 
@@ -362,7 +383,7 @@ public class Checkers extends JPanel
     difficulty = level.getSelectedIndex();
 
     unB.setEnabled(false);
-    
+
     won = 0;
 
     // undoCount = 0; // OLD - Steven
@@ -373,7 +394,8 @@ public class Checkers extends JPanel
 
     loser = empty;
 
-    for (int i = 0; i < 8; i++) // applies values to the board
+    // Initiates an new board
+    for (int i = 0; i < 8; i++)
     {
       for (int j = 0; j < 8; j++)
         board[i][j] = empty;
@@ -411,23 +433,46 @@ public class Checkers extends JPanel
     showStatus();
   }
 
-  public void drawCheckers() { // paint checkers on the board
+  /**
+   * Paints the checker pieces on the board.
+   * Enhancement presented: Pieces were not centered horizontally or vertically.
+   * Enhanced by: Cristi DeLeo
+   */
+  public void drawCheckers() 
+  {
     g = getGraphics();
 
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        if (board[i][j] == redNormal)
-          g.drawImage(redN.getImage(), i * 50, j * 50, this);
-        else if (board[i][j] == yellowNormal)
-          g.drawImage(yellowN.getImage(), i * 50, j * 50, this);
-        else if (board[i][j] == redKing)
-          g.drawImage(redK.getImage(), i * 50, j * 50, this);
-        else if (board[i][j] == yellowKing)
-          g.drawImage(yellowK.getImage(), i * 50, j * 50, this);
+    for (int i = 0; i < 8; i++) 
+    {
+      for (int j = 0; j < 8; j++) 
+      {
+        if (board[i][j] == redNormal) // Executes if current space contains a normal red piece
+        {
+          //g.drawImage(redN.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the normal red pieces centered horizontally and vertically in squares
+          g.drawImage(redN.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi
+        }  
+        else if (board[i][j] == yellowNormal) // Executes if current space contains a normal yellow piece
+        {
+          //g.drawImage(yellowN.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the normal yellow pieces centered horizontally and vertically in squares
+          g.drawImage(yellowN.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi
+        }
+        else if (board[i][j] == redKing) // Executes if current space contains a King red piece
+        {
+          //g.drawImage(redK.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the King red pieces centered horizontally and vertically in squares
+          g.drawImage(redK.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi
+        }
+        else if (board[i][j] == yellowKing) // Executes if current space contains a King yellow piece
+        {
+          //g.drawImage(yellowK.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the King yellow pieces centered horizontally and vertically in squares
+          g.drawImage(yellowK.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi
+        }
       }
     }
-
-  }
+  } // End of drawCheckers()
 
   public void undo() { // undo function
     undoCount = 1;
@@ -442,7 +487,7 @@ public class Checkers extends JPanel
       toMove = preToMove3; // FIXED - Steven
       play();
     } else {
-    	toMove = preToMove2; // FIXED - Steven
+      toMove = preToMove2; // FIXED - Steven
     }
   }
 
@@ -455,8 +500,6 @@ public class Checkers extends JPanel
         unB.setEnabled(true);
       else if (selectedMode == 2)
         unB.setEnabled(true);
-    } else {
-    	unB.setEnabled(false);
     }
 
     for (int i = 0; i < 8; i++) {
@@ -528,7 +571,8 @@ public class Checkers extends JPanel
     showStatus();
   }
 
-  private boolean isPossibleSquare(int i, int j) {
+  private boolean isPossibleSquare(int i, int j) 
+  {
     return (i + j) % 2 == 1;
   }
 
@@ -536,6 +580,8 @@ public class Checkers extends JPanel
   }
 
   public void mousePressed(MouseEvent e) {
+	if (won == 1)
+		return;
 
     int x = e.getX();
     int y = e.getY();
@@ -610,72 +656,71 @@ public class Checkers extends JPanel
   public void mouseExited(MouseEvent e) {
   }
 
-  private void showStatus() { // prints msgs to the statuss bar
-    if (this.toMove == redNormal) {
+  /**
+   * Displays messages in the status bar and generates the "Winner" window
+   * upon the winning/losing of a game.
+   * Bug presented:  New game automatically started with the settings of the
+   * previous game.  This did not allow the user to change settings for the
+   * next game, nor view the ending status of the board.
+   * Bug fixed by:  Cristi DeLeo
+   */
+  private void showStatus() 
+  {
+    if (this.toMove == redNormal) 
+    {
       msg.setText("Red to move");
-    } else {
+    } 
+    else 
+    {
       msg.setText("Yellow to move");
     }
 
-    if (loser == redNormal && won == 0) {
+    if (loser == redNormal && won == 0) 
+    {
       msg.setText("Yellow Wins!");
-      try {
+      try 
+      {
         Thread.sleep(150);
-      } catch (InterruptedException e) {
+      } 
+      catch (InterruptedException e) 
+      {
         e.printStackTrace();
       }
       new GameWin("Yellow", this.getLocationOnScreen());
       won = 1;
-//      undoCount = 0;
-//      newGame();
-    } else if (loser == yellowNormal && won == 0) {
+      //undoCount = 0;
+      //newGame(); // OLD - Removed to display board after game ends, user should have to click New Game for new game to start - Cristi
+    } 
+    else if (loser == yellowNormal && won == 0) 
+    {
       msg.setText("Red Wins!");
-      try {
+      try 
+      {
         Thread.sleep(150);
-      } catch (InterruptedException e) {
+      } 
+      catch (InterruptedException e) 
+      {
         e.printStackTrace();
       }
       new GameWin("Red", this.getLocationOnScreen());
       won = 1;
-//      undoCount = 0;
-//      newGame();
+      //undoCount = 0;
+      //newGame(); // OLD - Removed to display board after game ends, user should have to click New Game for new game to start - Cristi
     }
     if(won == 1) {
+        nwB.setEnabled(true);
+        col.setEnabled(true);
+        diff.setEnabled(true);
+        c1.setEnabled(true);
+        c2.setEnabled(true);
+        level.setEnabled(true);
+        mode.setEnabled(true);
+        p1.setEnabled(true);
+        p2.setEnabled(true);
+        ffB.setEnabled(false);
         undoCount = 0;
-    	reset();
     }
-  }
-  
-  private void reset() {
-	  for(int i = 0; i < 8; i++) {
-		  for(int j = 0; j < 8; j++) {
-			  board[i][j] = empty;
-		  }
-	  }
-	  nwB.setEnabled(true);
-      nwB.setVisible(true);
-      if(p1.isSelected()){
-          col.setEnabled(true);
-          col.setVisible(true);
-          diff.setEnabled(true);
-          diff.setVisible(true);
-          c1.setEnabled(true);
-          c1.setVisible(true);
-          c2.setEnabled(true);
-          c2.setVisible(true);
-          level.setEnabled(true);
-          level.setVisible(true);
-      }
-      mode.setEnabled(true);
-      mode.setVisible(true);
-      p1.setEnabled(true);
-      p1.setVisible(true);
-      p2.setEnabled(true);
-      p2.setVisible(true);
-      ffB.setEnabled(false);
-      update(getGraphics());
-      drawCheckers();
-  }
+  } // End of showStatus()
 
   // The AWT invokes the update() method in response to the repaint() method
   // calls that are made as a checker is dragged. The default implementation
