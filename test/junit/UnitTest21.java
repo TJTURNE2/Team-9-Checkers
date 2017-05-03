@@ -15,7 +15,7 @@ import org.junit.Test;
 import checkers.CheckerFrame;
 import checkers.Checkers;
 import checkers.IntelliChecker;
-import checkers.junitTester;
+import checkers.JunitTester;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -24,7 +24,7 @@ import checkers.junitTester;
 public class UnitTest21 {
 
   /** The Junit tester. */
-  junitTester junitTester;
+  JunitTester junitTester;
   
   /** The cframe. */
   CheckerFrame cframe;
@@ -41,7 +41,7 @@ public class UnitTest21 {
   @Test
   public void test() {
     IntelliChecker Checker = new IntelliChecker();
-    junitTester = new junitTester();
+    junitTester = new JunitTester();
     try {
       String[] stuff = { "null", "null" };
       Checker.main(stuff);
@@ -52,7 +52,7 @@ public class UnitTest21 {
     checkers = junitTester.getCheckers();
     checkers.drawCheckers();
     // checkers.();
-    cframe = new junitTester().getCheckerFrame();
+    cframe = new JunitTester().getCheckerFrame();
     junitTester.getCheckerFrame().setVisible(true);
     // junitTester.CFrameTest(); //assertNotNull(this.junitTester.runCheckers());
   }
@@ -63,7 +63,7 @@ public class UnitTest21 {
    */
   @Test
   public void mouseTest() {
-    junitTester = new junitTester();
+    junitTester = new JunitTester();
     checkers = junitTester.getCheckers();
     me = new MouseEvent(checkers, 0, 0, 0, 100, 100, 1, false);
     checkers.mouseDragged(me);
@@ -79,7 +79,7 @@ public class UnitTest21 {
    */
   @Test
   public void actionPerformedTest() {
-    junitTester = new junitTester();
+    junitTester = new JunitTester();
     checkers = junitTester.getCheckers();
     me = new MouseEvent(checkers, 0, 0, 0, 100, 100, 1, false);
     checkers.mousePressed(me);
@@ -105,7 +105,7 @@ public class UnitTest21 {
    */
   @Test
   public void moveComputerTest() {
-    junitTester = new junitTester();
+    junitTester = new JunitTester();
     int[] com = { 0, 0, 2, 2 };
     int[][] capBoardRed = {
         {1, 0, 0, 0, 0, 0, 0, 0}, 
@@ -124,7 +124,7 @@ public class UnitTest21 {
    */
   @Test
   public void generateMovesTest() {
-    junitTester = new junitTester();
+    junitTester = new JunitTester();
     int com = 1;
     int[][] board1 = {
         {1, 0, 0, 0, 0, 0, 0, 0}, 
