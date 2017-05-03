@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import checkers.JunitTester;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class InRangeTest.
  */
@@ -26,7 +25,9 @@ public class InRangeTest {
 
 	/**
 	 * In range test 1.
+	 * values both in range
 	 */
+
 	@Test
 	public void inRangeTest1() {
 		assertTrue(JunitTester.inRangeTest(0, 7));
@@ -34,7 +35,9 @@ public class InRangeTest {
 	
 	/**
 	 * In range test 2.
+	 * first value below range
 	 */
+
 	@Test
 	public void inRangeTest2() {
 		assertFalse(JunitTester.inRangeTest(-1, 7));
@@ -42,7 +45,9 @@ public class InRangeTest {
 	
 	/**
 	 * In range test 3.
+	 * first value above range
 	 */
+
 	@Test
 	public void inRangeTest3() {
 		assertFalse(JunitTester.inRangeTest(8, 7));
@@ -50,7 +55,9 @@ public class InRangeTest {
 	
 	/**
 	 * In range test 4.
+	 * second value below range
 	 */
+
 	@Test
 	public void inRangeTest4() {
 		assertFalse(JunitTester.inRangeTest(0, -1));
@@ -58,7 +65,10 @@ public class InRangeTest {
 
 	/**
 	 * In range test 5.
+	 * //second value above range
+	 * 
 	 */
+
 	@Test
 	public void inRangeTest5() {
 		assertFalse(JunitTester.inRangeTest(0, 8));

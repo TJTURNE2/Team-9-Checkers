@@ -30,6 +30,7 @@ public class EvalTest {
 
 	/**
 	 * Eval test.
+	 * running eval test 1k times to ensure the random value (1-10) never brings the expected value outside the range
 	 */
 	@Test
 	public void evalTest() {

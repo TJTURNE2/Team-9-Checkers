@@ -34,6 +34,7 @@ public class IsWalkLegalTest {
 	 * Walk test 1.
 	 */
 	//OUt of bounds walk	
+
 	@Test
 	public void walkTest1() {
 		assertEquals(JunitTester.isWalkLegalTest(capBoardRed, 0, -1, -1, 0), 2);
