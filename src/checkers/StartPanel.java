@@ -40,7 +40,7 @@ public class StartPanel extends JPanel {
     // g.drawImage(new
     // ImageIcon(getClass().getResource("/images/checkersIcon.jpg")).getImage(),350,280,this);//checkersIcon.jpg
     // //OLD
-    g.drawImage(new ImageIcon("/images/checkersIcon.jpg").getImage(), 350, 280, this);// checkersIcon.jpg
+    g.drawImage(new ImageIcon("images/checkersIcon.jpg").getImage(), 350, 280, this);// checkersIcon.jpg
     // //FIXED - Terry
 
     g.setColor(new Color(0, 0, 0));
