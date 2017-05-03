@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>HelpTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">junit</a> &gt; <span class="el_source">HelpTest.java</span></div><h1>HelpTest.java</h1><pre class="source lang-java linenums">/*
+ * 
+ */
+package junit;
+
+import org.junit.Test;
+import checkers.Help;
+import checkers.JunitTester;
+// TODO: Auto-generated Javadoc
+/**
+ * Unit Test #2 in Software Test Plan
+ * Checks to make sure &quot;Help&quot; menu is constructed.
+ * @author Cristi DeLeo
+ * @version 1.0
+ * @since 27 April 2017
+ */
+<span class="fc" id="L17">public class HelpTest </span>
+{
+  
+  /** The Junit tester. */
+<span class="fc" id="L21">  JunitTester JunitTester = new checkers.JunitTester();</span>
+  
+	/** The tester. */
+	Help tester;
+	
+	/**
+	 * Test help.
+	 */
+	@Test
+	public void testHelp() 
+	{
+<span class="fc" id="L32">		tester = JunitTester.newHelp();</span>
+<span class="fc" id="L33">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

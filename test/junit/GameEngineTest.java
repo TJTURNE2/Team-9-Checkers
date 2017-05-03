@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package junit;
 
 import static org.junit.Assert.*;
@@ -5,6 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import checkers.GameEngine;
 
+// TODO: Auto-generated Javadoc
 /**
  * Unit Test #18 in Software Test Plan
  * Checks to make sure boards are copied correctly.
@@ -14,8 +18,13 @@ import checkers.GameEngine;
  */
 public class GameEngineTest 
 {
+  
+  /** The Junit tester. */
   checkers.JunitTester JunitTester = new checkers.JunitTester();
   
+	/**
+	 * Test copy board.
+	 */
 	@Test
 	public void testCopyBoard()
 	{
@@ -48,12 +57,22 @@ public class GameEngineTest
 	}
 
   //Merge Conflict 
+  /**
+   * Gets the opponent test 1.
+   *
+   * @return the opponent test 1
+   */
   //Steven Bennett-Test Cases
   @Test
   public void getOpponentTest1() {
     assertTrue(JunitTester.getOpponentTest(1) == 2);
   }
   
+  /**
+   * Gets the opponent test 2.
+   *
+   * @return the opponent test 2
+   */
   @Test
   public void getOpponentTest2() {
     assertTrue(JunitTester.getOpponentTest(2) == 1);

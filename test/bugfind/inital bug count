@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.2-dev-20160306-90c514b" sequence="2" timestamp="1493764373244" analysisTimestamp="1493764349389" release="">
+  <Project projectName="Checkers">
+    <Jar>D:\Classes\SER 216\Checkers\Team-9-Checkers\bin</Jar>
+    <AuxClasspathEntry>D:\Classes\SER 216\Checkers\Team-9-Checkers\bin</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\TRON\.p2\pool\plugins\org.junit_4.12.0.v201504281640\junit.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\TRON\.p2\pool\plugins\org.hamcrest.core_1.3.0.v201303031735.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Program Files\Java\jre1.8.0_131\lib\rt.jar</AuxClasspathEntry>
+    <SrcDir>D:\Classes\SER 216\Checkers\Team-9-Checkers\images</SrcDir>
+    <SrcDir>D:\Classes\SER 216\Checkers\Team-9-Checkers\src</SrcDir>
+    <SrcDir>D:\Classes\SER 216\Checkers\Team-9-Checkers\sounds</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <BugInstance type="FE_FLOATING_POINT_EQUALITY" priority="1" rank="15" abbrev="FE" category="STYLE" first="1">
+    <Class classname="checkers.CheckerMove">
+      <SourceLine classname="checkers.CheckerMove" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Class>
+    <Method classname="checkers.CheckerMove" name="noMovesLeft" signature="([[II)Z" isStatic="true">
+      <SourceLine classname="checkers.CheckerMove" start="33" end="52" startBytecode="0" endBytecode="301" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Method>
+    <SourceLine classname="checkers.CheckerMove" start="35" end="35" startBytecode="23" endBytecode="23" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+  </BugInstance>
+  <BugInstance type="ICAST_IDIV_CAST_TO_DOUBLE" priority="2" rank="17" abbrev="ICAST" category="STYLE" first="1">
+    <Class classname="checkers.CheckerMove">
+      <SourceLine classname="checkers.CheckerMove" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Class>
+    <Method classname="checkers.CheckerMove" name="noMovesLeft" signature="([[II)Z" isStatic="true">
+      <SourceLine classname="checkers.CheckerMove" start="33" end="52" startBytecode="0" endBytecode="301" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Method>
+    <SourceLine classname="checkers.CheckerMove" start="35" end="35" startBytecode="21" endBytecode="21" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    <SourceLine classname="checkers.CheckerMove" start="35" end="35" startBytecode="21" endBytecode="21" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+  </BugInstance>
+  <BugInstance type="IM_AVERAGE_COMPUTATION_COULD_OVERFLOW" priority="2" rank="17" abbrev="IM" category="STYLE" first="1">
+    <Class classname="checkers.CheckerMove">
+      <SourceLine classname="checkers.CheckerMove" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Class>
+    <Method classname="checkers.CheckerMove" name="ApplyMove" signature="([[IIIII)I" isStatic="true">
+      <SourceLine classname="checkers.CheckerMove" start="62" end="91" startBytecode="0" endBytecode="333" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Method>
+    <SourceLine classname="checkers.CheckerMove" start="70" end="70" startBytecode="60" endBytecode="60" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    <SourceLine classname="checkers.CheckerMove" start="70" end="70" startBytecode="60" endBytecode="60" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+  </BugInstance>
+  <BugInstance type="IM_AVERAGE_COMPUTATION_COULD_OVERFLOW" priority="2" rank="17" abbrev="IM" category="STYLE" first="1">
+    <Class classname="checkers.CheckerMove">
+      <SourceLine classname="checkers.CheckerMove" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Class>
+    <Method classname="checkers.CheckerMove" name="isMoveLegal" signature="([[IIIIII)I" isStatic="true">
+      <SourceLine classname="checkers.CheckerMove" start="101" end="190" startBytecode="0" endBytecode="853" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Method>
+    <SourceLine classname="checkers.CheckerMove" start="154" end="154" startBytecode="297" endBytecode="297" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    <SourceLine classname="checkers.CheckerMove" start="154" end="154" startBytecode="297" endBytecode="297" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+  </BugInstance>
+  <BugInstance type="SF_SWITCH_NO_DEFAULT" priority="2" rank="19" abbrev="SF" category="STYLE" first="1">
+    <Class classname="checkers.CheckerMove">
+      <SourceLine classname="checkers.CheckerMove" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Class>
+    <Method classname="checkers.CheckerMove" name="isMoveLegal" signature="([[IIIIII)I" isStatic="true">
+      <SourceLine classname="checkers.CheckerMove" start="101" end="190" startBytecode="0" endBytecode="853" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    </Method>
+    <SourceLine classname="checkers.CheckerMove" start="111" end="124" startBytecode="49" endBytecode="216" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+    <SourceLine classname="checkers.CheckerMove" start="111" end="124" startBytecode="49" endBytecode="216" sourcefile="CheckerMove.java" sourcepath="checkers/CheckerMove.java"/>
+  </BugInstance>
+  <BugInstance type="FE_FLOATING_POINT_EQUALITY" priority="1" rank="15" abbrev="FE" category="STYLE" first="1">
+    <Class classname="checkers.Checkers">
+      <SourceLine classname="checkers.Checkers" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Class>
+    <Method classname="checkers.Checkers" name="mousePressed" signature="(Ljava/awt/event/MouseEvent;)V" isStatic="false">
+      <SourceLine classname="checkers.Checkers" start="770" end="834" startBytecode="0" endBytecode="771" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Method>
+    <SourceLine classname="checkers.Checkers" start="806" end="806" startBytecode="283" endBytecode="283" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+  </BugInstance>
+  <BugInstance type="ICAST_IDIV_CAST_TO_DOUBLE" priority="2" rank="17" abbrev="ICAST" category="STYLE" first="1">
+    <Class classname="checkers.Checkers">
+      <SourceLine classname="checkers.Checkers" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Class>
+    <Method classname="checkers.Checkers" name="mousePressed" signature="(Ljava/awt/event/MouseEvent;)V" isStatic="false">
+      <SourceLine classname="checkers.Checkers" start="770" end="834" startBytecode="0" endBytecode="771" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Method>
+    <SourceLine classname="checkers.Checkers" start="806" end="806" startBytecode="281" endBytecode="281" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    <SourceLine classname="checkers.Checkers" start="806" end="806" startBytecode="281" endBytecode="281" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+  </BugInstance>
+  <BugInstance type="IM_BAD_CHECK_FOR_ODD" priority="2" rank="13" abbrev="IM" category="STYLE" first="1">
+    <Class classname="checkers.Checkers">
+      <SourceLine classname="checkers.Checkers" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Class>
+    <Method classname="checkers.Checkers" name="isPossibleSquare" signature="(II)Z" isStatic="false">
+      <SourceLine classname="checkers.Checkers" start="762" end="762" startBytecode="0" endBytecode="83" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Method>
+    <SourceLine classname="checkers.Checkers" start="762" end="762" startBytecode="6" endBytecode="6" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    <SourceLine classname="checkers.Checkers" start="762" end="762" startBytecode="6" endBytecode="6" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+  </BugInstance>
+  <BugInstance type="SF_SWITCH_NO_DEFAULT" priority="2" rank="19" abbrev="SF" category="STYLE" first="1">
+    <Class classname="checkers.Checkers">
+      <SourceLine classname="checkers.Checkers" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Class>
+    <Method classname="checkers.Checkers" name="mousePressed" signature="(Ljava/awt/event/MouseEvent;)V" isStatic="false">
+      <SourceLine classname="checkers.Checkers" start="770" end="834" startBytecode="0" endBytecode="771" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Method>
+    <SourceLine classname="checkers.Checkers" start="811" end="830" startBytecode="329" endBytecode="476" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    <SourceLine classname="checkers.Checkers" start="811" end="830" startBytecode="329" endBytecode="476" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+  </BugInstance>
+  <BugInstance type="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" priority="1" rank="15" abbrev="ST" category="STYLE" first="1">
+    <Class classname="checkers.Checkers">
+      <SourceLine classname="checkers.Checkers" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Class>
+    <Method classname="checkers.Checkers" name="actionPerformed" signature="(Ljava/awt/event/ActionEvent;)V" isStatic="false">
+      <SourceLine classname="checkers.Checkers" start="310" end="417" startBytecode="0" endBytecode="864" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Method>
+    <Field classname="checkers.Checkers" name="silent" signature="Z" isStatic="true">
+      <SourceLine classname="checkers.Checkers" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    </Field>
+    <SourceLine classname="checkers.Checkers" start="407" end="407" startBytecode="514" endBytecode="514" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+    <SourceLine classname="checkers.Checkers" start="407" end="407" startBytecode="514" endBytecode="514" sourcefile="Checkers.java" sourcepath="checkers/Checkers.java"/>
+  </BugInstance>
+  <BugInstance type="DM_NEXTINT_VIA_NEXTDOUBLE" priority="2" rank="18" abbrev="Dm" category="PERFORMANCE" first="1">
+    <Class classname="checkers.GameEngine">
+      <SourceLine classname="checkers.GameEngine" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    </Class>
+    <Method classname="checkers.GameEngine" name="eval" signature="([[I)I" isStatic="true">
+      <SourceLine classname="checkers.GameEngine" start="31" end="64" startBytecode="0" endBytecode="390" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    </Method>
+    <SourceLine classname="checkers.GameEngine" start="62" end="62" startBytecode="175" endBytecode="175" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    <SourceLine classname="checkers.GameEngine" start="62" end="62" startBytecode="175" endBytecode="175" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.GameEngine">
+      <SourceLine classname="checkers.GameEngine" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    </Class>
+    <Method classname="checkers.GameEngine" name="MinMax" signature="([[III[II[I)I" isStatic="true">
+      <SourceLine classname="checkers.GameEngine" start="76" end="76" startBytecode="0" endBytecode="107" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="SF_SWITCH_NO_DEFAULT" priority="2" rank="19" abbrev="SF" category="STYLE" first="1">
+    <Class classname="checkers.GameEngine">
+      <SourceLine classname="checkers.GameEngine" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    </Class>
+    <Method classname="checkers.GameEngine" name="MinMax" signature="([[III[II[III)I" isStatic="true">
+      <SourceLine classname="checkers.GameEngine" start="83" end="149" startBytecode="0" endBytecode="794" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    </Method>
+    <SourceLine classname="checkers.GameEngine" start="98" end="110" startBytecode="47" endBytecode="107" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+    <SourceLine classname="checkers.GameEngine" start="98" end="110" startBytecode="47" endBytecode="107" sourcefile="GameEngine.java" sourcepath="checkers/GameEngine.java"/>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" first="1">
+    <Class classname="checkers.Help">
+      <SourceLine classname="checkers.Help" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+    </Class>
+    <Method classname="checkers.Help" name="addText" signature="()V" isStatic="false">
+      <SourceLine classname="checkers.Help" start="40" end="50" startBytecode="0" endBytecode="267" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+    </Method>
+    <Method classname="java.io.FileReader" name="&lt;init&gt;" signature="(Ljava/io/File;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.FileReader"/>
+    </Method>
+    <SourceLine classname="checkers.Help" start="40" end="40" startBytecode="17" endBytecode="17" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+    <SourceLine classname="checkers.Help" start="40" end="40" startBytecode="17" endBytecode="17" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+  </BugInstance>
+  <BugInstance type="OS_OPEN_STREAM" priority="2" rank="16" abbrev="OS" category="BAD_PRACTICE" first="1">
+    <Class classname="checkers.Help">
+      <SourceLine classname="checkers.Help" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+    </Class>
+    <Method classname="checkers.Help" name="addText" signature="()V" isStatic="false">
+      <SourceLine classname="checkers.Help" start="40" end="50" startBytecode="0" endBytecode="36" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+    </Method>
+    <Type descriptor="Ljava/io/Reader;" role="TYPE_CLOSEIT">
+      <SourceLine classname="java.io.Reader"/>
+    </Type>
+    <SourceLine classname="checkers.Help" start="40" end="40" startBytecode="0" endBytecode="0" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+    <SourceLine classname="checkers.Help" start="40" end="40" startBytecode="0" endBytecode="0" sourcefile="Help.java" sourcepath="checkers/Help.java"/>
+  </BugInstance>
+  <BugInstance type="MS_PKGPROTECT" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="checkers" signature="Lcheckers/Checkers;" isStatic="true">
+      <SourceLine classname="checkers.JunitTester" start="29" end="29" startBytecode="0" endBytecode="0" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Method classname="checkers.JunitTester" name="ApplyMove" signature="([[IIIII)I" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="276" end="276" startBytecode="0" endBytecode="102" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" priority="1" rank="15" abbrev="ST" category="STYLE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Method classname="checkers.JunitTester" name="getCheckers" signature="()Lcheckers/Checkers;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="180" end="182" startBytecode="0" endBytecode="70" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Method>
+    <Field classname="checkers.JunitTester" name="checkers" signature="Lcheckers/Checkers;" isStatic="true">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="180" end="180" startBytecode="7" endBytecode="7" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    <SourceLine classname="checkers.JunitTester" start="180" end="180" startBytecode="7" endBytecode="7" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" priority="1" rank="15" abbrev="ST" category="STYLE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Method classname="checkers.JunitTester" name="getStartTest" signature="()Lcheckers/StartPanel;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="236" end="236" startBytecode="0" endBytecode="53" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Method>
+    <Field classname="checkers.JunitTester" name="startTest" signature="Lcheckers/StartPanel;" isStatic="true">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="236" end="236" startBytecode="8" endBytecode="8" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    <SourceLine classname="checkers.JunitTester" start="236" end="236" startBytecode="8" endBytecode="8" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" rank="18" abbrev="UrF" category="PERFORMANCE" first="1" last="1" removedByChange="true">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="testCFrame" signature="Lcheckers/CheckerFrame;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="20" end="20" startBytecode="12" endBytecode="12" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="18" abbrev="UrF" category="STYLE" first="1" last="1" removedByChange="true">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="cFrame" signature="Lcheckers/CheckerFrame;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="38" end="38" startBytecode="9" endBytecode="9" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="18" abbrev="UrF" category="STYLE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="help" signature="Lcheckers/Help;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="441" end="441" startBytecode="9" endBytecode="9" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="18" abbrev="UrF" category="STYLE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="iCheckers" signature="Lcheckers/IntelliChecker;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="171" end="171" startBytecode="9" endBytecode="9" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="18" abbrev="UrF" category="STYLE" first="1" last="1" removedByChange="true">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="startTest" signature="Lcheckers/StartPanel;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+    <SourceLine classname="checkers.JunitTester" start="73" end="73" startBytecode="9" endBytecode="9" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" first="2">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="testCFrame" signature="Lcheckers/CheckerFrame;" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="47" end="47" startBytecode="0" endBytecode="0" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="17" abbrev="UuF" category="STYLE" first="1">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="canWalk" signature="Z" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="35" end="35" startBytecode="0" endBytecode="0" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="17" abbrev="UuF" category="STYLE" first="1">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="getTurn" signature="I" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="41" end="41" startBytecode="0" endBytecode="0" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" priority="2" rank="17" abbrev="UuF" category="STYLE" first="1">
+    <Class classname="checkers.JunitTester">
+      <SourceLine classname="checkers.JunitTester" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Class>
+    <Field classname="checkers.JunitTester" name="noMoves" signature="Z" isStatic="false">
+      <SourceLine classname="checkers.JunitTester" start="38" end="38" startBytecode="0" endBytecode="0" sourcefile="JunitTester.java" sourcepath="checkers/JunitTester.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="SS_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SS" category="PERFORMANCE" first="1">
+    <Class classname="checkers.PlaySound">
+      <SourceLine classname="checkers.PlaySound" sourcefile="PlaySound.java" sourcepath="checkers/PlaySound.java"/>
+    </Class>
+    <Field classname="checkers.PlaySound" name="EXTERNAL_BUFFER_SIZE" signature="I" isStatic="false">
+      <SourceLine classname="checkers.PlaySound" sourcefile="PlaySound.java" sourcepath="checkers/PlaySound.java"/>
+    </Field>
+    <SourceLine classname="checkers.PlaySound" start="18" end="18" startBytecode="7" endBytecode="7" sourcefile="PlaySound.java" sourcepath="checkers/PlaySound.java"/>
+  </BugInstance>
+  <BugInstance type="DE_MIGHT_IGNORE" priority="2" rank="16" abbrev="DE" category="BAD_PRACTICE" first="1">
+    <Class classname="junit.UnitTest21">
+      <SourceLine classname="junit.UnitTest21" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    </Class>
+    <Method classname="junit.UnitTest21" name="test" signature="()V" isStatic="false">
+      <SourceLine classname="junit.UnitTest21" start="16" end="32" startBytecode="0" endBytecode="189" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    </Method>
+    <Class classname="java.lang.Exception" role="CLASS_EXCEPTION">
+      <SourceLine classname="java.lang.Exception"/>
+    </Class>
+    <SourceLine classname="junit.UnitTest21" start="25" end="25" startBytecode="65" endBytecode="65" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    <SourceLine classname="junit.UnitTest21" start="25" end="25" startBytecode="65" endBytecode="65" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    <SourceLine classname="junit.UnitTest21" start="25" end="25" startBytecode="65" endBytecode="65" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" first="1">
+    <Class classname="junit.UnitTest21">
+      <SourceLine classname="junit.UnitTest21" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    </Class>
+    <Method classname="junit.UnitTest21" name="test" signature="()V" isStatic="false">
+      <SourceLine classname="junit.UnitTest21" start="16" end="32" startBytecode="0" endBytecode="34" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    </Method>
+    <LocalVariable name="Checker" register="1" pc="8" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="junit.UnitTest21" start="16" end="16" startBytecode="7" endBytecode="7" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    <SourceLine classname="junit.UnitTest21" start="16" end="16" startBytecode="7" endBytecode="7" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="Checker"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" rank="18" abbrev="UrF" category="PERFORMANCE" first="1">
+    <Class classname="junit.UnitTest21">
+      <SourceLine classname="junit.UnitTest21" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    </Class>
+    <Field classname="junit.UnitTest21" name="cframe" signature="Lcheckers/CheckerFrame;" isStatic="false">
+      <SourceLine classname="junit.UnitTest21" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+    </Field>
+    <SourceLine classname="junit.UnitTest21" start="21" end="21" startBytecode="48" endBytecode="48" sourcefile="UnitTest21.java" sourcepath="junit/UnitTest21.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" rank="18" abbrev="UrF" category="PERFORMANCE" first="1">
+    <Class classname="junit.UnitTest4">
+      <SourceLine classname="junit.UnitTest4" sourcefile="UnitTest4.java" sourcepath="junit/UnitTest4.java"/>
+    </Class>
+    <Field classname="junit.UnitTest4" name="p1" signature="Ljava/awt/Point;" isStatic="false">
+      <SourceLine classname="junit.UnitTest4" sourcefile="UnitTest4.java" sourcepath="junit/UnitTest4.java"/>
+    </Field>
+    <SourceLine classname="junit.UnitTest4" start="14" end="14" startBytecode="16" endBytecode="16" sourcefile="UnitTest4.java" sourcepath="junit/UnitTest4.java"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Tue, 2 May 2017 15:31:30 -0700" total_classes="12" referenced_classes="405" total_bugs="30" total_size="1191" num_packages="2" java_version="1.8.0_131" vm_version="25.131-b11" cpu_seconds="74.22" clock_seconds="639.06" peak_mbytes="953.63" alloc_mbytes="1024.00" gc_seconds="1.06" priority_2="23" priority_1="7">
+    <PackageStats package="checkers" total_bugs="26" total_types="12" total_size="1191" priority_2="20" priority_1="6">
+      <ClassStats class="checkers.CheckerFrame" sourceFile="CheckerFrame.java" interface="false" size="43" bugs="0"/>
+      <ClassStats class="checkers.CheckerMove" sourceFile="CheckerMove.java" interface="false" size="278" bugs="5" priority_2="4" priority_1="1"/>
+      <ClassStats class="checkers.Checkers" sourceFile="Checkers.java" interface="false" size="523" bugs="5" priority_2="3" priority_1="2"/>
+      <ClassStats class="checkers.GameEngine" sourceFile="GameEngine.java" interface="false" size="86" bugs="3" priority_2="3"/>
+      <ClassStats class="checkers.GameWin" sourceFile="GameWin.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="checkers.Help" sourceFile="Help.java" interface="false" size="36" bugs="2" priority_2="1" priority_1="1"/>
+      <ClassStats class="checkers.IntelliChecker" sourceFile="IntelliChecker.java" interface="false" size="6" bugs="0"/>
+      <ClassStats class="checkers.IntelliChecker$1" sourceFile="IntelliChecker.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="checkers.JunitTester" sourceFile="JunitTester.java" interface="false" size="97" bugs="10" priority_2="8" priority_1="2"/>
+      <ClassStats class="checkers.PlaySound" sourceFile="PlaySound.java" interface="false" size="48" bugs="1" priority_2="1"/>
+      <ClassStats class="checkers.PlaySound$Position" sourceFile="PlaySound.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="checkers.StartPanel" sourceFile="StartPanel.java" interface="false" size="33" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="454" invocations="2" avgMicrosecondsPerInvocation="227202" maxMicrosecondsPerInvocation="282583" standardDeviationMircosecondsPerInvocation="55381"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="381" invocations="1716" avgMicrosecondsPerInvocation="222" maxMicrosecondsPerInvocation="19938" standardDeviationMircosecondsPerInvocation="651"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="308" invocations="405" avgMicrosecondsPerInvocation="761" maxMicrosecondsPerInvocation="12391" standardDeviationMircosecondsPerInvocation="1465"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="296" invocations="405" avgMicrosecondsPerInvocation="731" maxMicrosecondsPerInvocation="11272" standardDeviationMircosecondsPerInvocation="1405"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="204" invocations="966" avgMicrosecondsPerInvocation="212" maxMicrosecondsPerInvocation="4002" standardDeviationMircosecondsPerInvocation="293"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="185" invocations="1720" avgMicrosecondsPerInvocation="107" maxMicrosecondsPerInvocation="14009" standardDeviationMircosecondsPerInvocation="368"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="107" invocations="481" avgMicrosecondsPerInvocation="223" maxMicrosecondsPerInvocation="41020" standardDeviationMircosecondsPerInvocation="1977"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="106" invocations="103" avgMicrosecondsPerInvocation="1031" maxMicrosecondsPerInvocation="12126" standardDeviationMircosecondsPerInvocation="2226"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="92" invocations="405" avgMicrosecondsPerInvocation="227" maxMicrosecondsPerInvocation="4560" standardDeviationMircosecondsPerInvocation="454"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="92" invocations="101" avgMicrosecondsPerInvocation="912" maxMicrosecondsPerInvocation="12141" standardDeviationMircosecondsPerInvocation="1782"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="83" invocations="101" avgMicrosecondsPerInvocation="828" maxMicrosecondsPerInvocation="11787" standardDeviationMircosecondsPerInvocation="1685"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="82" invocations="103" avgMicrosecondsPerInvocation="796" maxMicrosecondsPerInvocation="12045" standardDeviationMircosecondsPerInvocation="1740"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="81" invocations="101" avgMicrosecondsPerInvocation="803" maxMicrosecondsPerInvocation="8627" standardDeviationMircosecondsPerInvocation="1554"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="64" invocations="405" avgMicrosecondsPerInvocation="159" maxMicrosecondsPerInvocation="4920" standardDeviationMircosecondsPerInvocation="313"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="58" invocations="101" avgMicrosecondsPerInvocation="575" maxMicrosecondsPerInvocation="11134" standardDeviationMircosecondsPerInvocation="1338"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="57" invocations="405" avgMicrosecondsPerInvocation="141" maxMicrosecondsPerInvocation="6038" standardDeviationMircosecondsPerInvocation="368"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="56" invocations="405" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="8587" standardDeviationMircosecondsPerInvocation="487"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="54" invocations="405" avgMicrosecondsPerInvocation="135" maxMicrosecondsPerInvocation="1634" standardDeviationMircosecondsPerInvocation="244"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1493612377693" release="" codeSize="0" numClasses="0"/>
+    <AppVersion sequence="1" timestamp="1493612377693" release="" codeSize="1761" numClasses="26"/>
+  </History>
+</BugCollection>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>JunitTester.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">checkers</a> &gt; <span class="el_source">JunitTester.java</span></div><h1>JunitTester.java</h1><pre class="source lang-java linenums">package checkers;
+
+import java.awt.Point;
+import java.util.Vector;
+import java.util.concurrent.TimeUnit;
+
+import checkers.GameWin;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JunitTester.
+ */
+// class that Exposes Variables and methods for testing
+public class JunitTester {
+
+  /** The p 1. */
+<span class="fc" id="L17">  Point p1 = new Point(25, 25);</span>
+
+  /** The start test. */
+  public static StartPanel startTest;
+
+  /** The i checkers. */
+  public IntelliChecker iCheckers;
+
+  /** The c frame. */
+  public CheckerFrame cFrame;
+
+  /** The checkers. */
+  public static Checkers checkers;
+
+  /** The game win. */
+  public GameWin gameWin;
+
+  /** The can walk. */
+  public boolean canWalk;
+
+  /** The no moves. */
+  public boolean noMoves;
+
+  /** The get turn. */
+  public int getTurn;
+
+  /** The help. */
+  public Help help;
+
+  /** The test C frame. */
+  CheckerFrame testCFrame;
+
+  /**
+   * Instantiates a new junit tester.
+   */
+<span class="fc" id="L52">  public JunitTester() {</span>
+    // p1 = new Point(25, 25);
+    // gameWin = new GameWin(&quot;Test GameWin&quot;, p1);
+    // iCheckers = new IntelliChecker();
+    // checkers = new Checkers();
+<span class="fc" id="L57">  }</span>
+
+  /**
+   * New game win.
+   *
+   * @param str
+   *          the str
+   * @return the game win
+   */
+  public GameWin newGameWin(String str) {
+<span class="fc" id="L67">    return gameWin = new GameWin(str, p1);</span>
+  }
+
+  /**
+   * Gets the gamewin.
+   *
+   * @return the gamewin
+   */
+  public GameWin getGamewin() {
+<span class="fc" id="L76">    gameWin = new GameWin(&quot;Test GameWin&quot;, p1);</span>
+<span class="fc" id="L77">    return gameWin;</span>
+  }
+
+  /**
+   * Gets the checker frame.
+   *
+   * @return the checker frame
+   */
+  public CheckerFrame getCheckerFrame() {
+<span class="fc" id="L86">    return cFrame = new CheckerFrame();</span>
+  }
+
+  /**
+   * Play checker frame.
+   */
+  public void playCheckerFrame() {
+<span class="nc" id="L93">    checkers = new Checkers();</span>
+<span class="nc" id="L94">    checkers.toMove = checkers.redNormal;</span>
+<span class="nc" id="L95">    checkers.play();</span>
+<span class="nc" id="L96">  }</span>
+
+  /**
+   * Checks if is move legal.
+   *
+   * @param board
+   *          the board
+   * @param srtI
+   *          the srt I
+   * @param srtJ
+   *          the srt J
+   * @param endI
+   *          the end I
+   * @param endJ
+   *          the end J
+   * @param turn
+   *          the turn
+   * @return the int
+   */
+  public int isMoveLegal(int[][] board, int srtI, int srtJ, int endI, int endJ, int turn) {
+<span class="nc" id="L116">    return CheckerMove.isMoveLegal(board, srtI, srtJ, endI, endJ, turn);</span>
+  }
+
+  /**
+   * Checks if is can walk.
+   *
+   * @param board
+   *          the board
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @return true, if is can walk
+   */
+  public boolean isCanWalk(int[][] board, int i, int j) {
+<span class="fc" id="L131">    return CheckerMove.canWalk(board, i, j);</span>
+  }
+
+  /**
+   * Checks for no moves.
+   *
+   * @param board
+   *          the board
+   * @param i
+   *          the i
+   * @return true, if successful
+   */
+  public boolean hasNoMoves(int[][] board, int i) {
+<span class="fc" id="L144">    return CheckerMove.noMovesLeft(board, i);</span>
+  }
+
+  /**
+   * Gets the gets the turn.
+   *
+   * @param turn
+   *          the turn
+   * @return the gets the turn
+   */
+  public int getGetTurn(int turn) {
+<span class="fc" id="L155">    return GameEngine.getTurn(turn);</span>
+  }
+
+  /**
+   * Gets the inf.
+   *
+   * @return the inf
+   */
+  public int getInf() {
+<span class="fc" id="L164">    return GameEngine.inf;</span>
+  }
+
+  /**
+   * Gets the i checkers.
+   *
+   * @return the i checkers
+   */
+  public IntelliChecker getiCheckers() {
+<span class="nc" id="L173">    return iCheckers = new IntelliChecker();</span>
+  }
+
+  /**
+   * Gets the checkers.
+   *
+   * @return the checkers
+   */
+  public Checkers getCheckers() {
+<span class="fc" id="L182">    checkers = new Checkers();</span>
+<span class="fc" id="L183">    checkers.toMove = checkers.redNormal;</span>
+<span class="fc" id="L184">    return checkers;</span>
+  }
+
+  /**
+   * Gets the redking.
+   *
+   * @return the redking
+   */
+  public int getRedking() {
+<span class="fc" id="L193">    return Checkers.redKing;</span>
+  }
+
+  /**
+   * Gets the yellowking.
+   *
+   * @return the yellowking
+   */
+  public int getYellowking() {
+<span class="fc" id="L202">    return Checkers.yellowKing;</span>
+  }
+
+  /**
+   * Gets the red normal.
+   *
+   * @return the red normal
+   */
+  public int getRedNormal() {
+<span class="fc" id="L211">    return Checkers.redNormal;</span>
+  }
+
+  /**
+   * Gets the yellow normal.
+   *
+   * @return the yellow normal
+   */
+  public int getYellowNormal() {
+<span class="fc" id="L220">    return Checkers.yellowNormal;</span>
+  }
+
+  /**
+   * Gets the empty.
+   *
+   * @return the empty
+   */
+  public int getEmpty() {
+<span class="fc" id="L229">    return Checkers.empty;</span>
+  }
+
+  /**
+   * Gets the start test.
+   *
+   * @return the start test
+   */
+  public StartPanel getStartTest() {
+<span class="nc" id="L238">    return startTest = new StartPanel();</span>
+  }
+
+  /**
+   * Run checkers.
+   */
+  public void runCheckers() {
+<span class="nc" id="L245">    CFrameTest();</span>
+<span class="nc" id="L246">  }</span>
+
+  /**
+   * C frame test.
+   */
+  public static void CFrameTest() {
+<span class="nc" id="L252">    CheckerFrame testCFrame = new CheckerFrame();</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">    while (testCFrame.isVisible()) {</span>
+      try {
+<span class="nc" id="L255">        TimeUnit.SECONDS.sleep(60);</span>
+<span class="nc" id="L256">      } catch (InterruptedException e) {</span>
+      }
+    }
+<span class="nc" id="L259">    testCFrame = null;</span>
+<span class="nc" id="L260">  }</span>
+
+  /**
+   * Apply move.
+   *
+   * @param capBoardRed1
+   *          the cap board red 1
+   * @param startX1
+   *          the start X 1
+   * @param startY1
+   *          the start Y 1
+   * @param endX1
+   *          the end X 1
+   * @param endY1
+   *          the end Y 1
+   * @return the int
+   */
+  public int ApplyMove(int[][] capBoardRed1, int startX1, int startY1, int endX1, int endY1) {
+<span class="fc" id="L278">    return CheckerMove.ApplyMove(capBoardRed1, startX1, startY1, endX1, endY1);</span>
+  }
+
+  /**
+   * Checks if is move legal test.
+   *
+   * @param board
+   *          the board
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @param k
+   *          the k
+   * @param l
+   *          the l
+   * @param turn
+   *          the turn
+   * @return the int
+   */
+  public int isMoveLegalTest(int[][] board, int i, int j, int k, int l, int turn) {
+<span class="fc" id="L299">    return CheckerMove.isMoveLegal(board, i, j, k, l, turn);</span>
+  }
+
+  /**
+   * Checks if is possible square test.
+   *
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @return true, if is possible square test
+   */
+  public static boolean isPossibleSquareTest(int i, int j) {
+<span class="fc" id="L312">    Checkers testCheckers = new Checkers();</span>
+<span class="fc" id="L313">    boolean value = testCheckers.getIsPossibleSquare(i, j);</span>
+<span class="fc" id="L314">    testCheckers = null;</span>
+<span class="fc" id="L315">    return value;</span>
+  }
+
+  /**
+   * Gets the opponent test.
+   *
+   * @param turn
+   *          the turn
+   * @return the opponent test
+   */
+  public int getOpponentTest(int turn) {
+<span class="fc" id="L326">    return GameEngine.getOpponent(turn);</span>
+  }
+
+  /**
+   * Checks if is empty test.
+   *
+   * @param capBoardRedFlip
+   *          the cap board red flip
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @return true, if is empty test
+   */
+  public boolean isEmptyTest(int[][] capBoardRedFlip, int i, int j) {
+<span class="fc" id="L341">    return CheckerMove.getIsEmpty(capBoardRedFlip, i, j);</span>
+  }
+
+  /**
+   * Can capture test.
+   *
+   * @param capBoardRed
+   *          the cap board red
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @return true, if successful
+   */
+  public boolean canCaptureTest(int[][] capBoardRed, int i, int j) {
+<span class="fc" id="L356">    return CheckerMove.canCapture(capBoardRed, i, j);</span>
+  }
+
+  /**
+   * Eval test.
+   *
+   * @param capBoardRed
+   *          the cap board red
+   * @return the int
+   */
+  public int evalTest(int[][] capBoardRed) {
+<span class="fc" id="L367">    return GameEngine.eval(capBoardRed);</span>
+  }
+
+  /**
+   * Checks if is walk legal test.
+   *
+   * @param capBoardRed
+   *          the cap board red
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @param k
+   *          the k
+   * @param l
+   *          the l
+   * @return the int
+   */
+  public int isWalkLegalTest(int[][] capBoardRed, int i, int j, int k, int l) {
+<span class="fc" id="L386">    return CheckerMove.isWalkLegal(capBoardRed, i, j, k, l);</span>
+  }
+
+  /**
+   * In range test.
+   *
+   * @param i
+   *          the i
+   * @param j
+   *          the j
+   * @return true, if successful
+   */
+  public boolean inRangeTest(int i, int j) {
+<span class="fc" id="L399">    return CheckerMove.getInRange(i, j);</span>
+  }
+
+  /**
+   * Colour.
+   *
+   * @param piece
+   *          the piece
+   * @return the int
+   */
+  public int colour(int piece) {
+<span class="fc" id="L410">    return CheckerMove.colour(piece);</span>
+  }
+
+  /**
+   * Gets the index.
+   *
+   * @param actualX1
+   *          the actual X 1
+   * @param actualY1
+   *          the actual Y 1
+   * @return the index
+   */
+  public int[] getIndex(int actualX1, int actualY1) {
+<span class="fc" id="L423">    return CheckerMove.getIndex(actualX1, actualY1);</span>
+  }
+
+  /**
+   * Copy board.
+   *
+   * @param testBoard1
+   *          the test board 1
+   * @return the int[][]
+   */
+  public int[][] copyBoard(int[][] testBoard1) {
+<span class="fc" id="L434">    return GameEngine.copyBoard(testBoard1);</span>
+  }
+
+  /**
+   * New help.
+   *
+   * @return the help
+   */
+  public Help newHelp() {
+<span class="fc" id="L443">    return help = new Help();</span>
+  }
+
+  /**
+   * Move computer.
+   *
+   * @param capBoardRed
+   *          the cap board red
+   * @param com
+   *          the com
+   */
+  public void moveComputer(int[][] capBoardRed, int[] com) {
+<span class="fc" id="L455">    CheckerMove.moveComputer(capBoardRed, com);</span>
+<span class="fc" id="L456">  }</span>
+
+  /**
+   * Generate moves.
+   *
+   * @param board
+   *          the board
+   * @param turn
+   *          the turn
+   * @return the vector
+   */
+  public Vector generateMoves(int[][] board, int turn) {
+<span class="fc" id="L468">    return CheckerMove.generateMoves(board, turn);</span>
+  }
+
+  // public void forceCaptures(int[][] capBoardRed, int[] com) {
+  // CheckerMove.forceCapture();
+  // }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

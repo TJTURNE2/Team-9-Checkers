@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Checkers.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">checkers</a> &gt; <span class="el_source">Checkers.java</span></div><h1>Checkers.java</h1><pre class="source lang-java linenums">package checkers;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class Checkers extends JPanel
+    implements ActionListener, ItemListener, MouseMotionListener, MouseListener {
+
+  Graphics g;
+
+<span class="fc" id="L12">  JTextArea msg = new JTextArea(&quot;Start a new game... Yellow is to move first...&quot;);</span>
+  // ImageIcon redN=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/red.png&quot;)).getImage());//red_normal.jpg //OLD
+<span class="fc" id="L15">  ImageIcon redN = new ImageIcon(new ImageIcon(&quot;images/red_normal.png&quot;).getImage());// red_normal.jpg</span>
+                                                                                    // //FIXED -
+                                                                                    // Terry
+  // ImageIcon yellowN=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/blue.png&quot;)).getImage());//yellow_normal.jpg //OLD
+<span class="fc" id="L20">  ImageIcon yellowN = new ImageIcon(new ImageIcon(&quot;images/yellow_normal.png&quot;).getImage());// yellow_normal.jpg//FIXED</span>
+                                                                                          // - Terry
+  // ImageIcon redK=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/rs.jpg&quot;)).getImage());//red_king.jpg //OLD
+<span class="fc" id="L24">  ImageIcon redK = new ImageIcon(new ImageIcon(&quot;images/red_king.png&quot;).getImage());// red_king.jpg</span>
+                                                                                  // //FIXED - Terry
+  // ImageIcon yellowK=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/bs.jpg&quot;)).getImage());//yellow_king.jpg //OLD
+<span class="fc" id="L28">  ImageIcon yellowK = new ImageIcon(new ImageIcon(&quot;images/yellow_king.png&quot;).getImage());// yellow_king.jpg</span>
+                                                                                        // //FIXED -
+                                                                                        // Terry
+  // ImageIcon hlp=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/help.jpg&quot;)).getImage());//help.jpg //OLD
+<span class="fc" id="L33">  ImageIcon hlp = new ImageIcon(new ImageIcon(&quot;images/help.jpg&quot;).getImage());// help.jpg //FIXED -</span>
+                                                                             // Terry
+  // ImageIcon snp=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/sound.jpg&quot;)).getImage());//sound.jpg //OLD
+<span class="fc" id="L37">  ImageIcon snp = new ImageIcon(new ImageIcon(&quot;images/sound.jpg&quot;).getImage());// sound.jpg //FIXED -</span>
+                                                                              // Terry
+  // ImageIcon mup=new ImageIcon(new
+  // ImageIcon(getClass().getResource(&quot;/images/mute.jpg&quot;)).getImage());//mute.jpg //OLD
+<span class="fc" id="L41">  ImageIcon mup = new ImageIcon(new ImageIcon(&quot;images/mute.jpg&quot;).getImage());// mute.jpg //FIXED -</span>
+                                                                             // Terry
+
+<span class="fc" id="L44">  JButton nwB = new JButton(&quot;New Game&quot;);</span>
+<span class="fc" id="L45">  JButton ffB = new JButton(&quot;Forfeit&quot;);</span>
+<span class="fc" id="L46">  JButton unB = new JButton(&quot;Undo&quot;);</span>
+<span class="fc" id="L47">  JButton hlpB = new JButton(hlp);</span>
+<span class="fc" id="L48">  JButton snB = new JButton(snp);</span>
+
+<span class="fc" id="L50">  ButtonGroup players = new ButtonGroup();</span>
+<span class="fc" id="L51">  JRadioButton p1 = new JRadioButton(&quot;1-Player&quot;, true);</span>
+<span class="fc" id="L52">  JRadioButton p2 = new JRadioButton(&quot;2-Player&quot;, false);</span>
+
+<span class="fc" id="L54">  ButtonGroup colors = new ButtonGroup();</span>
+<span class="fc" id="L55">  JRadioButton c1 = new JRadioButton(&quot;Red&quot;, false);</span>
+<span class="fc" id="L56">  JRadioButton c2 = new JRadioButton(&quot;Yellow&quot;, true);</span>
+
+<span class="fc" id="L58">  Help hp = new Help();</span>
+
+<span class="fc" id="L60">  JLabel mode = new JLabel(&quot;Mode&quot;);</span>
+<span class="fc" id="L61">  JLabel col = new JLabel(&quot;Colour&quot;);</span>
+<span class="fc" id="L62">  JLabel diff = new JLabel(&quot;Difficulty Level&quot;);</span>
+<span class="fc" id="L63">  JLabel rp = new JLabel();</span>
+<span class="fc" id="L64">  JLabel rpt = new JLabel(&quot;Red Piece&quot;);</span>
+<span class="fc" id="L65">  JLabel bpt = new JLabel(&quot;Yellow Piece&quot;);</span>
+<span class="fc" id="L66">  JLabel bp = new JLabel();</span>
+<span class="fc" id="L67">  JLabel rk = new JLabel();</span>
+<span class="fc" id="L68">  JLabel rkt = new JLabel(&quot;Red King&quot;);</span>
+<span class="fc" id="L69">  JLabel bkt = new JLabel(&quot;Yellow King&quot;);</span>
+<span class="fc" id="L70">  JLabel bk = new JLabel();</span>
+
+<span class="fc" id="L72">  JComboBox level = new JComboBox();</span>
+
+  String selectedColor;
+  int selectedMode;
+  int difficulty;
+
+  static final int redNormal = 1;
+  static final int yellowNormal = 2;
+  static final int redKing = 3;
+  static final int yellowKing = 4;
+  static final int empty = 0;
+
+  int currType;
+  boolean movable;
+
+<span class="fc" id="L87">  int[][] board = new int[8][8];</span>
+
+<span class="fc" id="L89">  int[][] preBoard1 = new int[8][8]; // for undo</span>
+  int preToMove1;
+<span class="fc" id="L91">  int[][] preBoard2 = new int[8][8];</span>
+  int preToMove2;
+<span class="fc" id="L93">  int[][] preBoard3 = new int[8][8];</span>
+  int preToMove3;
+
+  int startX, startY, endX, endY;
+<span class="fc" id="L97">  boolean incomplete = false;</span>
+<span class="fc" id="L98">  boolean highlight = false;</span>
+
+<span class="fc" id="L100">  int toMove = redNormal;</span>
+<span class="fc" id="L101">  int loser = empty;</span>
+
+<span class="fc" id="L103">  static boolean silent = false;</span>
+
+  int undoCount;
+
+<span class="fc" id="L107">  int won = 0;</span>
+
+  Point winPoint;
+
+<span class="fc" id="L111">  Checkers() {</span>
+<span class="fc" id="L112">    setupGUI();</span>
+<span class="fc" id="L113">  }</span>
+
+  private void setupGUI() {
+<span class="fc" id="L116">    setLayout(null);</span>
+
+<span class="fc" id="L118">    nwB.setFocusPainted(false);</span>
+<span class="fc" id="L119">    ffB.setFocusPainted(false);</span>
+<span class="fc" id="L120">    unB.setFocusPainted(false);</span>
+<span class="fc" id="L121">    c1.setFocusPainted(false);</span>
+<span class="fc" id="L122">    c2.setFocusPainted(false);</span>
+<span class="fc" id="L123">    p1.setFocusPainted(false);</span>
+<span class="fc" id="L124">    p2.setFocusPainted(false);</span>
+<span class="fc" id="L125">    hlpB.setFocusPainted(false);</span>
+<span class="fc" id="L126">    snB.setFocusPainted(false);</span>
+
+<span class="fc" id="L128">    diff.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L129">    col.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L130">    mode.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L131">    c1.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L132">    c2.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L133">    p1.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L134">    p2.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L135">    nwB.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 11));</span>
+<span class="fc" id="L136">    ffB.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 11));</span>
+<span class="fc" id="L137">    unB.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 11));</span>
+<span class="fc" id="L138">    hlpB.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L139">    snB.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L140">    msg.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 11));</span>
+
+<span class="fc" id="L142">    nwB.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L143">    ffB.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L144">    unB.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L145">    hlpB.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L146">    snB.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L147">    nwB.addActionListener(this);</span>
+<span class="fc" id="L148">    ffB.addActionListener(this);</span>
+<span class="fc" id="L149">    unB.addActionListener(this);</span>
+<span class="fc" id="L150">    hlpB.addActionListener(this);</span>
+<span class="fc" id="L151">    snB.addActionListener(this);</span>
+<span class="fc" id="L152">    nwB.setBounds(405, 70, 95, 25);// 297</span>
+<span class="fc" id="L153">    this.add(nwB);</span>
+<span class="fc" id="L154">    ffB.setBounds(405, 350, 95, 25);</span>
+<span class="fc" id="L155">    ffB.setEnabled(false);</span>
+<span class="fc" id="L156">    this.add(ffB);</span>
+<span class="fc" id="L157">    unB.setBounds(405, 40, 95, 25); // FIXED - Steven</span>
+<span class="fc" id="L158">    this.add(unB); // FIXED - Steven</span>
+<span class="fc" id="L159">    hlpB.setBounds(415, 10, 25, 25);</span>
+<span class="fc" id="L160">    this.add(hlpB);</span>
+<span class="fc" id="L161">    snB.setBounds(460, 10, 25, 25);</span>
+<span class="fc" id="L162">    this.add(snB);</span>
+
+<span class="fc" id="L164">    mode.setBounds(420, 260, 80, 25);</span>
+<span class="fc" id="L165">    this.add(mode);</span>
+<span class="fc" id="L166">    p1.addActionListener(this);</span>
+<span class="fc" id="L167">    p2.addActionListener(this);</span>
+<span class="fc" id="L168">    p1.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L169">    p2.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L170">    players.add(p1);</span>
+<span class="fc" id="L171">    players.add(p2);</span>
+<span class="fc" id="L172">    p1.setBounds(415, 290, 80, 25);</span>
+<span class="fc" id="L173">    p2.setBounds(415, 318, 80, 25);</span>
+<span class="fc" id="L174">    this.add(p1);</span>
+<span class="fc" id="L175">    this.add(p2);</span>
+
+<span class="fc" id="L177">    col.setBounds(420, 100, 80, 25); // FIXED - Steven</span>
+<span class="fc" id="L178">    this.add(col); // FIXED - Steven</span>
+<span class="fc" id="L179">    c1.addActionListener(this);</span>
+<span class="fc" id="L180">    c2.addActionListener(this);</span>
+<span class="fc" id="L181">    c1.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L182">    c2.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L183">    colors.add(c1);</span>
+<span class="fc" id="L184">    colors.add(c2);</span>
+<span class="fc" id="L185">    c1.setBounds(415, 140, 80, 25); // FIXED - Steven</span>
+<span class="fc" id="L186">    c2.setBounds(415, 120, 80, 25); // FIXED - Steven</span>
+<span class="fc" id="L187">    this.add(c1); // FIXED - Steven</span>
+<span class="fc" id="L188">    this.add(c2); // FIXED - Steven</span>
+
+<span class="fc" id="L190">    level.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L191">    level.addItemListener(this);</span>
+<span class="fc" id="L192">    level.addItem(&quot;Easy&quot;);</span>
+<span class="fc" id="L193">    level.addItem(&quot;Fairly Easy&quot;);</span>
+<span class="fc" id="L194">    level.addItem(&quot;Moderate&quot;);</span>
+<span class="fc" id="L195">    level.addItem(&quot;Bit Difficult&quot;);</span>
+<span class="fc" id="L196">    level.addItem(&quot;Tough&quot;);</span>
+<span class="fc" id="L197">    level.setSelectedIndex(2);</span>
+<span class="fc" id="L198">    level.setBounds(415, 200, 80, 25);</span>
+<span class="fc" id="L199">    this.add(level);</span>
+
+<span class="fc" id="L201">    diff.setCursor(new Cursor(Cursor.HAND_CURSOR));</span>
+<span class="fc" id="L202">    diff.setBounds(415, 170, 100, 25);</span>
+<span class="fc" id="L203">    this.add(diff);</span>
+
+<span class="fc" id="L205">    this.addMouseListener(this);</span>
+<span class="fc" id="L206">    this.addMouseMotionListener(this);</span>
+
+<span class="fc" id="L208">    msg.setBounds(0, 405, 400, 20);</span>
+<span class="fc" id="L209">    msg.setEnabled(false);</span>
+<span class="fc" id="L210">    this.add(msg);</span>
+
+<span class="fc" id="L212">    rp.setBounds(10, 440, 50, 50);</span>
+<span class="fc" id="L213">    rp.setIcon(redN);</span>
+<span class="fc" id="L214">    this.add(rp);</span>
+<span class="fc" id="L215">    rpt.setBounds(60, 450, 60, 20);</span>
+<span class="fc" id="L216">    this.add(rpt);</span>
+
+<span class="fc" id="L218">    bp.setBounds(110, 440, 50, 50);</span>
+<span class="fc" id="L219">    bp.setIcon(yellowN);</span>
+<span class="fc" id="L220">    this.add(bp);</span>
+<span class="fc" id="L221">    bpt.setBounds(160, 450, 90, 20);</span>
+<span class="fc" id="L222">    this.add(bpt);</span>
+
+<span class="fc" id="L224">    rk.setBounds(250, 440, 50, 50);</span>
+<span class="fc" id="L225">    rk.setIcon(redK);</span>
+<span class="fc" id="L226">    this.add(rk);</span>
+<span class="fc" id="L227">    rkt.setBounds(305, 450, 60, 20);</span>
+<span class="fc" id="L228">    this.add(rkt);</span>
+
+<span class="fc" id="L230">    bk.setBounds(365, 440, 50, 50);</span>
+<span class="fc" id="L231">    bk.setIcon(yellowK);</span>
+<span class="fc" id="L232">    this.add(bk);</span>
+<span class="fc" id="L233">    bkt.setBounds(420, 450, 100, 20);</span>
+<span class="fc" id="L234">    this.add(bkt);</span>
+
+    // g=getGraphics();
+    // g.drawImage(redN.getImage(),30,450,this);
+
+<span class="fc" id="L239">  }</span>
+
+  /**
+   * Graphically creates the Checkers board with the checkers
+   * placed on the black squares.
+   * Bug presented: the checkers were previously placed in the
+   * white squares, and, in the game of Checkers, it is
+   * customary for the pieces to be placed on the darker colored
+   * squares.
+   * Bug fixed by: Cristi DeLeo
+   * Enhancement presented: there were two for-loops to create 
+   * the squares for a single color, and only one for-loop was
+   * needed (combine both fillRect statements, per color, under
+   * one for-loop).
+   * Bug fixed by: Cristi DeLeo
+   */
+  public void paintComponent(Graphics g) 
+  {
+<span class="nc" id="L257">    super.paintComponent(g);</span>
+    
+    // Sets color in-use to white
+<span class="nc" id="L260">    g.setColor(Color.white);</span>
+    
+    // Creates white squares with dimensions of 50 pixels x 50 pixels 
+<span class="nc bnc" id="L263" title="All 2 branches missed.">    for (int i = 0; i &lt; 4; i++)</span>
+    {
+<span class="nc bnc" id="L265" title="All 2 branches missed.">      for (int j = 0; j &lt; 4; j++) </span>
+      {
+<span class="nc" id="L267">        g.fillRect(100 * j, 100 * i, 50, 50);</span>
+<span class="nc" id="L268">        g.fillRect(50 + 100 * j, 50 + 100 * i, 50, 50);</span>
+      }
+    }
+
+    // Sets color in-use to black
+<span class="nc" id="L273">    g.setColor(Color.black);</span>
+    
+    // Creates black squares with dimensions of 50 pixels x 50 pixels
+    // that alternate in between the white squares, completing the
+    // black &amp; white checkered board display
+<span class="nc bnc" id="L278" title="All 2 branches missed.">    for (int i = 0; i &lt; 4; i++) </span>
+    {
+<span class="nc bnc" id="L280" title="All 2 branches missed.">      for (int j = 0; j &lt; 4; j++) </span>
+      {
+<span class="nc" id="L282">        g.fillRect(100 * j, 50 + 100 * i, 50, 50);</span>
+<span class="nc" id="L283">        g.fillRect(50 + 100 * j, 100 * i, 50, 50);</span>
+      }
+    }
+    
+<span class="nc" id="L287">    g.drawLine(0, 400, 400, 400);</span>
+<span class="nc" id="L288">    g.drawLine(400, 0, 400, 400);</span>
+    
+    // Displays the checkers on the board
+<span class="nc" id="L291">    drawCheckers();</span>
+<span class="nc" id="L292">  } // End of paintComponent(Graphics g)</span>
+
+  public void actionPerformed(ActionEvent e) {
+<span class="fc bfc" id="L295" title="All 2 branches covered.">    if (e.getActionCommand().equalsIgnoreCase(&quot;1-Player&quot;)) {</span>
+      // new PlaySound(&quot;src//sounds//option.wav&quot;).start(); //OLD
+<span class="fc" id="L297">      new PlaySound(&quot;sounds//option.wav&quot;).start(); // FIXED - Terry</span>
+<span class="fc" id="L298">      col.setEnabled(true);</span>
+<span class="fc" id="L299">      col.setVisible(true);</span>
+<span class="fc" id="L300">      diff.setEnabled(true);</span>
+<span class="fc" id="L301">      diff.setVisible(true);</span>
+<span class="fc" id="L302">      c1.setEnabled(true);</span>
+<span class="fc" id="L303">      c1.setVisible(true);</span>
+<span class="fc" id="L304">      c2.setEnabled(true);</span>
+<span class="fc" id="L305">      c2.setVisible(true);</span>
+<span class="fc" id="L306">      level.setEnabled(true);</span>
+<span class="fc" id="L307">      level.setVisible(true);</span>
+    }
+<span class="fc bfc" id="L309" title="All 2 branches covered.">    if (e.getActionCommand().equalsIgnoreCase(&quot;2-Player&quot;)) {</span>
+      // new PlaySound(&quot;src//sounds//option.wav&quot;).start(); //OLD
+<span class="fc" id="L311">      new PlaySound(&quot;sounds//option.wav&quot;).start(); // FIXED -Terry</span>
+<span class="fc" id="L312">      col.setEnabled(false);</span>
+<span class="fc" id="L313">      col.setVisible(false);</span>
+<span class="fc" id="L314">      diff.setEnabled(false);</span>
+<span class="fc" id="L315">      diff.setVisible(false);</span>
+<span class="fc" id="L316">      c1.setEnabled(false);</span>
+<span class="fc" id="L317">      c1.setVisible(false);</span>
+<span class="fc" id="L318">      c2.setEnabled(false);</span>
+<span class="fc" id="L319">      c2.setVisible(false);</span>
+<span class="fc" id="L320">      level.setEnabled(false);</span>
+<span class="fc" id="L321">      level.setVisible(false);</span>
+<span class="fc" id="L322">      c2.setSelected(true);</span>
+    }
+<span class="fc bfc" id="L324" title="All 2 branches covered.">    if (e.getActionCommand().equalsIgnoreCase(&quot;red&quot;)) {</span>
+      // new PlaySound(&quot;src//sounds//option.wav&quot;).start(); //OLD
+<span class="fc" id="L326">      new PlaySound(&quot;sounds//option.wav&quot;).start();// FIXED -Terry</span>
+    }
+<span class="fc bfc" id="L328" title="All 2 branches covered.">    if (e.getActionCommand().equalsIgnoreCase(&quot;yellow&quot;)) {</span>
+      // new PlaySound(&quot;src//sounds//option.wav&quot;).start(); //OLD
+<span class="fc" id="L330">      new PlaySound(&quot;sounds//option.wav&quot;).start();// FIXED -Terry</span>
+    }
+<span class="pc bpc" id="L332" title="1 of 2 branches missed.">    if (e.getActionCommand().equalsIgnoreCase(&quot;New Game&quot;)) {</span>
+      // new PlaySound(&quot;src//sounds//button.wav&quot;).start(); //OLD
+<span class="nc" id="L334">      new PlaySound(&quot;sounds//button.wav&quot;).start();// FIXED -Terry</span>
+<span class="nc" id="L335">      nwB.setEnabled(false);</span>
+<span class="nc" id="L336">      col.setEnabled(false);</span>
+<span class="nc" id="L337">      diff.setEnabled(false);</span>
+<span class="nc" id="L338">      c1.setEnabled(false);</span>
+<span class="nc" id="L339">      c2.setEnabled(false);</span>
+<span class="nc" id="L340">      level.setEnabled(false);</span>
+<span class="nc" id="L341">      mode.setEnabled(false);</span>
+<span class="nc" id="L342">      p1.setEnabled(false);</span>
+<span class="nc" id="L343">      p2.setEnabled(false);</span>
+<span class="nc" id="L344">      ffB.setEnabled(true);</span>
+<span class="nc" id="L345">      newGame();</span>
+    }
+<span class="pc bpc" id="L347" title="1 of 2 branches missed.">    if(e.getActionCommand().equalsIgnoreCase(&quot;Forfeit&quot;)) {</span>
+<span class="nc" id="L348">        new PlaySound(&quot;sounds//button.wav&quot;).start();</span>
+<span class="nc" id="L349">        loser = toMove;</span>
+<span class="nc" id="L350">        showStatus();</span>
+    }
+<span class="pc bpc" id="L352" title="1 of 4 branches missed.">    if (e.getActionCommand().equalsIgnoreCase(&quot;Undo&quot;) &amp;&amp; undoCount &gt; 3) {</span>
+      // new PlaySound(&quot;src//sounds//button.wav&quot;).start(); //OLD
+<span class="nc" id="L354">      new PlaySound(&quot;sounds//button.wav&quot;).start();// FIXED -Terry</span>
+<span class="nc" id="L355">      undo();</span>
+    }
+<span class="pc bpc" id="L357" title="1 of 2 branches missed.">    if (e.getSource() == hlpB) {</span>
+      // new PlaySound(&quot;src//sounds//button.wav&quot;).start(); //OLD
+<span class="nc" id="L359">      new PlaySound(&quot;sounds//button.wav&quot;).start();// FIXED -Terry</span>
+<span class="nc" id="L360">      hp.setVisible(true);</span>
+    }
+<span class="pc bpc" id="L362" title="1 of 2 branches missed.">    if (e.getSource() == snB) {</span>
+<span class="nc bnc" id="L363" title="All 2 branches missed.">      if (silent) {</span>
+<span class="nc" id="L364">        snB.setIcon(snp);</span>
+<span class="nc" id="L365">        silent = false;</span>
+        // new PlaySound(&quot;src//sounds//button.wav&quot;).start(); //OLD
+<span class="nc" id="L367">        new PlaySound(&quot;sounds//button.wav&quot;).start();// FIXED -Terry</span>
+<span class="nc" id="L368">      } else {</span>
+<span class="nc" id="L369">        snB.setIcon(mup);</span>
+<span class="nc" id="L370">        silent = true;</span>
+      }
+    }
+<span class="fc" id="L373">  }</span>
+
+  public void newGame() { // creates a new game
+
+    // Yellow takes the first move in both modes
+    // If someone wants to move secondly, red has to be selected
+    // Yellow is always at the bottom of the board
+
+<span class="nc bnc" id="L381" title="All 2 branches missed.">    selectedColor = c1.isSelected() ? &quot;red&quot; : &quot;yellow&quot;;</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">    selectedMode = p1.isSelected() ? 1 : 2;</span>
+<span class="nc" id="L383">    difficulty = level.getSelectedIndex();</span>
+
+<span class="nc" id="L385">    unB.setEnabled(false);</span>
+
+<span class="nc" id="L387">    won = 0;</span>
+
+    // undoCount = 0; // OLD - Steven
+<span class="nc" id="L390">    undoCount = 2; // FIXED - Steven</span>
+
+<span class="nc" id="L392">    highlight = false;</span>
+<span class="nc" id="L393">    incomplete = false;</span>
+
+<span class="nc" id="L395">    loser = empty;</span>
+
+    // Initiates an new board
+<span class="nc bnc" id="L398" title="All 2 branches missed.">    for (int i = 0; i &lt; 8; i++)</span>
+    {
+<span class="nc bnc" id="L400" title="All 2 branches missed.">      for (int j = 0; j &lt; 8; j++)</span>
+<span class="nc" id="L401">        board[i][j] = empty;</span>
+
+<span class="nc bnc" id="L403" title="All 2 branches missed.">      for (int j = 0; j &lt; 3; j++)</span>
+<span class="nc bnc" id="L404" title="All 2 branches missed.">        if (isPossibleSquare(i, j))</span>
+<span class="nc" id="L405">          board[i][j] = redNormal;</span>
+
+<span class="nc bnc" id="L407" title="All 2 branches missed.">      for (int j = 5; j &lt; 8; j++)</span>
+<span class="nc bnc" id="L408" title="All 2 branches missed.">        if (isPossibleSquare(i, j))</span>
+<span class="nc" id="L409">          board[i][j] = yellowNormal;</span>
+    }
+
+<span class="nc" id="L412">    toMove = yellowNormal;</span>
+
+<span class="nc bnc" id="L414" title="All 2 branches missed.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="nc" id="L415">      System.arraycopy(board[i], 0, preBoard1[i], 0, 8); // for undo</span>
+<span class="nc" id="L416">      System.arraycopy(preBoard1[i], 0, preBoard2[i], 0, 8);</span>
+<span class="nc" id="L417">      System.arraycopy(preBoard2[i], 0, preBoard3[i], 0, 8);</span>
+<span class="nc" id="L418">      preToMove3 = preToMove2 = preToMove1 = toMove;</span>
+    }
+
+<span class="nc bnc" id="L421" title="All 4 branches missed.">    if (selectedMode == 1 &amp;&amp; selectedColor.equalsIgnoreCase(&quot;yellow&quot;)) {</span>
+<span class="nc" id="L422">      undoCount = 1; // FIXED - Steven</span>
+<span class="nc" id="L423">      this.toMove = redNormal;</span>
+<span class="nc" id="L424">      play();</span>
+<span class="nc bnc" id="L425" title="All 4 branches missed.">    } else if (selectedMode == 1 &amp;&amp; selectedColor.equalsIgnoreCase(&quot;red&quot;)) {</span>
+<span class="nc" id="L426">      undoCount = 1; // FIXED - Steven</span>
+<span class="nc" id="L427">      this.toMove = redNormal;</span>
+<span class="nc" id="L428">      play();</span>
+    }
+
+<span class="nc" id="L431">    update(getGraphics());</span>
+<span class="nc" id="L432">    drawCheckers();</span>
+<span class="nc" id="L433">    showStatus();</span>
+<span class="nc" id="L434">  }</span>
+
+  /**
+   * Paints the checker pieces on the board.
+   * Enhancement presented: Pieces were not centered horizontally or vertically.
+   * Enhanced by: Cristi DeLeo
+   */
+  public void drawCheckers() 
+  {
+<span class="fc" id="L443">    g = getGraphics();</span>
+
+<span class="fc bfc" id="L445" title="All 2 branches covered.">    for (int i = 0; i &lt; 8; i++) </span>
+    {
+<span class="fc bfc" id="L447" title="All 2 branches covered.">      for (int j = 0; j &lt; 8; j++) </span>
+      {
+<span class="pc bpc" id="L449" title="1 of 2 branches missed.">        if (board[i][j] == redNormal) // Executes if current space contains a normal red piece</span>
+        {
+          //g.drawImage(redN.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the normal red pieces centered horizontally and vertically in squares
+<span class="nc" id="L453">          g.drawImage(redN.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi</span>
+<span class="nc" id="L454">        }  </span>
+<span class="pc bpc" id="L455" title="1 of 2 branches missed.">        else if (board[i][j] == yellowNormal) // Executes if current space contains a normal yellow piece</span>
+        {
+          //g.drawImage(yellowN.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the normal yellow pieces centered horizontally and vertically in squares
+<span class="nc" id="L459">          g.drawImage(yellowN.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi</span>
+<span class="nc" id="L460">        }</span>
+<span class="pc bpc" id="L461" title="1 of 2 branches missed.">        else if (board[i][j] == redKing) // Executes if current space contains a King red piece</span>
+        {
+          //g.drawImage(redK.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the King red pieces centered horizontally and vertically in squares
+<span class="nc" id="L465">          g.drawImage(redK.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi</span>
+<span class="nc" id="L466">        }</span>
+<span class="pc bpc" id="L467" title="1 of 2 branches missed.">        else if (board[i][j] == yellowKing) // Executes if current space contains a King yellow piece</span>
+        {
+          //g.drawImage(yellowK.getImage(), i * 50, j * 50, this); // OLD
+          // Displays the King yellow pieces centered horizontally and vertically in squares
+<span class="nc" id="L471">          g.drawImage(yellowK.getImage(), (i * 50) + 5, (j * 50) + 5, this); // Centered in box - Cristi</span>
+        }
+      }
+    }
+<span class="fc" id="L475">  } // End of drawCheckers()</span>
+
+  public void undo() { // undo function
+<span class="nc" id="L478">    undoCount = 1;</span>
+<span class="nc bnc" id="L479" title="All 2 branches missed.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="nc" id="L480">      System.arraycopy(preBoard3[i], 0, board[i], 0, 8); // copies previous board</span>
+    }
+    // toMove = preToMove3; // OLD - Steven
+<span class="nc" id="L483">    drawCheckers();</span>
+<span class="nc" id="L484">    update(g);</span>
+
+<span class="nc bnc" id="L486" title="All 2 branches missed.">    if (selectedMode == 1) {</span>
+<span class="nc" id="L487">      toMove = preToMove3; // FIXED - Steven</span>
+<span class="nc" id="L488">      play();</span>
+<span class="nc" id="L489">    } else {</span>
+<span class="nc" id="L490">      toMove = preToMove2; // FIXED - Steven</span>
+    }
+<span class="nc" id="L492">  }</span>
+
+  public void play() {
+
+<span class="nc" id="L496">    undoCount++;</span>
+
+<span class="nc bnc" id="L498" title="All 2 branches missed.">    if (undoCount &gt; 3) {</span>
+<span class="nc bnc" id="L499" title="All 4 branches missed.">      if (selectedMode == 1 &amp;&amp; difficulty != 4)</span>
+<span class="nc" id="L500">        unB.setEnabled(true);</span>
+<span class="nc bnc" id="L501" title="All 2 branches missed.">      else if (selectedMode == 2)</span>
+<span class="nc" id="L502">        unB.setEnabled(true);</span>
+    }
+
+<span class="nc bnc" id="L505" title="All 2 branches missed.">    for (int i = 0; i &lt; 8; i++) {</span>
+<span class="nc" id="L506">      System.arraycopy(preBoard2[i], 0, preBoard3[i], 0, 8);</span>
+<span class="nc" id="L507">      System.arraycopy(preBoard1[i], 0, preBoard2[i], 0, 8);</span>
+<span class="nc" id="L508">      System.arraycopy(board[i], 0, preBoard1[i], 0, 8);</span>
+    }
+<span class="nc" id="L510">    preToMove3 = preToMove2;</span>
+<span class="nc" id="L511">    preToMove2 = preToMove1;</span>
+<span class="nc" id="L512">    preToMove1 = toMove;</span>
+    int tempScore;
+<span class="nc" id="L514">    int[] result = new int[4];</span>
+<span class="nc" id="L515">    int[] counter = new int[1];</span>
+
+<span class="nc" id="L517">    counter[0] = 0;</span>
+
+<span class="nc bnc" id="L519" title="All 4 branches missed.">    if (this.toMove == yellowNormal &amp;&amp; selectedMode == 1</span>
+<span class="nc bnc" id="L520" title="All 2 branches missed.">        &amp;&amp; selectedColor.equalsIgnoreCase(&quot;yellow&quot;)) {</span>
+<span class="nc" id="L521">      this.toMove = redNormal;</span>
+<span class="nc" id="L522">      showStatus();</span>
+<span class="nc" id="L523">      tempScore = GameEngine.MinMax(board, 0, difficulty + 2, result, this.toMove, counter);</span>
+
+<span class="nc bnc" id="L525" title="All 4 branches missed.">      if (result[0] == 0 &amp;&amp; result[1] == 0)</span>
+<span class="nc" id="L526">        loser = redNormal;</span>
+      else {
+<span class="nc" id="L528">        CheckerMove.moveComputer(board, result);</span>
+
+<span class="nc bnc" id="L530" title="All 2 branches missed.">        if (loser == empty) {</span>
+          // new PlaySound(&quot;src//sounds//comPlay.wav&quot;).start(); //OLD
+<span class="nc" id="L532">          new PlaySound(&quot;sounds//comPlay.wav&quot;).start(); // FIXED -Terry</span>
+<span class="nc" id="L533">          play();</span>
+        }
+<span class="nc" id="L535">        this.toMove = yellowNormal;</span>
+      }
+<span class="nc" id="L537">    }</span>
+
+<span class="nc bnc" id="L539" title="All 4 branches missed.">    else if (this.toMove == redNormal &amp;&amp; selectedMode == 1</span>
+<span class="nc bnc" id="L540" title="All 2 branches missed.">        &amp;&amp; selectedColor.equalsIgnoreCase(&quot;red&quot;)) {</span>
+<span class="nc" id="L541">      this.toMove = yellowNormal;</span>
+<span class="nc" id="L542">      showStatus();</span>
+<span class="nc" id="L543">      tempScore = GameEngine.MinMax(board, 0, difficulty + 2, result, this.toMove, counter);</span>
+
+<span class="nc bnc" id="L545" title="All 4 branches missed.">      if (result[0] == 0 &amp;&amp; result[1] == 0)</span>
+<span class="nc" id="L546">        loser = yellowNormal;</span>
+      else {
+<span class="nc" id="L548">        CheckerMove.moveComputer(board, result);</span>
+<span class="nc bnc" id="L549" title="All 2 branches missed.">        if (loser == empty) {</span>
+          // new PlaySound(&quot;src//sounds//comPlay.wav&quot;).start(); //OLD
+<span class="nc" id="L551">          new PlaySound(&quot;sounds//comPlay.wav&quot;).start(); // FIXED -Terry</span>
+<span class="nc" id="L552">          play();</span>
+        }
+
+<span class="nc" id="L555">        this.toMove = redNormal;</span>
+      }
+<span class="nc" id="L557">    } else {</span>
+<span class="nc bnc" id="L558" title="All 2 branches missed.">      if (this.toMove == redNormal)</span>
+<span class="nc" id="L559">        this.toMove = yellowNormal;</span>
+      else
+<span class="nc" id="L561">        this.toMove = redNormal;</span>
+    }
+<span class="nc bnc" id="L563" title="All 2 branches missed.">    if (CheckerMove.noMovesLeft(board, this.toMove)) //</span>
+    {
+<span class="nc bnc" id="L565" title="All 2 branches missed.">      if (this.toMove == redNormal)</span>
+<span class="nc" id="L566">        loser = redNormal;</span>
+      else
+<span class="nc" id="L568">        loser = yellowNormal;</span>
+    }
+
+<span class="nc" id="L571">    showStatus();</span>
+<span class="nc" id="L572">  }</span>
+
+  private boolean isPossibleSquare(int i, int j) 
+  {
+<span class="fc bfc" id="L576" title="All 2 branches covered.">    return (i + j) % 2 == 1;</span>
+  }
+
+  public void itemStateChanged(ItemEvent e) {
+<span class="fc" id="L580">  }</span>
+
+  public void mousePressed(MouseEvent e) {
+<span class="pc bpc" id="L583" title="1 of 2 branches missed.">	if (won == 1)</span>
+<span class="nc" id="L584">		return;</span>
+
+<span class="fc" id="L586">    int x = e.getX();</span>
+<span class="fc" id="L587">    int y = e.getY();</span>
+<span class="fc" id="L588">    int[] square = new int[2];</span>
+
+<span class="pc bpc" id="L590" title="4 of 8 branches missed.">    if (x &gt;= 0 &amp;&amp; x &lt;= 500 &amp;&amp; y &lt;= 500 &amp;&amp; y &gt;= 0)</span>
+<span class="fc" id="L591">      square = CheckerMove.getIndex(x, y);</span>
+
+<span class="pc bpc" id="L593" title="1 of 2 branches missed.">    if (toMove == Checkers.redNormal</span>
+<span class="pc bpc" id="L594" title="1 of 2 branches missed.">        &amp;&amp; (board[square[0]][square[1]] == Checkers.redNormal</span>
+<span class="pc bpc" id="L595" title="1 of 2 branches missed.">            || board[square[0]][square[1]] == Checkers.redKing)</span>
+<span class="pc bpc" id="L596" title="3 of 4 branches missed.">        || toMove == Checkers.yellowNormal &amp;&amp; (board[square[0]][square[1]] == Checkers.yellowNormal</span>
+<span class="nc bnc" id="L597" title="All 2 branches missed.">            || board[square[0]][square[1]] == Checkers.yellowKing)) {</span>
+
+      // we don't want to lose the incomplete move info:
+      // only set new start variables if !incomplete
+<span class="nc bnc" id="L601" title="All 2 branches missed.">      if (!incomplete) {</span>
+<span class="nc" id="L602">        highlight = true;</span>
+<span class="nc" id="L603">        startX = square[0];</span>
+<span class="nc" id="L604">        startY = square[1];</span>
+<span class="nc" id="L605">        update(g);</span>
+<span class="nc" id="L606">        g = getGraphics();</span>
+<span class="nc" id="L607">        g.setColor(new Color(255, 100, 30));</span>
+<span class="nc" id="L608">        g.fillRect(50 * square[0], 50 * square[1], 50, 50);</span>
+<span class="nc" id="L609">        drawCheckers();</span>
+        // new PlaySound(&quot;src//sounds//clickChecker.wav&quot;).start(); //OLD
+<span class="nc" id="L611">        new PlaySound(&quot;sounds//clickChecker.wav&quot;).start(); // FIXED -Terry</span>
+      }
+<span class="pc bpc" id="L613" title="3 of 4 branches missed.">    } else if (highlight &amp;&amp; (float) (square[0] + square[1]) / 2 != (square[0] + square[1]) / 2) {</span>
+<span class="nc" id="L614">      endX = square[0];</span>
+<span class="nc" id="L615">      endY = square[1];</span>
+<span class="nc" id="L616">      int status = CheckerMove.ApplyMove(board, startX, startY, endX, endY);</span>
+<span class="nc bnc" id="L617" title="All 3 branches missed.">      switch (status) {</span>
+      case CheckerMove.legalMove:
+<span class="nc" id="L619">        incomplete = false;</span>
+<span class="nc" id="L620">        highlight = false;</span>
+<span class="nc" id="L621">        play();</span>
+<span class="nc" id="L622">        update(g);</span>
+<span class="nc" id="L623">        drawCheckers();</span>
+<span class="nc" id="L624">        break;</span>
+      case CheckerMove.incompleteMove:
+<span class="nc" id="L626">        incomplete = true;</span>
+<span class="nc" id="L627">        highlight = true;</span>
+        // the ending square is now starting square for the next capture
+<span class="nc" id="L629">        startX = square[0];</span>
+<span class="nc" id="L630">        startY = square[1];</span>
+<span class="nc" id="L631">        update(g);</span>
+<span class="nc" id="L632">        g = getGraphics();</span>
+<span class="nc" id="L633">        g.setColor(new Color(255, 100, 30));</span>
+<span class="nc" id="L634">        g.fillRect(50 * square[0], 50 * square[1], 50, 50);</span>
+<span class="nc" id="L635">        drawCheckers();</span>
+        break;
+      }
+    }
+<span class="fc" id="L639">  }</span>
+
+  public void mouseReleased(MouseEvent e) {
+<span class="fc" id="L642">  }</span>
+
+  public void mouseDragged(MouseEvent e) {
+<span class="fc" id="L645">  }</span>
+
+  public void mouseMoved(MouseEvent e) {
+<span class="fc" id="L648">  }</span>
+
+  public void mouseClicked(MouseEvent e) {
+<span class="fc" id="L651">  }</span>
+
+  public void mouseEntered(MouseEvent e) {
+<span class="fc" id="L654">  }</span>
+
+  public void mouseExited(MouseEvent e) {
+<span class="fc" id="L657">  }</span>
+
+  /**
+   * Displays messages in the status bar and generates the &quot;Winner&quot; window
+   * upon the winning/losing of a game.
+   * Bug presented:  New game automatically started with the settings of the
+   * previous game.  This did not allow the user to change settings for the
+   * next game, nor view the ending status of the board.
+   * Bug fixed by:  Cristi DeLeo
+   */
+  private void showStatus() 
+  {
+<span class="nc bnc" id="L669" title="All 2 branches missed.">    if (this.toMove == redNormal) </span>
+    {
+<span class="nc" id="L671">      msg.setText(&quot;Red to move&quot;);</span>
+<span class="nc" id="L672">    } </span>
+    else 
+    {
+<span class="nc" id="L675">      msg.setText(&quot;Yellow to move&quot;);</span>
+    }
+
+<span class="nc bnc" id="L678" title="All 4 branches missed.">    if (loser == redNormal &amp;&amp; won == 0) </span>
+    {
+<span class="nc" id="L680">      msg.setText(&quot;Yellow Wins!&quot;);</span>
+      try 
+      {
+<span class="nc" id="L683">        Thread.sleep(150);</span>
+<span class="nc" id="L684">      } </span>
+<span class="nc" id="L685">      catch (InterruptedException e) </span>
+      {
+<span class="nc" id="L687">        e.printStackTrace();</span>
+      }
+<span class="nc" id="L689">      new GameWin(&quot;Yellow&quot;, this.getLocationOnScreen());</span>
+<span class="nc" id="L690">      won = 1;</span>
+      //undoCount = 0;
+      //newGame(); // OLD - Removed to display board after game ends, user should have to click New Game for new game to start - Cristi
+<span class="nc" id="L693">    } </span>
+<span class="nc bnc" id="L694" title="All 4 branches missed.">    else if (loser == yellowNormal &amp;&amp; won == 0) </span>
+    {
+<span class="nc" id="L696">      msg.setText(&quot;Red Wins!&quot;);</span>
+      try 
+      {
+<span class="nc" id="L699">        Thread.sleep(150);</span>
+<span class="nc" id="L700">      } </span>
+<span class="nc" id="L701">      catch (InterruptedException e) </span>
+      {
+<span class="nc" id="L703">        e.printStackTrace();</span>
+      }
+<span class="nc" id="L705">      new GameWin(&quot;Red&quot;, this.getLocationOnScreen());</span>
+<span class="nc" id="L706">      won = 1;</span>
+      //undoCount = 0;
+      //newGame(); // OLD - Removed to display board after game ends, user should have to click New Game for new game to start - Cristi
+    }
+<span class="nc bnc" id="L710" title="All 2 branches missed.">    if(won == 1) {</span>
+<span class="nc" id="L711">        nwB.setEnabled(true);</span>
+<span class="nc" id="L712">        col.setEnabled(true);</span>
+<span class="nc" id="L713">        diff.setEnabled(true);</span>
+<span class="nc" id="L714">        c1.setEnabled(true);</span>
+<span class="nc" id="L715">        c2.setEnabled(true);</span>
+<span class="nc" id="L716">        level.setEnabled(true);</span>
+<span class="nc" id="L717">        mode.setEnabled(true);</span>
+<span class="nc" id="L718">        p1.setEnabled(true);</span>
+<span class="nc" id="L719">        p2.setEnabled(true);</span>
+<span class="nc" id="L720">        ffB.setEnabled(false);</span>
+<span class="nc" id="L721">        undoCount = 0;</span>
+    }
+<span class="nc" id="L723">  } // End of showStatus()</span>
+
+  // The AWT invokes the update() method in response to the repaint() method
+  // calls that are made as a checker is dragged. The default implementation
+  // of this method, which is inherited from the Container class, clears the
+  // applet's drawing area to the background color prior to calling paint().
+  // This clearing followed by drawing causes flicker. CheckerDrag overrides
+  // update() to prevent the background from being cleared, which eliminates
+  // the flicker.
+  @Override
+  public void update(Graphics g) {
+<span class="nc" id="L734">    paint(g);</span>
+<span class="nc" id="L735">  }</span>
+
+  //////////// TEST CODE////////////////////
+  public boolean getIsPossibleSquare(int i, int j) {
+<span class="fc" id="L739">    return isPossibleSquare(i, j);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CanCaptureTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (May 1, 2017 9:35:37 PM)</a> &gt; <a href="../../index.html" class="el_group">Checkers</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">junit</a> &gt; <span class="el_source">CanCaptureTest.java</span></div><h1>CanCaptureTest.java</h1><pre class="source lang-java linenums">/*
+ * 
+ */
+package junit;
+
+
+import org.junit.Test;
+import checkers.JunitTester;
+import static org.junit.Assert.*;
+
+/**
+ * The Class CanCaptureTest.
+ */
+<span class="fc" id="L14">public class CanCaptureTest {</span>
+		
+	/** The Junit tester. */
+<span class="fc" id="L17">	JunitTester JunitTester =  new JunitTester();</span>
+	
+		/** The cap board red. */
+<span class="fc" id="L20">		int[][] capBoardRed = {</span>
+<span class="fc" id="L21">				   {0, 0, 2, 0, 0, 4, 0, 2}, </span>
+<span class="fc" id="L22">				   {0, 2, 0, 0, 4, 0, 1, 0}, </span>
+<span class="fc" id="L23">				   {1, 0, 0, 1, 0, 0, 0, 2}, </span>
+<span class="fc" id="L24">				   {0, 2, 0, 0, 4, 0, 0, 0}, </span>
+<span class="fc" id="L25">				   {0, 2, 0, 1, 0, 0, 0, 0}, </span>
+<span class="fc" id="L26">				   {1, 0, 1, 0, 0, 0, 0, 2}, </span>
+<span class="fc" id="L27">				   {0, 2, 0, 4, 1, 0, 1, 0}, </span>
+<span class="fc" id="L28">				   {0, 0, 2, 0, 2, 4, 0, 2}};</span>
+		
+		/** The cap board yellow. */
+<span class="fc" id="L31">		int[][] capBoardYellow = {</span>
+<span class="fc" id="L32">				   {1, 0, 3, 0, 0, 1, 0, 0}, </span>
+<span class="fc" id="L33">				   {0, 2, 0, 3, 0, 0, 1, 0}, </span>
+<span class="fc" id="L34">				   {1, 0, 0, 0, 2, 0, 0, 2}, </span>
+<span class="fc" id="L35">				   {0, 0, 0, 3, 0, 0, 1, 0}, </span>
+<span class="fc" id="L36">				   {0, 0, 0, 0, 2, 0, 1, 0}, </span>
+<span class="fc" id="L37">				   {1, 0, 0, 0, 0, 2, 0, 2}, </span>
+<span class="fc" id="L38">				   {0, 2, 0, 2, 3, 0, 1, 0}, </span>
+<span class="fc" id="L39">				   {1, 0, 3, 1, 0, 1, 0, 0}};</span>
+		
+		/** The red king board. */
+<span class="fc" id="L42">		int[][] redKingBoard = {</span>
+<span class="fc" id="L43">				   {0, 0, 2, 0, 0, 2, 0, 2}, </span>
+<span class="fc" id="L44">				   {0, 2, 0, 0, 0, 2, 3, 0}, </span>
+<span class="fc" id="L45">				   {3, 0, 0, 0, 0, 0, 2, 2}, </span>
+<span class="fc" id="L46">				   {0, 2, 0, 0, 0, 0, 0, 3}, </span>
+<span class="fc" id="L47">				   {3, 0, 0, 0, 0, 0, 2, 0}, </span>
+<span class="fc" id="L48">				   {2, 2, 0, 0, 0, 0, 0, 3}, </span>
+<span class="fc" id="L49">				   {0, 3, 2, 0, 0, 0, 2, 0}, </span>
+<span class="fc" id="L50">				   {2, 0, 2, 0, 0, 2, 0, 0}};</span>
+		
+		/** The red kingvs king board. */
+<span class="fc" id="L53">		int[][] redKingvsKingBoard = {</span>
+<span class="fc" id="L54">				   {0, 0, 4, 0, 0, 4, 0, 4}, </span>
+<span class="fc" id="L55">				   {0, 4, 0, 0, 0, 4, 3, 0}, </span>
+<span class="fc" id="L56">				   {3, 0, 0, 0, 0, 0, 4, 4}, </span>
+<span class="fc" id="L57">				   {0, 4, 0, 0, 0, 0, 0, 3}, </span>
+<span class="fc" id="L58">				   {3, 0, 0, 0, 0, 0, 4, 0}, </span>
+<span class="fc" id="L59">				   {4, 4, 0, 0, 0, 0, 0, 3}, </span>
+<span class="fc" id="L60">				   {0, 3, 4, 0, 0, 0, 4, 0}, </span>
+<span class="fc" id="L61">				   {4, 0, 4, 0, 0, 4, 0, 0}};</span>
+		
+		/** The yellow king board. */
+<span class="fc" id="L64">		int[][] yellowKingBoard = {</span>
+<span class="fc" id="L65">				   {0, 0, 1, 0, 0, 1, 0, 1}, </span>
+<span class="fc" id="L66">				   {0, 1, 0, 0, 0, 1, 4, 0}, </span>
+<span class="fc" id="L67">				   {4, 0, 0, 0, 0, 0, 1, 1}, </span>
+<span class="fc" id="L68">				   {0, 1, 0, 0, 0, 0, 0, 4}, </span>
+<span class="fc" id="L69">				   {4, 0, 0, 0, 0, 0, 1, 0}, </span>
+<span class="fc" id="L70">				   {1, 1, 0, 0, 0, 0, 0, 4}, </span>
+<span class="fc" id="L71">				   {0, 4, 1, 0, 0, 0, 1, 0}, </span>
+<span class="fc" id="L72">				   {1, 0, 1, 0, 0, 1, 0, 0}};</span>
+		
+		/** The yellow kingvs king board. */
+<span class="fc" id="L75">		int[][] yellowKingvsKingBoard = {</span>
+<span class="fc" id="L76">				   {0, 0, 3, 0, 0, 3, 0, 3}, </span>
+<span class="fc" id="L77">				   {0, 3, 0, 0, 0, 3, 4, 0}, </span>
+<span class="fc" id="L78">				   {4, 0, 0, 0, 0, 0, 3, 3}, </span>
+<span class="fc" id="L79">				   {0, 3, 0, 0, 0, 0, 0, 4}, </span>
+<span class="fc" id="L80">				   {4, 0, 0, 0, 0, 0, 3, 0}, </span>
+<span class="fc" id="L81">				   {3, 3, 0, 0, 0, 0, 0, 4}, </span>
+<span class="fc" id="L82">				   {0, 4, 3, 0, 0, 0, 3, 0}, </span>
+<span class="fc" id="L83">				   {3, 0, 3, 0, 0, 3, 0, 0}};</span>
+
+	/**
+	 * Cap test 1.
+	 */
+	//normal red  op1 = capture out of bounds(y)  op2 = capture out of bounds(x &amp; y)
+	@Test
+	public void capTest1() {
+<span class="fc" id="L91">		assertFalse(JunitTester.canCaptureTest(capBoardRed, 1, 6));</span>
+<span class="fc" id="L92">	}</span>
+	
+	/**
+	 * Cap test 2.
+	 */
+	//normal red  op1 = capture out of bounds(y)  op2 = capture out of bounds(x &amp; y)
+	@Test
+	public void capTest2() {
+<span class="fc" id="L100">		assertFalse(JunitTester.canCaptureTest(capBoardRed, 6, 6));</span>
+<span class="fc" id="L101">	}</span>
+	
+	/**
+	 * Cap test 3.
+	 */
+	//normal red  op1 = capture normal blocked (up move)  op2 = capture normal yellow (down move)	
+	@Test
+	public void capTest3() {
+		
+<span class="fc" id="L110">		assertTrue(JunitTester.canCaptureTest(capBoardRed, 2, 0));</span>
+<span class="fc" id="L111">	}</span>
+	
+	/**
+	 * Cap test 4.
+	 */
+	//normal red  op1 = cap yellow normal(up move)  op2 = capture normal blocked (down move)
+	@Test
+	public void capTest4() {
+<span class="fc" id="L119">		assertTrue(JunitTester.canCaptureTest(capBoardRed, 5, 0));</span>
+<span class="fc" id="L120">	}</span>
+	
+	/**
+	 * Cap test 5.
+	 */
+	//normal red  op1 = cap yellow king(up move)  op2 = none
+	@Test
+	public void capTest5() {
+<span class="fc" id="L128">		assertTrue(JunitTester.canCaptureTest(capBoardRed, 4, 3));</span>
+<span class="fc" id="L129">	}</span>
+	
+	/**
+	 * Cap test 6.
+	 */
+	//normal red  op1 = cap yellow king(down move)  op2 = capture king blocked (up move)
+	@Test
+	public void capTest6() {
+<span class="fc" id="L137">		assertTrue(JunitTester.canCaptureTest(capBoardRed, 2, 3));</span>
+<span class="fc" id="L138">	}</span>
+	
+	/**
+	 * Cap test 7.
+	 */
+	//normal red  op1 = capture out of bounds (king)  op2 = none
+	@Test
+	public void capTest7() {
+<span class="fc" id="L146">		assertFalse(JunitTester.canCaptureTest(capBoardRed, 6, 4));</span>
+<span class="fc" id="L147">	}</span>
+	
+	/**
+	 * Cap test 8.
+	 */
+	//normal red  op1 = capture king blocked (down move)  op2 = none
+	@Test
+	public void capTest8() {
+<span class="fc" id="L155">		assertFalse(JunitTester.canCaptureTest(capBoardRed, 5, 2));</span>
+<span class="fc" id="L156">	}</span>
+	
+	/**
+	 * Cap test 9.
+	 */
+	// normal yellow op1 = capture out of bounds(y)  op2 = capture out of bounds(x &amp; y)
+	@Test
+	public void capTest9() {
+<span class="fc" id="L164">		assertFalse(JunitTester.canCaptureTest(capBoardYellow, 1, 1));</span>
+<span class="fc" id="L165">	}</span>
+	
+	/**
+	 * Cap test 10.
+	 */
+	// normal yellow op1 = capture out of bounds(y)  op2 = capture out of bounds(x &amp; y)
+	@Test
+	public void capTest10() {
+<span class="fc" id="L173">		assertFalse(JunitTester.canCaptureTest(capBoardYellow, 6, 1));</span>
+<span class="fc" id="L174">	}</span>
+	
+	/**
+	 * Cap test 11.
+	 */
+	//normal yellow op1 = capture normal blocked (up move)  op2 = capture normal red (down move)
+	@Test
+	public void capTest11() {
+<span class="fc" id="L182">		assertTrue(JunitTester.canCaptureTest(capBoardYellow, 2, 7));</span>
+<span class="fc" id="L183">	}</span>
+	
+	/**
+	 * Cap test 12.
+	 */
+	//normal yellow  op1 = cap red normal(up move)  op2 = capture normal blocked (down move)
+	@Test
+	public void capTest12() {
+<span class="fc" id="L191">		assertTrue(JunitTester.canCaptureTest(capBoardYellow, 5, 7));</span>
+<span class="fc" id="L192">	}</span>
+	
+	/**
+	 * Cap test 13.
+	 */
+	//normal yello1  op1 = cap red king(up move)  op2 = none
+	@Test
+	public void capTest13() {
+<span class="fc" id="L200">		assertTrue(JunitTester.canCaptureTest(capBoardYellow, 2, 4));</span>
+<span class="fc" id="L201">	}</span>
+	
+	/**
+	 * Cap test 14.
+	 */
+	//normal red  op1 = cap yellow king(down move)  op2 = capture king blocked (up move)
+	@Test
+	public void capTest14() {
+<span class="fc" id="L209">		assertTrue(JunitTester.canCaptureTest(capBoardYellow, 4, 4));</span>
+<span class="fc" id="L210">	}</span>
+	
+	/**
+	 * Cap test 15.
+	 */
+	//normal red  op1 = capture out of bounds (king)  op2 = none
+	@Test
+	public void capTest15() {
+<span class="fc" id="L218">		assertFalse(JunitTester.canCaptureTest(capBoardYellow, 5, 5));</span>
+<span class="fc" id="L219">	}</span>
+	
+	/**
+	 * Cap test 16.
+	 */
+	//normal red  op1 = capture king blocked (down move)  op2 = none
+	@Test
+	public void capTest16() {
+<span class="fc" id="L227">		assertFalse(JunitTester.canCaptureTest(capBoardYellow, 5, 2));</span>
+<span class="fc" id="L228">	}</span>
+	
+	/**
+	 * Cap test 17.
+	 */
+	//king red  cap out of bounds in 3 directions
+	@Test
+	public void capTest17() {
+<span class="fc" id="L236">		assertFalse(JunitTester.canCaptureTest(redKingBoard, 6, 1));</span>
+<span class="fc" id="L237">	}</span>
+		
+	/**
+	 * Cap test 18.
+	 */
+	//king red  cap out of bounds in 3 directions
+	@Test
+	public void capTest18() {
+<span class="fc" id="L245">		assertFalse(JunitTester.canCaptureTest(redKingBoard, 1, 6));</span>
+<span class="fc" id="L246">	}</span>
+		
+	/**
+	 * Cap test 19.
+	 */
+	//king red  cap up right
+	@Test
+	public void capTest19() {
+<span class="fc" id="L254">		assertTrue(JunitTester.canCaptureTest(redKingBoard, 4, 0));</span>
+<span class="fc" id="L255">	}</span>
+	
+	/**
+	 * Cap test 20.
+	 */
+	//king red  cap down right
+	@Test
+	public void capTest20() {
+<span class="fc" id="L263">		assertTrue(JunitTester.canCaptureTest(redKingBoard, 2, 0));</span>
+<span class="fc" id="L264">	}</span>
+	
+	/**
+	 * Cap test 21.
+	 */
+	//king red  cap up left
+	@Test
+	public void capTest21() {
+<span class="fc" id="L272">		assertTrue(JunitTester.canCaptureTest(redKingBoard, 5, 7));</span>
+<span class="fc" id="L273">	}</span>
+	
+	/**
+	 * Cap test 22.
+	 */
+	//king red  cap down left
+	@Test
+	public void capTest22() {
+<span class="fc" id="L281">		assertTrue(JunitTester.canCaptureTest(redKingBoard, 3, 7));</span>
+<span class="fc" id="L282">	}</span>
+	
+	/**
+	 * Cap test 23.
+	 */
+	//king red  cap out of bounds in 3 directions
+	@Test
+	public void capTest23() {
+<span class="fc" id="L290">		assertFalse(JunitTester.canCaptureTest(redKingvsKingBoard, 6, 1));</span>
+<span class="fc" id="L291">	}</span>
+		
+	/**
+	 * Cap test 24.
+	 */
+	//king red  cap out of bounds in 3 directions
+	@Test
+	public void capTest24() {
+<span class="fc" id="L299">		assertFalse(JunitTester.canCaptureTest(redKingvsKingBoard, 1, 6));</span>
+<span class="fc" id="L300">	}</span>
+		
+	/**
+	 * Cap test 25.
+	 */
+	//king red  cap up right
+	@Test
+	public void capTest25() {
+<span class="fc" id="L308">		assertTrue(JunitTester.canCaptureTest(redKingvsKingBoard, 4, 0));</span>
+<span class="fc" id="L309">	}</span>
+	
+	/**
+	 * Cap test 26.
+	 */
+	//king red  cap down right
+	@Test
+	public void capTest26() {
+<span class="fc" id="L317">		assertTrue(JunitTester.canCaptureTest(redKingvsKingBoard, 2, 0));</span>
+<span class="fc" id="L318">	}</span>
+	
+	/**
+	 * Cap test 27.
+	 */
+	//king red  cap up left
+	@Test
+	public void capTest27() {
+<span class="fc" id="L326">		assertTrue(JunitTester.canCaptureTest(redKingvsKingBoard, 5, 7));</span>
+<span class="fc" id="L327">	}</span>
+	
+	/**
+	 * Cap test 28.
+	 */
+	//king red  cap down left
+	@Test
+	public void capTest28() {
+<span class="fc" id="L335">		assertTrue(JunitTester.canCaptureTest(redKingvsKingBoard, 3, 7));</span>
+<span class="fc" id="L336">	}</span>
+	
+	/**
+	 * Cap test 29.
+	 */
+	//king yellow  cap out of bounds in 3 directions
+	@Test
+	public void capTest29() {
+<span class="fc" id="L344">		assertFalse(JunitTester.canCaptureTest(yellowKingBoard, 6, 1));</span>
+<span class="fc" id="L345">	}</span>
+			
+	/**
+	 * Cap test 30.
+	 */
+	//king yellow  cap out of bounds in 3 directions
+	@Test
+	public void capTest30() {
+<span class="fc" id="L353">		assertFalse(JunitTester.canCaptureTest(yellowKingBoard, 1, 6));</span>
+<span class="fc" id="L354">	}</span>
+			
+	/**
+	 * Cap test 31.
+	 */
+	//king yellow  cap up right
+	@Test
+	public void capTest31() {
+<span class="fc" id="L362">		assertTrue(JunitTester.canCaptureTest(yellowKingBoard, 4, 0));</span>
+<span class="fc" id="L363">	}</span>
+		
+	/**
+	 * Cap test 32.
+	 */
+	//king yellow  cap down right
+	@Test
+	public void capTest32() {
+<span class="fc" id="L371">		assertTrue(JunitTester.canCaptureTest(yellowKingBoard, 2, 0));</span>
+<span class="fc" id="L372">	}</span>
+		
+	/**
+	 * Cap test 33.
+	 */
+	//king yellow  cap up left
+	@Test
+	public void capTest33() {
+<span class="fc" id="L380">		assertTrue(JunitTester.canCaptureTest(yellowKingBoard, 5, 7));</span>
+<span class="fc" id="L381">	}</span>
+		
+	/**
+	 * Cap test 34.
+	 */
+	//king yellow  cap down left
+	@Test
+	public void capTest34() {
+<span class="fc" id="L389">		assertTrue(JunitTester.canCaptureTest(yellowKingBoard, 3, 7));</span>
+<span class="fc" id="L390">	}</span>
+		
+	/**
+	 * Cap test 35.
+	 */
+	//king yellow  cap out of bounds in 3 directions
+	@Test
+	public void capTest35() {
+<span class="fc" id="L398">		assertFalse(JunitTester.canCaptureTest(yellowKingvsKingBoard, 6, 1));</span>
+<span class="fc" id="L399">	}</span>
+			
+	/**
+	 * Cap test 36.
+	 */
+	//king yellow  cap out of bounds in 3 directions
+	@Test
+	public void capTest36() {
+<span class="fc" id="L407">		assertFalse(JunitTester.canCaptureTest(yellowKingvsKingBoard, 1, 6));</span>
+<span class="fc" id="L408">	}</span>
+			
+	/**
+	 * Cap test 37.
+	 */
+	//king yellow  cap up right
+	@Test
+	public void capTest37() {
+<span class="fc" id="L416">		assertTrue(JunitTester.canCaptureTest(yellowKingvsKingBoard, 4, 0));</span>
+<span class="fc" id="L417">	}</span>
+		
+	/**
+	 * Cap test 38.
+	 */
+	//king yellow  cap down right
+	@Test
+	public void capTest38() {
+<span class="fc" id="L425">		assertTrue(JunitTester.canCaptureTest(yellowKingvsKingBoard, 2, 0));</span>
+<span class="fc" id="L426">	}</span>
+		
+	/**
+	 * Cap test 39.
+	 */
+	//king yellow  cap up left
+	@Test
+	public void capTest39() {
+<span class="fc" id="L434">		assertTrue(JunitTester.canCaptureTest(yellowKingvsKingBoard, 5, 7));</span>
+<span class="fc" id="L435">	}</span>
+		
+	/**
+	 * Cap test 40.
+	 */
+	//king yellow  cap down left
+	@Test
+	public void capTest40() {
+<span class="fc" id="L443">		assertTrue(JunitTester.canCaptureTest(yellowKingvsKingBoard, 3, 7));</span>
+<span class="fc" id="L444">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>AllTests (May 1, 2017 9:35:37 PM)</div></body></html>

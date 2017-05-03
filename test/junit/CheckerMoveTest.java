@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package junit;
 
 import static org.junit.Assert.*;
@@ -5,6 +8,7 @@ import org.junit.Test;
 import checkers.CheckerMove;
 import checkers.Checkers;
 
+// TODO: Auto-generated Javadoc
 /**
  * Unit Tests #6, 10, and 14 in Software Test Plan Checks getIndex, testColour, and ApplyMove
  * methods behave correctly.
@@ -15,8 +19,13 @@ import checkers.Checkers;
  * @since 25 April 2017
  */
 public class CheckerMoveTest {
+  
+  /** The Junit tester. */
   checkers.JunitTester JunitTester = new checkers.JunitTester();
 
+  /**
+   * Test get index.
+   */
   @Test
   public void testGetIndex() {
     // Test 1: x = -1, y = 50, result = {0, 0}
@@ -42,6 +51,9 @@ public class CheckerMoveTest {
         JunitTester.getIndex(actualX3, actualY3));
   }
 
+  /**
+   * Test colour.
+   */
   @Test
   public void testColour() {
     // Test 1 Parameters: Empty square returns 0
@@ -65,6 +77,9 @@ public class CheckerMoveTest {
     assertEquals("Case: yellowKing (4), Result: 2", expected2, actual4);
   }
 
+  /**
+   * Test apply move.
+   */
   @Test
   public void testApplyMove() {
     int[][] capBoardRed1 = { { 0, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 },
@@ -170,111 +185,170 @@ public class CheckerMoveTest {
   //
   //
 
+  /** The cap board red. */
   int[][] capBoardRed = { { 0, 1, 0, 3, 0, 1, 0, 0 }, { 2, 0, 0, 0, 2, 0, 2, 0 },
       { 0, 0, 0, 0, 0, 0, 0, 2 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 1, 0, 0, 0, 2 },
       { 0, 0, 3, 0, 2, 0, 3, 0 }, { 0, 4, 0, 2, 0, 0, 0, 2 }, { 1, 0, 3, 0, 2, 0, 0, 0 } };
 
+  /** The cap board yellow. */
   int[][] capBoardYellow = { { 0, 0, 0, 0, 0, 0, 0, 2 }, { 1, 0, 0, 0, 0, 0, 3, 0 },
       { 0, 4, 0, 0, 0, 4, 0, 0 }, { 1, 0, 0, 0, 1, 0, 2, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 },
       { 0, 0, 1, 0, 2, 0, 0, 0 }, { 0, 0, 0, 2, 0, 1, 0, 1 }, { 0, 0, 0, 0, 4, 0, 2, 0 } };
 
+  /** The cap board red flip. */
   int[][] capBoardRedFlip = { { 0, 2, 0, 0, 0, 0, 0, 1 }, { 1, 0, 0, 0, 2, 0, 4, 0 },
       { 0, 0, 0, 0, 0, 3, 0, 3 }, { 3, 0, 0, 0, 1, 0, 2, 0 }, { 0, 2, 0, 0, 0, 2, 0, 2 },
       { 1, 0, 0, 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0, 3, 0, 0 }, { 0, 0, 2, 0, 2, 0, 2, 0 } };
 
+  /** The no cap board flip. */
   int[][] noCapBoardFlip = { { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 0, 0 },
       { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 4, 0 }, { 0, 3, 0, 0, 0, 0, 0, 0 },
       { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 2 }, { 0, 0, 0, 0, 0, 0, 0, 0 } };
 
+  /** The empty board. */
   int[][] emptyBoard = { { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 },
       { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 },
       { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 } };
 
+  /**
+   * Checks if is empty test 1.
+   */
   @Test
   public void isEmptyTest1() {
     assertTrue(JunitTester.isEmptyTest(capBoardRedFlip, 1, 2) == true);
   }
 
+  /**
+   * Checks if is empty test 2.
+   */
   @Test
   public void isEmptyTest2() {
     assert (JunitTester.isEmptyTest(capBoardRedFlip, 1, 0) == false);
   }
 
+  /**
+   * Checks if is empty test 3.
+   */
   @Test
   public void isEmptyTest3() {
     assert (JunitTester.isEmptyTest(capBoardRedFlip, -1, 0) == false);
   }
 
+  /**
+   * Checks if is move legal test 1.
+   */
   @Test
   public void isMoveLegalTest1() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 0, 1, -1, 0, 2) == 2);
   }
 
+  /**
+   * Checks if is move legal test 2.
+   */
   @Test
   public void isMoveLegalTest2() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 7, 3, 6, 2) == 2);
   }
 
+  /**
+   * Checks if is move legal test 3.
+   */
   @Test
   public void isMoveLegalTest3() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 3, 0, 2, 1, 1) == 2);
   }
 
+  /**
+   * Checks if is move legal test 4.
+   */
   @Test
   public void isMoveLegalTest4() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 5, 5, 4, 2) == 2);
   }
 
+  /**
+   * Checks if is move legal test 5.
+   */
   @Test
   public void isMoveLegalTest5() {
     assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 1, 0, 2, 1, 1) == 1);
   }
 
+  /**
+   * Checks if is move legal test 6.
+   */
   @Test
   public void isMoveLegalTest6() {
     assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 6, 7, 5, 6, 2) == 1);
   }
 
+  /**
+   * Checks if is move legal test 7.
+   */
   @Test
   public void isMoveLegalTest7() {
     assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 4, 1, 3, 0, 1) == 1);
   }
 
+  /**
+   * Checks if is move legal test 8.
+   */
   @Test
   public void isMoveLegalTest8() {
     assert (JunitTester.isMoveLegalTest(noCapBoardFlip, 1, 0, 2, 2, 2) == 2);
   }
 
+  /**
+   * Checks if is move legal test 9.
+   */
   @Test
   public void isMoveLegalTest9() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 4, 3, 1) == 2);
   }
 
+  /**
+   * Checks if is move legal test 10.
+   */
   @Test
   public void isMoveLegalTest10() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 3, 6, 5, 4, 2) == 2);
   }
 
+  /**
+   * Checks if is move legal test 11.
+   */
   @Test
   public void isMoveLegalTest11() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 5, 0, 3, 3, 1) == 2);
   }
 
+  /**
+   * Checks if is move legal test 12.
+   */
   @Test
   public void isMoveLegalTest12() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 4, 5, 2, 4, 2) == 2);
   }
 
+  /**
+   * Checks if is move legal test 13.
+   */
   @Test
   public void isMoveLegalTest13() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 0, 4, 1) == 2);
   }
 
+  /**
+   * Checks if is move legal test 14.
+   */
   @Test
   public void isMoveLegalTest14() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 2, 5, 0, 3, 1) == 3);
   }
 
+  /**
+   * Checks if is move legal test 15.
+   */
   @Test
   public void isMoveLegalTest15() {
     assert (JunitTester.isMoveLegalTest(capBoardRedFlip, 1, 0, 1, 1, 1) == 2);
