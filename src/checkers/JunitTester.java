@@ -4,8 +4,6 @@ import java.awt.Point;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
-import checkers.GameWin;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class JunitTester.

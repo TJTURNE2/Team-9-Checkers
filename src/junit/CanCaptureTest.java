@@ -5,9 +5,8 @@ package junit;
 
 
 import org.junit.Test;
-import checkers.JunitTester;
 import static org.junit.Assert.*;
-
+import checkers.JunitTester;
 /**
  * The Class CanCaptureTest.
  */

@@ -2,6 +2,7 @@ package checkers;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 
@@ -10,6 +11,7 @@ import java.awt.*;
  * The Class CheckerFrame.
  */
 public class CheckerFrame extends JFrame implements ActionListener {
+
 
   /** The st B. */
   JButton stB = new JButton("Start Game");
@@ -42,10 +44,19 @@ public class CheckerFrame extends JFrame implements ActionListener {
     gmP.setBounds(0, 0, 508, 401);// 400,401
     // gmP.imageUpdate(ne, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH)
     add(gmP);
+    
     stB.setHorizontalAlignment(SwingConstants.LEADING);
-    // stB.setIcon(new
-    // ImageIcon(getClass().getResource("/images/checkers.png"))); //OLD
+    //stB.setIcon(new
+    //ImageIcon(getClass().getResource("/images/checkers.png"))); //OLD
     stB.setIcon(new ImageIcon("images/checkers.png")); // Fixed - Terry
+    
+//    String filename;
+//    filename = (getClass().getResource("/images/checkers.png").toString());
+//    //File soundFile = new File(filename);
+//    JDialog dia = new JDialog(this, filename);
+//    dia.setVisible(true);
+    
+    
     stB.setBackground(Color.LIGHT_GRAY);
     stB.setCursor(new Cursor(Cursor.HAND_CURSOR));
     // stB.setBounds(154,420,200,60); //OLD-Steven
